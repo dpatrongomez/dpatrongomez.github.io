@@ -1,0 +1,19 @@
+<section id="education">
+    <div class="container">
+        <h2><strong>Formación</strong></h2>
+        <p-divider></p-divider>
+        <p-timeline [value]="studies" align="alternate" styleClass="customized-timeline">
+            <ng-template pTemplate="marker" let-studie>
+                <span class="p-timeline-event-marker" [style.backgroundColor]="studie.color"></span>
+            </ng-template>
+            <ng-template pTemplate="content" let-studie>
+                <p-card [header]="studie.name" [subheader]="studie.date">
+                    <p *ngIf="studie.info">{{studie.info}}</p>
+                    <button pButton label="Leer más" 
+                            class="p-button-text"
+                            *ngIf="studie.infoExtended"></button>
+                </p-card>
+            </ng-template>
+        </p-timeline>
+    </div>
+</section>

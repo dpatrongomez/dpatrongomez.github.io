@@ -1,0 +1,16 @@
+<section id="portfolio">
+    <div class="container">
+        <h2><strong>Portfolio</strong></h2>
+        <p-divider></p-divider>
+        <div class="row">
+
+            <div class="col p-2" *ngFor="let project of projects">
+
+                <p-card [header]="project">
+                    Content
+                </p-card>
+            </div>
+        </div>
+
+    </div>
+</section>
