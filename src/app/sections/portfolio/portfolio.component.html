@@ -2,15 +2,26 @@
     <div class="container">
         <h2><strong>Portfolio</strong></h2>
         <p-divider></p-divider>
-        <div class="row">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
 
-            <div class="col p-2" *ngFor="let project of projects">
+            <div class="col" *ngFor="let project of projects">
+                <div class="card h-100 shadow bg-body rounded">
+                    <img [src]="project.image" class="card-img-top" alt="Imagen del proyecto">
+                    <div class="card-body">
+                        <h5 class="card-title">{{project.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{project.technologies}}</h6>
 
-                <p-card [header]="project">
-                    Content
-                </p-card>
+                        <p class="card-text">
+                           {{project.info}}
+                        </p>
+                        
+                        <div class="d-grid gap-2">
+                            <a *ngIf="project.googlePlay" [href]="project.googlePlay" class="btn btn-warning">Ir a Google Play</a>
+                            <a [href]="project.github" class="btn btn-dark">Ir a GitHub</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 </section>
