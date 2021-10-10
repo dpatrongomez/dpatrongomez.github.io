@@ -15,10 +15,13 @@ export class SkillsComponent implements OnInit {
     this.skills = [
       { label: "Flutter", value: 80 },
       { label: "Angular", value: 70 },
+      { label: "MySQL", value: 60 },
+      { label: "PHP", value: 60 },
       { label: "Android", value: 50 },
-      { label: "Java", value: 30 },
+      { label: "JavaScript", value: 50 },
       { label: "Python", value: 50 },
-      { label: "MySQL", value: 80 },
+      { label: "Git", value: 30 },
+      { label: "Java", value: 30 },
     ];
   }
 }
