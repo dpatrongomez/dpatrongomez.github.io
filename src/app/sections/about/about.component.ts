@@ -8,7 +8,7 @@ import * as icon from '@fortawesome/free-solid-svg-icons';
 })
 export class AboutComponent implements OnInit {
   private _fecha = new Date('1998-06-16');
-  mapMarker: any ;
+  mapMarker:any;
   building:any;
   mobile:any;
   email:any;
