@@ -19,8 +19,9 @@ export class PortfolioComponent implements OnInit {
         technologies: "Flutter",
         image:
           "https://play-lh.googleusercontent.com/7vsRTxvaj9xDOhunhwzYwn_HlLQW4YwXcxBcQ4kvvSCfVFT01nCnAOIsJHPhV9fTyZg",
-        googlePlay:
+        web:
           "https://play.google.com/store/apps/details?id=com.dpatrongomez.urbanosguadalajara",
+          googleplay: true,
         github: "https://github.com/dpatrongomez/urbanosguadalajara",
       },
       {
@@ -29,8 +30,9 @@ export class PortfolioComponent implements OnInit {
         technologies: "Flutter",
         image:
           "https://play-lh.googleusercontent.com/FX_XrlIS2I68S2YULJxmfnozd5_AaiOcmMwAu44-hOYU0CPExCHeg13HYIztJoP2VAg",
-        googlePlay:
+        web:
           "https://play.google.com/store/apps/details?id=com.dpatrongomez.mercalist",
+           googleplay: true,
         github: "https://github.com/dpatrongomez/mercalist",
       },
       {
@@ -39,8 +41,9 @@ export class PortfolioComponent implements OnInit {
         technologies: "Flutter",
         image:
           "https://play-lh.googleusercontent.com/D3Qw9e43W_y9MSrHX42i5XCST_0WYxY9OfmOUJ6c6trVtte-JcST6HRT_0avVjG8Q4Y",
-        googlePlay:
+        web:
           "https://play.google.com/store/apps/details?id=es.dpatrongomez.papas",
+          googleplay: true,
         github: "https://github.com/dpatrongomez/EducamosCLM",
       },
       {
@@ -49,9 +52,20 @@ export class PortfolioComponent implements OnInit {
         technologies: "Flutter y Firebase",
         image:
           "https://play-lh.googleusercontent.com/G58ZEGH2yFBRHz6Wnetl8h4SQ7viSyFIj0-2hmOFB7185AShTa7RfzOV54MuYoCpmW0W",
-        googlePlay:
+        web:
           "https://play.google.com/store/apps/details?id=com.dpatrongomez.vares",
+          googleplay: true,
         github: "https://github.com/dpatrongomez/vares",
+      },
+      {
+        name: "TiempoApp",
+        info: "Web que permite obtener el tiempo de los municipios de España.",
+        technologies: "Angular y GitHub Actions",
+        image: "https://www.freeiconspng.com/uploads/weather-icon-png-2.png",
+        web:
+          "https://dpatrongomez.github.io/tiempoApp/",
+        googleplay: false,
+        github: "https://github.com/dpatrongomez/tiempoApp",
       },
       {
         name: "dpatrongomez.github.io",
@@ -59,6 +73,9 @@ export class PortfolioComponent implements OnInit {
         technologies: "Angular y GitHub Actions",
         image: "assets/images/logo.svg",
         github: "https://github.com/dpatrongomez/dpatrongomez.github.io",
+        web:
+          "https://dpatrongomez.github.io/",
+        googleplay: false,
       },
     ];
   }

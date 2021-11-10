@@ -3,6 +3,7 @@ export interface Project {
     technologies: string;
     info: string;
     image: string;
-    googlePlay?: string;
+    web?: string;
+    googleplay: boolean;
     github: string;
 }

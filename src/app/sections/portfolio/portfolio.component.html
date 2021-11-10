@@ -16,7 +16,7 @@
                         </p>
                         
                         <div class="d-grid gap-2">
-                            <a *ngIf="project.googlePlay" [href]="project.googlePlay" class="btn btn-warning">Ir a Google Play</a>
+                            <a *ngIf="project.web" [href]="project.web" class="btn btn-warning">Ir a {{project.googleplay ? 'Google Play' : 'Web'}}</a>
                             <a [href]="project.github" class="btn btn-dark">Ir a GitHub</a>
                         </div>
                     </div>
