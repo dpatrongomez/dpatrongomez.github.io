@@ -77,6 +77,17 @@ export class PortfolioComponent implements OnInit {
           "https://dpatrongomez.github.io/",
         googleplay: false,
       },
+      {
+        name: "Precio Luz",
+        info: "Aplicación para consultar el precio de la luz en España por horas.",
+        technologies: "Flutter",
+        image:
+          "https://play-lh.googleusercontent.com/A8uaRfrlgFdjv6foFiuMKZqJmBxp3OwB-TEWZ4jsGIQTicioKl-_C2DBaoQ_CgbI4Sw=w240-h480-rw",
+        web:
+          "https://play.google.com/store/apps/details?id=com.dpatrongomez.precioluz",
+          googleplay: true,
+        github: "https://github.com/dpatrongomez/precioluz",
+      },
     ];
   }
 }
