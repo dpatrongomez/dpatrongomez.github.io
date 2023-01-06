@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v3
       - uses: actions/setup-node@v3 #this installs node and npm for us
         with:
@@ -19,12 +19,12 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Build
+      - name: Install and Build 🔧
         run: |
           npm install
           npm run-script deploy
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.4.1
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           BRANCH: gh-pages
           FOLDER: dist/dpatrongomez
