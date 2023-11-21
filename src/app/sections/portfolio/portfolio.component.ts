@@ -68,16 +68,6 @@ export class PortfolioComponent implements OnInit {
         github: "https://github.com/dpatrongomez/tiempoApp",
       },
       {
-        name: "dpatrongomez.github.io",
-        info: "Web creada para mostrar mi perfil profesional.",
-        technologies: "Angular y GitHub Actions",
-        image: "assets/images/logo.svg",
-        github: "https://github.com/dpatrongomez/dpatrongomez.github.io",
-        web:
-          "https://dpatrongomez.github.io/",
-        googleplay: false,
-      },
-      {
         name: "Precio Luz",
         info: "Aplicación para consultar el precio de la luz en España por horas.",
         technologies: "Flutter",
