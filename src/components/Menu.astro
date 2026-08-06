@@ -1,0 +1,162 @@
+---
+const menuItems = [
+  { label: "Inicio", icon: "fa-solid fa-house", url: "#header" },
+  { label: "Sobre mí", icon: "fa-solid fa-user", url: "#about" },
+  { label: "Habilidades", icon: "fa-solid fa-list-check", url: "#skills" },
+  { label: "Formación", icon: "fa-solid fa-graduation-cap", url: "#education" },
+  { label: "Portfolio", icon: "fa-solid fa-folder-open", url: "#portfolio" },
+  { label: "Contacto", icon: "fa-solid fa-envelope", url: "#contact" },
+];
+---
+
+<header class="navbar-wrapper glass-panel">
+  <nav class="navbar-container">
+    <a href="#header" class="navbar-brand">
+      <img src="/assets/images/logo.svg" alt="dpatrongomez logo" height="38" class="brand-logo" />
+    </a>
+
+    <button id="menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars icon-open"></i>
+      <i class="fa-solid fa-xmark icon-close hidden"></i>
+    </button>
+
+    <ul id="navbar-menu" class="nav-links">
+      {menuItems.map((item) => (
+        <li>
+          <a href={item.url} class="nav-link">
+            <i class={`${item.icon} nav-icon`}></i>
+            <span>{item.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .navbar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand-logo {
+    transition: transform 0.3s ease;
+  }
+
+  .navbar-brand:hover .brand-logo {
+    transform: scale(1.05);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    color: var(--navy-accent);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+  }
+
+  .nav-icon {
+    font-size: 0.9rem;
+    color: var(--primary);
+    transition: var(--transition);
+  }
+
+  .nav-link:hover {
+    background: var(--primary-light);
+    color: var(--primary-hover);
+  }
+
+  .nav-link:hover .nav-icon {
+    transform: translateY(-2px);
+  }
+
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--navy-accent);
+    cursor: pointer;
+    padding: 6px;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  @media (max-width: 868px) {
+    .mobile-toggle {
+      display: block;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      padding: 16px;
+      gap: 10px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .nav-link {
+      width: 100%;
+      padding: 12px 16px;
+    }
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById('menu-toggle');
+  const navMenu = document.getElementById('navbar-menu');
+  const iconOpen = toggleBtn?.querySelector('.icon-open');
+  const iconClose = toggleBtn?.querySelector('.icon-close');
+
+  toggleBtn?.addEventListener('click', () => {
+    navMenu?.classList.toggle('active');
+    iconOpen?.classList.toggle('hidden');
+    iconClose?.classList.toggle('hidden');
+  });
+
+  // Close menu when clicking link on mobile
+  navMenu?.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      iconOpen?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+    });
+  });
+</script>

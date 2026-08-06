@@ -1,0 +1,35 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer-wrapper">
+  <div class="container footer-content">
+    <p class="copyright-text">
+      &copy; Copyright {currentYear}, 
+      <a href="https://dpatrongomez.github.io/" class="author-link">dpatrongomez</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer-wrapper {
+    background: #ffffff;
+    border-top: 1px solid var(--card-border);
+    padding: 24px 0;
+    text-align: center;
+  }
+
+  .copyright-text {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .author-link {
+    color: var(--navy-accent);
+    font-weight: 600;
+  }
+
+  .author-link:hover {
+    color: var(--primary);
+  }
+</style>

@@ -1,0 +1,162 @@
+---
+---
+
+<section id="header" class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Daniel Patrón Gómez</h1>
+    <p class="hero-subtitle">
+      Desarrollador <span id="typed-text" class="typed-highlight"></span><span class="cursor">|</span>
+    </p>
+    <a href="#about" class="scroll-down-btn" aria-label="Desplazar a sobre mí">
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    width: 100%;
+    max-width: 100% !important;
+    height: 100vh;
+    min-height: 500px;
+    background: url('/assets/images/background.jpeg') top center / cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg, 
+      rgba(15, 23, 42, 0.6) 0%, 
+      rgba(15, 23, 42, 0.75) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #ffffff;
+    padding: 0 20px;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+    text-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .hero-subtitle {
+    color: #f1f5f9;
+    font-size: 1.8rem;
+    font-weight: 400;
+    display: inline-block;
+  }
+
+  .typed-highlight {
+    color: #ffffff;
+    padding-bottom: 4px;
+    letter-spacing: 1px;
+    border-bottom: 3px solid var(--primary);
+    font-weight: 600;
+  }
+
+  .cursor {
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 300;
+    animation: blink 0.8s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .scroll-down-btn {
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    animation: bounce 2s infinite;
+  }
+
+  .scroll-down-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+    40% { transform: translate(-50%, -10px); }
+    60% { transform: translate(-50%, -5px); }
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.4rem;
+    }
+    .hero-subtitle {
+      font-size: 1.3rem;
+    }
+  }
+</style>
+
+<script>
+  const words = ['Web', 'Android'];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typedTarget = document.getElementById('typed-text');
+
+  function typeEffect() {
+    if (!typedTarget) return;
+
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+      typedTarget.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typedTarget.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    let typeSpeed = isDeleting ? 80 : 120;
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      typeSpeed = 2000; // Pause at full word
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      typeSpeed = 500;
+    }
+
+    setTimeout(typeEffect, typeSpeed);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(typeEffect, 400);
+  });
+</script>

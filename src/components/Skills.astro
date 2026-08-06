@@ -1,0 +1,96 @@
+---
+const skills = [
+  { label: "Flutter", value: 80, icon: "fa-mobile-screen-button" },
+  { label: "Angular", value: 70, icon: "fa-brands fa-angular" },
+  { label: "MySQL", value: 60, icon: "fa-database" },
+  { label: "PHP", value: 60, icon: "fa-brands fa-php" },
+  { label: "Android", value: 50, icon: "fa-brands fa-android" },
+  { label: "JavaScript", value: 50, icon: "fa-brands fa-js" },
+  { label: "Python", value: 50, icon: "fa-brands fa-python" },
+  { label: "Git", value: 30, icon: "fa-brands fa-git-alt" },
+  { label: "Java", value: 30, icon: "fa-brands fa-java" },
+];
+---
+
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">Habilidades</h2>
+    <div class="section-divider"></div>
+
+    <div class="grid-3">
+      {skills.map((skill) => (
+        <div class="skill-card">
+          <div class="skill-header">
+            <span class="skill-name">
+              <i class={`fa-solid ${skill.icon} skill-icon`}></i>
+              {skill.label}
+            </span>
+            <span class="skill-percentage">{skill.value}%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style={`width: ${skill.value}%`}></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skill-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+
+  .skill-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(221, 157, 20, 0.4);
+  }
+
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .skill-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--navy-accent);
+    font-size: 1rem;
+  }
+
+  .skill-icon {
+    color: var(--primary);
+    font-size: 1.1rem;
+  }
+
+  .skill-percentage {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.95rem;
+  }
+
+  .progress-bar-bg {
+    width: 100%;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-hover) 100%);
+    border-radius: var(--radius-full);
+    transition: width 1s ease-in-out;
+  }
+</style>

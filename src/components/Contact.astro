@@ -1,0 +1,94 @@
+---
+const socialLinks = [
+  {
+    name: "GitHub",
+    url: "https://github.com/dpatrongomez",
+    icon: "fa-brands fa-github",
+    color: "#24292e"
+  },
+  {
+    name: "Email",
+    url: "mailto:dpatrongomez@gmail.com",
+    icon: "fa-solid fa-envelope",
+    color: "#ea4335"
+  },
+  {
+    name: "Telegram",
+    url: "https://t.me/dpatrongomez",
+    icon: "fa-brands fa-telegram",
+    color: "#0088cc"
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/dpatrongomez/",
+    icon: "fa-brands fa-instagram",
+    color: "#e4405f"
+  },
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/dpatrongomez",
+    icon: "fa-brands fa-facebook",
+    color: "#1877f2"
+  },
+];
+---
+
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Contacto</h2>
+    <div class="section-divider"></div>
+
+    <div class="contact-links-grid">
+      {socialLinks.map((social) => (
+        <a 
+          href={social.url} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="social-button" 
+          aria-label={social.name}
+          title={social.name}
+        >
+          <i class={`${social.icon} social-icon`}></i>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-links-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+  }
+
+  .social-button {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy-accent);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+
+  .social-icon {
+    font-size: 2.2rem;
+    transition: var(--transition);
+  }
+
+  .social-button:hover {
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: var(--shadow-md);
+    background: var(--navy-dark);
+    color: #ffffff;
+    border-color: var(--navy-dark);
+  }
+</style>
