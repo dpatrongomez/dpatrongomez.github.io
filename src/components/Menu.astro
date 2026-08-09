@@ -11,8 +11,8 @@ const menuItems = [
 
 <header class="navbar-wrapper glass-panel">
   <nav class="navbar-container">
-    <a href="#header" class="navbar-brand">
-      <img src="/assets/images/logo.svg" alt="dpatrongomez logo" height="38" class="brand-logo" />
+    <a href="#header" class="navbar-brand" aria-label="Inicio">
+      <img src="/assets/images/logo.svg" alt="dpatrongomez logo" width="114" height="38" class="brand-logo" />
     </a>
 
     <button id="menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
@@ -54,6 +54,9 @@ const menuItems = [
   }
 
   .brand-logo {
+    height: 38px;
+    width: auto;
+    display: block;
     transition: transform 0.3s ease;
   }
 
