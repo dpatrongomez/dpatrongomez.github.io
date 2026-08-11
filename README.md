@@ -8,18 +8,18 @@ Todos los comandos se ejecutan desde la raíz del proyecto:
 
 | Comando | Acción |
 | :--- | :--- |
-| `npm install` | Instala las dependencias del proyecto |
-| `npm run dev` | Inicia el servidor de desarrollo local en `http://localhost:4321` |
-| `npm run build` | Compila el sitio web estático en el directorio `./dist` |
-| `npm run preview` | Previsualiza la versión de producción localmente |
-| `npm run astro` | Ejecuta comandos CLI de Astro como `astro check` |
+| `pnpm install` | Instala las dependencias del proyecto |
+| `pnpm run dev` | Inicia el servidor de desarrollo local en `http://localhost:4321` |
+| `pnpm run build` | Compila el sitio web estático en el directorio `./dist` |
+| `pnpm run preview` | Previsualiza la versión de producción localmente |
+| `pnpm run astro` | Ejecuta comandos CLI de Astro como `astro check` |
 
 ## 🛠️ Tecnologías
 
 - **Framework**: [Astro](https://astro.build/)
 - **Estilos**: Vanilla CSS con variables de diseño moderno, responsive y glassmorphism.
 - **Iconos**: [FontAwesome 6](https://fontawesome.com/)
-- **Despliegue**: GitHub Pages a través de GitHub Actions (.github/workflows/build-deploy.yml).
+- **Despliegue**: GitHub Pages a través de GitHub Actions (.github/workflows/astro.yml).
 
 ## 📄 Estructura del Proyecto
 
