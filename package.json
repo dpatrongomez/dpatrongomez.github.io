@@ -12,11 +12,11 @@
     "deploy": "astro build"
   },
   "dependencies": {
-    "astro": "^4.16.18"
+    "astro": "^7.2.1"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
-    "typescript": "^5.7.2"
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^7.0.2"
   },
   "engines": {
     "node": ">=24.0.0"
