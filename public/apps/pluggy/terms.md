@@ -49,4 +49,4 @@ Nos reservamos el derecho de modificar o actualizar estos Términos y Condicione
 ## 7. Contacto
 
 Si tienes preguntas sobre estos Términos y Condiciones, puedes contactarnos en:
-- **Correo Electrónico:** dpatrongomez@gmail.com
+- **Correo Electrónico:** [dpatrongomez@gmail.com](mailto:dpatrongomez@gmail.com)

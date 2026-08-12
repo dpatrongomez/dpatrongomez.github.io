@@ -13,7 +13,7 @@ Cumplimos estrictamente con las políticas de privacidad y datos de usuario de G
 - **Nombre de la Aplicación:** Pluggy
 - **Identificador de Paquete (Package ID):** `com.dpatrongomez.pluggy`
 - **Desarrollador Responsable:** Daniel Patrón Gómez
-- **Contacto de Privacidad:** dpatrongomez@gmail.com
+- **Contacto de Privacidad:** [dpatrongomez@gmail.com](mailto:dpatrongomez@gmail.com)
 
 ---
 
@@ -108,4 +108,4 @@ Nos reservamos el derecho de actualizar esta Política de Privacidad para reflej
 
 Si tienes alguna pregunta, duda o solicitud sobre esta Política de Privacidad o el tratamiento de datos en Pluggy, puedes contactarnos en:
 
-- **Correo Electrónico:** dpatrongomez@gmail.com
+- **Correo Electrónico:** [dpatrongomez@gmail.com](mailto:dpatrongomez@gmail.com)
