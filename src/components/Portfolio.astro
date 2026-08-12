@@ -2,74 +2,91 @@
 const projects = [
   {
     name: "Urbanos Guadalajara",
-    info: "Aplicación para disponer de los itinerarios de los autobuses urbanos de Guadalajara.",
-    technologies: "Flutter",
+    info: "Aplicación móvil para consultar los itinerarios y horarios de los autobuses urbanos de Guadalajara.",
+    tags: ["Flutter", "Dart", "Android"],
     image: "https://play-lh.googleusercontent.com/7vsRTxvaj9xDOhunhwzYwn_HlLQW4YwXcxBcQ4kvvSCfVFT01nCnAOIsJHPhV9fTyZg",
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.urbanosguadalajara",
     googleplay: true,
     github: "https://github.com/dpatrongomez/urbanosguadalajara",
+    featured: true
   },
   {
     name: "MercaList",
-    info: "Aplicación para realizar la lista de la compra con los productos de la API de Mercadona.",
-    technologies: "Flutter",
+    info: "Aplicación interactiva para crear listas de la compra conectada con el catálogo oficial de Mercadona.",
+    tags: ["Flutter", "REST API", "Android"],
     image: "https://play-lh.googleusercontent.com/FX_XrlIS2I68S2YULJxmfnozd5_AaiOcmMwAu44-hOYU0CPExCHeg13HYIztJoP2VAg",
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.mercalist",
     googleplay: true,
     github: "https://github.com/dpatrongomez/mercalist",
-  },
-  {
-    name: "EducamosCLM",
-    info: "Aplicación para acceder a los distintos módulos de la plataforma de educación utilizada en Castilla la Mancha.",
-    technologies: "Flutter",
-    image: "https://play-lh.googleusercontent.com/D3Qw9e43W_y9MSrHX42i5XCST_0WYxY9OfmOUJ6c6trVtte-JcST6HRT_0avVjG8Q4Y",
-    archived: true,
-    github: "https://github.com/dpatrongomez/EducamosCLM",
-  },
-  {
-    name: "Vares, con “V” de Visillo",
-    info: "Aplicación para valorar los bares de la ciudad de Guadalajara para incentivar el consumo en la ciudad.",
-    technologies: "Flutter y Firebase",
-    image: "https://play-lh.googleusercontent.com/G58ZEGH2yFBRHz6Wnetl8h4SQ7viSyFIj0-2hmOFB7185AShTa7RfzOV54MuYoCpmW0W",
-    archived: true,
-    github: "https://github.com/dpatrongomez/vares",
-  },
-  {
-    name: "TiempoApp",
-    info: "Web que permite obtener el tiempo de los municipios de España.",
-    technologies: "Angular y GitHub Actions",
-    image: "https://www.freeiconspng.com/uploads/weather-icon-png-2.png",
-    web: "https://dpatrongomez.github.io/tiempoApp/",
-    googleplay: false,
-    github: "https://github.com/dpatrongomez/tiempoApp",
+    featured: true
   },
   {
     name: "Precio Luz",
-    info: "Aplicación para consultar el precio de la luz en España por horas.",
-    technologies: "Flutter",
+    info: "Aplicación móvil para consultar el precio de la electricidad por horas en España.",
+    tags: ["Flutter", "REST API", "Android"],
     image: "https://play-lh.googleusercontent.com/A8uaRfrlgFdjv6foFiuMKZqJmBxp3OwB-TEWZ4jsGIQTicioKl-_C2DBaoQ_CgbI4Sw=w240-h480-rw",
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.precioluz",
     googleplay: true,
     github: "https://github.com/dpatrongomez/precioluz",
+    featured: true
+  },
+  {
+    name: "TiempoApp",
+    info: "Aplicación web progresiva para consultar el tiempo meteorológico en municipios de España.",
+    tags: ["Angular", "GitHub Actions", "Web"],
+    image: "https://www.freeiconspng.com/uploads/weather-icon-png-2.png",
+    web: "https://dpatrongomez.github.io/tiempoApp/",
+    googleplay: false,
+    github: "https://github.com/dpatrongomez/tiempoApp",
+    featured: false
+  },
+  {
+    name: "EducamosCLM",
+    info: "Acceso móvil a módulos y avisos de la plataforma de educación de Castilla-La Mancha.",
+    tags: ["Flutter", "Dart"],
+    image: "https://play-lh.googleusercontent.com/D3Qw9e43W_y9MSrHX42i5XCST_0WYxY9OfmOUJ6c6trVtte-JcST6HRT_0avVjG8Q4Y",
+    archived: true,
+    github: "https://github.com/dpatrongomez/EducamosCLM",
+    featured: false
+  },
+  {
+    name: "Vares, con “V” de Visillo",
+    info: "Plataforma para valorar establecimientos y bares en Guadalajara fomentando el comercio local.",
+    tags: ["Flutter", "Firebase"],
+    image: "https://play-lh.googleusercontent.com/G58ZEGH2yFBRHz6Wnetl8h4SQ7viSyFIj0-2hmOFB7185AShTa7RfzOV54MuYoCpmW0W",
+    archived: true,
+    github: "https://github.com/dpatrongomez/vares",
+    featured: false
   },
 ];
 ---
 
 <section id="portfolio">
   <div class="container">
-    <h2 class="section-title">Portfolio</h2>
+    <h2 class="section-title">Proyectos & Aplicaciones</h2>
     <div class="section-divider"></div>
 
-    <div class="grid-4">
+    <div class="grid-3">
       {projects.map((project) => (
-        <div class="portfolio-card">
+        <div class={`portfolio-card ${project.featured ? 'card-featured' : ''}`}>
           <div class="card-img-wrapper">
             <img src={project.image} alt={project.name} loading="lazy" class="card-img" />
+            {project.featured && (
+              <span class="badge-featured">
+                <i class="fa-solid fa-star"></i> Destacado
+              </span>
+            )}
           </div>
 
           <div class="card-body">
             <h3 class="card-title">{project.name}</h3>
-            <span class="tech-badge">{project.technologies}</span>
+            
+            <div class="project-tags">
+              {project.tags.map((tag) => (
+                <span class="p-tag">{tag}</span>
+              ))}
+            </div>
+
             <p class="card-info">{project.info}</p>
 
             <div class="card-actions">
@@ -81,13 +98,13 @@ const projects = [
                   class="btn btn-primary btn-sm"
                 >
                   <i class={project.googleplay ? "fa-brands fa-google-play" : "fa-solid fa-globe"}></i>
-                  {project.googleplay ? "Google Play" : "Web"}
+                  {project.googleplay ? "Google Play" : "Ver Web"}
                 </a>
               )}
               {project.archived && (
-                <span class="btn btn-archived btn-sm" title="Aplicación archivada en Google Play">
-                  <i class="fa-brands fa-google-play"></i>
-                  Google Play (Archivada)
+                <span class="btn btn-archived btn-sm" title="Aplicación archivada">
+                  <i class="fa-solid fa-box-archive"></i>
+                  Archivada
                 </span>
               )}
               <a 
@@ -97,7 +114,7 @@ const projects = [
                 class="btn btn-dark btn-sm"
               >
                 <i class="fa-brands fa-github"></i>
-                GitHub
+                Código fuente
               </a>
             </div>
           </div>
@@ -110,81 +127,115 @@ const projects = [
 <style>
   .portfolio-card {
     background: #ffffff;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     border: 1px solid var(--card-border);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: var(--transition);
+    position: relative;
   }
 
   .portfolio-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
     border-color: rgba(221, 157, 20, 0.4);
   }
 
+  .card-featured {
+    border-top: 3px solid var(--primary);
+  }
+
   .card-img-wrapper {
-    height: 180px;
-    overflow: hidden;
-    background: #f1f5f9;
+    position: relative;
+    height: 160px;
+    background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 20px;
   }
 
   .card-img {
     max-height: 100%;
+    width: auto;
     object-fit: contain;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: transform 0.4s ease;
   }
 
   .portfolio-card:hover .card-img {
-    transform: scale(1.06);
+    transform: scale(1.08);
+  }
+
+  .badge-featured {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(221, 157, 20, 0.9);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
 
   .card-body {
-    padding: 20px;
+    padding: 22px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
 
   .card-title {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: var(--navy-accent);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    font-weight: 700;
   }
 
-  .tech-badge {
-    display: inline-block;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--text-muted);
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
     margin-bottom: 12px;
   }
 
-  .card-info {
-    font-size: 0.9rem;
+  .p-tag {
+    background: #f1f5f9;
     color: var(--text-muted);
-    line-height: 1.5;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  .card-info {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
     margin-bottom: 20px;
     flex-grow: 1;
   }
 
   .card-actions {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+    margin-top: auto;
   }
 
   .btn-sm {
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    width: 100%;
+    padding: 9px 12px;
+    font-size: 0.82rem;
+    flex: 1;
+    border-radius: var(--radius-md);
   }
 
   .btn-archived {
@@ -195,3 +246,4 @@ const projects = [
     user-select: none;
   }
 </style>
+

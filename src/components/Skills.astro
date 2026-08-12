@@ -1,34 +1,78 @@
 ---
-const skills = [
-  { label: "Flutter", value: 80, icon: "fa-mobile-screen-button" },
-  { label: "Angular", value: 70, icon: "fa-brands fa-angular" },
-  { label: "MySQL", value: 60, icon: "fa-database" },
-  { label: "PHP", value: 60, icon: "fa-brands fa-php" },
-  { label: "Android", value: 50, icon: "fa-brands fa-android" },
-  { label: "JavaScript", value: 50, icon: "fa-brands fa-js" },
-  { label: "Python", value: 50, icon: "fa-brands fa-python" },
-  { label: "Git", value: 30, icon: "fa-brands fa-git-alt" },
-  { label: "Java", value: 30, icon: "fa-brands fa-java" },
+const skillCategories = [
+  {
+    title: "Frontend & Web",
+    icon: "fa-code",
+    color: "#173b6c",
+    skills: [
+      { name: "JavaScript / ES6+", icon: "fa-brands fa-js" },
+      { name: "Web Components", icon: "fa-solid fa-cubes" },
+      { name: "Lit", icon: "fa-solid fa-fire" },
+      { name: "Ember.js", icon: "fa-solid fa-layer-group" },
+      { name: "HTML5 & CSS3", icon: "fa-brands fa-html5" },
+      { name: "Angular", icon: "fa-brands fa-angular" },
+    ]
+  },
+  {
+    title: "Desarrollo Mobile",
+    icon: "fa-mobile-screen-button",
+    color: "#dd9d14",
+    skills: [
+      { name: "Flutter", icon: "fa-solid fa-mobile-screen-button" },
+      { name: "Dart", icon: "fa-solid fa-bolt" },
+      { name: "Android Native", icon: "fa-brands fa-android" },
+      { name: "Firebase", icon: "fa-solid fa-flame" },
+      { name: "Banca Móvil", icon: "fa-solid fa-building-columns" },
+    ]
+  },
+  {
+    title: "Backend & Datos",
+    icon: "fa-database",
+    color: "#0f172a",
+    skills: [
+      { name: "MySQL", icon: "fa-solid fa-database" },
+      { name: "REST APIs", icon: "fa-solid fa-network-wired" },
+      { name: "PHP", icon: "fa-brands fa-php" },
+      { name: "Python", icon: "fa-brands fa-python" },
+      { name: "Java", icon: "fa-brands fa-java" },
+    ]
+  },
+  {
+    title: "Herramientas & Ágil",
+    icon: "fa-screwdriver-wrench",
+    color: "#2563eb",
+    skills: [
+      { name: "Git & GitHub", icon: "fa-brands fa-github" },
+      { name: "GitHub Actions", icon: "fa-solid fa-gears" },
+      { name: "Scrum / Agile", icon: "fa-solid fa-diagram-project" },
+      { name: "Jira / Confluence", icon: "fa-solid fa-list-check" },
+    ]
+  }
 ];
 ---
 
 <section id="skills">
   <div class="container">
-    <h2 class="section-title">Habilidades</h2>
+    <h2 class="section-title">Habilidades Técnicas</h2>
     <div class="section-divider"></div>
 
-    <div class="grid-3">
-      {skills.map((skill) => (
-        <div class="skill-card">
-          <div class="skill-header">
-            <span class="skill-name">
-              <i class={`fa-solid ${skill.icon} skill-icon`}></i>
-              {skill.label}
-            </span>
-            <span class="skill-percentage">{skill.value}%</span>
+    <div class="grid-2">
+      {skillCategories.map((category) => (
+        <div class="category-card">
+          <div class="category-header">
+            <div class="category-icon-box" style={`background-color: ${category.color}`}>
+              <i class={`fa-solid ${category.icon}`}></i>
+            </div>
+            <h3 class="category-title">{category.title}</h3>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" style={`width: ${skill.value}%`}></div>
+
+          <div class="skills-tags-grid">
+            {category.skills.map((skill) => (
+              <div class="tech-chip">
+                <i class={`${skill.icon} chip-icon`}></i>
+                <span>{skill.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       ))}
@@ -37,60 +81,80 @@ const skills = [
 </section>
 
 <style>
-  .skill-card {
+  .category-card {
     background: #ffffff;
-    padding: 20px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     border: 1px solid var(--card-border);
+    padding: 28px;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  .skill-card:hover {
-    transform: translateY(-3px);
+  .category-card:hover {
+    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
     border-color: rgba(221, 157, 20, 0.4);
   }
 
-  .skill-header {
+  .category-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--card-border);
   }
 
-  .skill-name {
+  .category-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius-md);
+    color: #ffffff;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-weight: 600;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .category-title {
+    font-size: 1.3rem;
     color: var(--navy-accent);
-    font-size: 1rem;
-  }
-
-  .skill-icon {
-    color: var(--primary);
-    font-size: 1.1rem;
-  }
-
-  .skill-percentage {
     font-weight: 700;
+  }
+
+  .skills-tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tech-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    color: var(--navy-accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+  }
+
+  .tech-chip:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--navy-dark);
+    transform: translateY(-2px);
+  }
+
+  .chip-icon {
     color: var(--primary);
     font-size: 0.95rem;
   }
-
-  .progress-bar-bg {
-    width: 100%;
-    height: 10px;
-    background: #e2e8f0;
-    border-radius: var(--radius-full);
-    overflow: hidden;
-  }
-
-  .progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-hover) 100%);
-    border-radius: var(--radius-full);
-    transition: width 1s ease-in-out;
-  }
 </style>
+

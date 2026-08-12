@@ -1,94 +1,175 @@
 ---
 const socialLinks = [
   {
+    name: "LinkedIn",
+    detail: "Conectemos profesionalmente",
+    url: "https://www.linkedin.com/in/dpatrongomez/",
+    icon: "fa-brands fa-linkedin",
+    color: "#0a66c2"
+  },
+  {
     name: "GitHub",
+    detail: "Revisa mi código y repositorio",
     url: "https://github.com/dpatrongomez",
     icon: "fa-brands fa-github",
     color: "#24292e"
   },
   {
     name: "Email",
+    detail: "dpatrongomez@gmail.com",
     url: "mailto:dpatrongomez@gmail.com",
     icon: "fa-solid fa-envelope",
     color: "#ea4335"
   },
   {
     name: "Telegram",
+    detail: "@dpatrongomez",
     url: "https://t.me/dpatrongomez",
     icon: "fa-brands fa-telegram",
     color: "#0088cc"
-  },
-  {
-    name: "Instagram",
-    url: "https://www.instagram.com/dpatrongomez/",
-    icon: "fa-brands fa-instagram",
-    color: "#e4405f"
-  },
-  {
-    name: "Facebook",
-    url: "https://www.facebook.com/dpatrongomez",
-    icon: "fa-brands fa-facebook",
-    color: "#1877f2"
   },
 ];
 ---
 
 <section id="contact">
   <div class="container">
-    <h2 class="section-title">Contacto</h2>
-    <div class="section-divider"></div>
+    <div class="contact-box">
+      <h2 class="section-title text-center">¿Hablamos?</h2>
+      <div class="section-divider center-divider"></div>
+      
+      <p class="contact-subtitle">
+        Si tienes alguna propuesta laboral, consulta o quieres colaborar en algún proyecto, ¡no dudes en contactarme!
+      </p>
 
-    <div class="contact-links-grid">
-      {socialLinks.map((social) => (
-        <a 
-          href={social.url} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="social-button" 
-          aria-label={social.name}
-          title={social.name}
-        >
-          <i class={`${social.icon} social-icon`}></i>
-        </a>
-      ))}
+      <div class="contact-cards-grid">
+        {socialLinks.map((social) => (
+          <a 
+            href={social.url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="contact-card"
+          >
+            <div class="contact-icon-box" style={`background-color: ${social.color}`}>
+              <i class={`${social.icon}`}></i>
+            </div>
+            <div class="contact-text-group">
+              <h3 class="contact-name">{social.name}</h3>
+              <span class="contact-detail">{social.detail}</span>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+          </a>
+        ))}
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .contact-links-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-    padding: 20px 0;
+  .text-center {
+    text-align: center;
+    display: block !important;
   }
 
-  .social-button {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
+  .center-divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-box {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .contact-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 36px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 680px) {
+    .contact-cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact-card {
     background: #ffffff;
+    border-radius: var(--radius-lg);
     border: 1px solid var(--card-border);
+    padding: 20px 24px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: var(--navy-accent);
+    gap: 16px;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
   }
 
-  .social-icon {
-    font-size: 2.2rem;
+  .contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(221, 157, 20, 0.4);
+  }
+
+  .contact-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  }
+
+  .contact-text-group {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-name {
+    font-size: 1.1rem;
+    color: var(--navy-accent);
+    font-weight: 700;
+  }
+
+  .contact-detail {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    display: block;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    line-height: 1.4;
+  }
+
+  .arrow-icon {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
     transition: var(--transition);
   }
 
-  .social-button:hover {
-    transform: translateY(-6px) scale(1.08);
-    box-shadow: var(--shadow-md);
-    background: var(--navy-dark);
-    color: #ffffff;
-    border-color: var(--navy-dark);
+  .contact-card:hover .arrow-icon {
+    color: var(--primary);
+    transform: translate(2px, -2px);
   }
 </style>
+
+
+
+

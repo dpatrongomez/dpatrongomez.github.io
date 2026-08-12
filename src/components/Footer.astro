@@ -5,31 +5,63 @@ const currentYear = new Date().getFullYear();
 <footer class="footer-wrapper">
   <div class="container footer-content">
     <p class="copyright-text">
-      &copy; Copyright {currentYear}, 
-      <a href="https://dpatrongomez.github.io/" class="author-link">dpatrongomez</a>
+      &copy; {currentYear} <strong>Daniel Patrón Gómez</strong>. Todos los derechos reservados.
     </p>
+    
+    <div class="footer-links">
+      <a href="#header" class="top-link">
+        Subir arriba <i class="fa-solid fa-arrow-up"></i>
+      </a>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer-wrapper {
-    background: #ffffff;
-    border-top: 1px solid var(--card-border);
-    padding: 24px 0;
-    text-align: center;
+    background: #0b1d36;
+    color: #94a3b8;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px 24px;
+  }
+
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
   .copyright-text {
-    color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    color: #cbd5e1;
   }
 
-  .author-link {
-    color: var(--navy-accent);
-    font-weight: 600;
+  .copyright-text strong {
+    color: #ffffff;
   }
 
-  .author-link:hover {
+  .top-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+
+  .top-link:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 600px) {
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+    }
   }
 </style>
+

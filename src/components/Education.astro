@@ -1,24 +1,27 @@
 ---
 const studies = [
   {
-    name: "Desarrollo de Aplicaciones Multiplataforma - Ciclo Formativo de Grado Superior",
+    name: "Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)",
     date: "2017 - 2020",
     info: "I.E.S. Brianda de Mendoza",
     badge: "Grado Superior",
+    highlight: true,
     icon: "fa-graduation-cap"
   },
   {
     name: "Administración y Programación en Sistemas ERP-CRM",
-    date: "2019 - 2019",
+    date: "2019",
     info: "Ayla Diseño y Tecnología",
     badge: "Especialización",
+    highlight: false,
     icon: "fa-laptop-code"
   },
   {
-    name: "Sistemas Microinformáticos y Redes - Ciclo Formativo de Grado Medio",
+    name: "Técnico en Sistemas Microinformáticos y Redes (SMR)",
     date: "2015 - 2017",
     info: "I.E.S. Brianda de Mendoza",
     badge: "Grado Medio",
+    highlight: false,
     icon: "fa-server"
   },
 ];
@@ -26,25 +29,26 @@ const studies = [
 
 <section id="education">
   <div class="container">
-    <h2 class="section-title">Formación</h2>
+    <h2 class="section-title">Formación Académica</h2>
     <div class="section-divider"></div>
 
-    <div class="timeline-container">
-      {studies.map((item, index) => (
-        <div class={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
-          <div class="timeline-dot">
+    <div class="education-grid">
+      {studies.map((item) => (
+        <div class={`education-card ${item.highlight ? 'highlight-card' : ''}`}>
+          <div class="edu-icon-box">
             <i class={`fa-solid ${item.icon}`}></i>
           </div>
-          <div class="timeline-card">
-            <div class="card-header-flex">
-              <span class="timeline-badge">{item.badge}</span>
-              <span class="timeline-date">
+
+          <div class="edu-body">
+            <div class="edu-header">
+              <span class="edu-badge">{item.badge}</span>
+              <span class="edu-date">
                 <i class="fa-regular fa-calendar"></i> {item.date}
               </span>
             </div>
-            <h3 class="timeline-title">{item.name}</h3>
-            <p class="timeline-institution">
-              <i class="fa-solid fa-school"></i> {item.info}
+            <h3 class="edu-title">{item.name}</h3>
+            <p class="edu-institution">
+              <i class="fa-solid fa-building-columns"></i> {item.info}
             </p>
           </div>
         </div>
@@ -54,112 +58,97 @@ const studies = [
 </section>
 
 <style>
-  .timeline-container {
-    position: relative;
+  .education-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     max-width: 900px;
     margin: 0 auto;
-    padding: 20px 0;
   }
 
-  /* Central line */
-  .timeline-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 3px;
-    background: var(--primary-light);
-    transform: translateX(-50%);
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 40px;
-    width: 50%;
-  }
-
-  .timeline-item.left {
-    left: 0;
-    padding-right: 40px;
-  }
-
-  .timeline-item.right {
-    left: 50%;
-    padding-left: 40px;
-  }
-
-  .timeline-dot {
-    position: absolute;
-    top: 15px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    box-shadow: 0 0 0 6px #ffffff, var(--shadow-md);
-    z-index: 2;
-  }
-
-  .timeline-item.left .timeline-dot {
-    right: -22px;
-  }
-
-  .timeline-item.right .timeline-dot {
-    left: -22px;
-  }
-
-  .timeline-card {
+  .education-card {
     background: #ffffff;
-    padding: 24px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     border: 1px solid var(--card-border);
+    padding: 24px 28px;
     box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
     transition: var(--transition);
   }
 
-  .timeline-card:hover {
+  .education-card:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
-    border-color: var(--primary);
+    border-color: rgba(221, 157, 20, 0.4);
   }
 
-  .card-header-flex {
+  .highlight-card {
+    border-left: 4px solid var(--primary);
+    background: linear-gradient(135deg, #ffffff 0%, #fffdf8 100%);
+  }
+
+  .edu-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .highlight-card .edu-icon-box {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(221, 157, 20, 0.3);
+  }
+
+  .edu-body {
+    flex: 1;
+  }
+
+  .edu-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     flex-wrap: wrap;
     gap: 8px;
   }
 
-  .timeline-badge {
-    background: var(--primary-light);
-    color: var(--primary-hover);
+  .edu-badge {
+    background: #f1f5f9;
+    color: var(--navy-accent);
     font-size: 0.8rem;
     font-weight: 600;
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: var(--radius-full);
   }
 
-  .timeline-date {
+  .highlight-card .edu-badge {
+    background: var(--primary-light);
+    color: var(--primary-hover);
+  }
+
+  .edu-date {
     font-size: 0.85rem;
     color: var(--text-muted);
     font-weight: 500;
   }
 
-  .timeline-title {
+  .edu-title {
     font-size: 1.15rem;
     color: var(--navy-accent);
-    margin-bottom: 10px;
-    line-height: 1.4;
+    margin-bottom: 6px;
+    font-weight: 700;
   }
 
-  .timeline-institution {
+  .edu-institution {
     font-size: 0.95rem;
     color: var(--text-muted);
     display: flex;
@@ -167,23 +156,11 @@ const studies = [
     gap: 8px;
   }
 
-  @media (max-width: 768px) {
-    .timeline-container::before {
-      left: 20px;
-    }
-
-    .timeline-item {
-      width: 100%;
-      padding-left: 60px !important;
-      padding-right: 0 !important;
-    }
-
-    .timeline-item.right {
-      left: 0;
-    }
-
-    .timeline-dot {
-      left: 0 !important;
+  @media (max-width: 600px) {
+    .education-card {
+      padding: 18px 20px;
+      gap: 14px;
     }
   }
 </style>
+
