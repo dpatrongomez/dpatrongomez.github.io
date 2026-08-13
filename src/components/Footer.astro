@@ -5,7 +5,7 @@ const currentYear = new Date().getFullYear();
 <footer class="footer-wrapper">
   <div class="container footer-content">
     <p class="copyright-text">
-      &copy; {currentYear} <strong>Daniel Patrón Gómez</strong>. Todos los derechos reservados.
+      &copy; {currentYear} Daniel Patrón Gómez. Todos los derechos reservados.
     </p>
     
     <div class="footer-links">
@@ -18,12 +18,12 @@ const currentYear = new Date().getFullYear();
 
 <style>
   .footer-wrapper {
-    background: #0b1d36;
-    color: #94a3b8;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 30px 24px;
+    background: var(--bg-main);
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    font-size: 0.85rem;
   }
-
 
   .footer-content {
     display: flex;
@@ -31,30 +31,25 @@ const currentYear = new Date().getFullYear();
     align-items: center;
     flex-wrap: wrap;
     gap: 16px;
+    max-width: 900px;
   }
 
   .copyright-text {
-    font-size: 0.9rem;
-    color: #cbd5e1;
-  }
-
-  .copyright-text strong {
-    color: #ffffff;
+    color: var(--text-muted);
   }
 
   .top-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--primary);
-    font-size: 0.9rem;
-    font-weight: 600;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
     transition: var(--transition);
   }
 
   .top-link:hover {
-    color: #ffffff;
-    transform: translateY(-2px);
+    color: var(--text-display);
   }
 
   @media (max-width: 600px) {
@@ -64,4 +59,3 @@ const currentYear = new Date().getFullYear();
     }
   }
 </style>
-

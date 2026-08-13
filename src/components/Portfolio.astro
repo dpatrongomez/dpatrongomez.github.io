@@ -63,58 +63,70 @@ const projects = [
 
 <section id="portfolio">
   <div class="container">
-    <h2 class="section-title">Proyectos & Aplicaciones</h2>
+    <div class="section-tag">
+      <i class="fa-solid fa-folder-open text-muted"></i> PROYECTOS
+    </div>
+    <h2 class="section-title">Proyectos Destacados & Apps</h2>
     <div class="section-divider"></div>
 
     <div class="grid-3">
       {projects.map((project) => (
-        <div class={`portfolio-card ${project.featured ? 'card-featured' : ''}`}>
-          <div class="card-img-wrapper">
-            <img src={project.image} alt={project.name} loading="lazy" class="card-img" />
+        <div class="project-card">
+          <div class="card-media">
+            <img src={project.image} alt={project.name} loading="lazy" class="media-img" />
             {project.featured && (
-              <span class="badge-featured">
-                <i class="fa-solid fa-star"></i> Destacado
-              </span>
+              <span class="badge-feat">Destacado</span>
             )}
           </div>
 
-          <div class="card-body">
-            <h3 class="card-title">{project.name}</h3>
-            
-            <div class="project-tags">
+          <div class="card-main">
+            <div class="card-header">
+              <h3 class="project-title">
+                {project.web ? (
+                  <a href={project.web} target="_blank" rel="noopener noreferrer" class="title-link">
+                    {project.name}
+                    <i class="fa-solid fa-arrow-up-right-from-square title-ic"></i>
+                  </a>
+                ) : (
+                  <span>{project.name}</span>
+                )}
+              </h3>
+            </div>
+
+            <p class="project-info">{project.info}</p>
+
+            <div class="tags-flex">
               {project.tags.map((tag) => (
-                <span class="p-tag">{tag}</span>
+                <span class="mono-tag">{tag}</span>
               ))}
             </div>
 
-            <p class="card-info">{project.info}</p>
-
-            <div class="card-actions">
+            <div class="card-footer">
               {project.web && (
                 <a 
                   href={project.web} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  class="btn btn-primary btn-sm"
+                  class="btn-project btn-primary-action"
                 >
-                  <i class={project.googleplay ? "fa-brands fa-google-play" : "fa-solid fa-globe"}></i>
-                  {project.googleplay ? "Google Play" : "Ver Web"}
+                  <i class={project.googleplay ? "fa-brands fa-google-play btn-ic" : "fa-solid fa-globe btn-ic"}></i>
+                  <span>{project.googleplay ? "Google Play" : "Ver Web"}</span>
                 </a>
               )}
               {project.archived && (
-                <span class="btn btn-archived btn-sm" title="Aplicación archivada">
-                  <i class="fa-solid fa-box-archive"></i>
-                  Archivada
-                </span>
+                <div class="archived-tag">
+                  <i class="fa-solid fa-box-archive btn-ic"></i>
+                  <span>Archivada</span>
+                </div>
               )}
               <a 
                 href={project.github} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                class="btn btn-dark btn-sm"
+                class="btn-project btn-secondary-action"
               >
-                <i class="fa-brands fa-github"></i>
-                Código fuente
+                <i class="fa-brands fa-github btn-ic"></i>
+                <span>Código</span>
               </a>
             </div>
           </div>
@@ -125,125 +137,198 @@ const projects = [
 </section>
 
 <style>
-  .portfolio-card {
-    background: #ffffff;
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--card-border);
-    box-shadow: var(--shadow-sm);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: var(--transition);
+  }
+
+  .project-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  .card-media {
     position: relative;
-  }
-
-  .portfolio-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(221, 157, 20, 0.4);
-  }
-
-  .card-featured {
-    border-top: 3px solid var(--primary);
-  }
-
-  .card-img-wrapper {
-    position: relative;
-    height: 160px;
-    background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+    height: 130px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 16px;
+    overflow: hidden;
   }
 
-  .card-img {
-    max-height: 100%;
-    width: auto;
-    object-fit: contain;
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.4s ease;
+  .media-img {
+    max-height: 100% !important;
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: var(--radius-sm);
+    transition: transform 0.2s ease;
   }
 
-  .portfolio-card:hover .card-img {
-    transform: scale(1.08);
+  .project-card:hover .media-img {
+    transform: scale(1.05);
   }
 
-  .badge-featured {
+  .badge-feat {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    background: rgba(221, 157, 20, 0.9);
-    backdrop-filter: blur(6px);
-    color: #ffffff;
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 3px 10px;
+    top: 10px;
+    right: 10px;
+    background: var(--accent-subtle);
+    color: var(--accent-hover);
+    border: 1px solid var(--accent-border);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
     border-radius: var(--radius-full);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
 
-  .card-body {
-    padding: 22px;
+  .card-main {
+    padding: 20px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
 
-  .card-title {
-    font-size: 1.2rem;
-    color: var(--navy-accent);
-    margin-bottom: 8px;
-    font-weight: 700;
-  }
-
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 12px;
-  }
-
-  .p-tag {
-    background: #f1f5f9;
-    color: var(--text-muted);
-    font-size: 0.75rem;
+  .project-title {
+    font-size: 1.1rem;
+    color: var(--text-display);
     font-weight: 600;
-    padding: 2px 8px;
-    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
   }
 
-  .card-info {
-    font-size: 0.92rem;
+  .title-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-display);
+  }
+
+  .title-link:hover {
+    color: var(--accent-hover);
+  }
+
+  .title-ic {
+    font-size: 0.72rem;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+  }
+
+  .title-link:hover .title-ic {
+    transform: translate(2px, -2px);
+    opacity: 1;
+  }
+
+  .project-info {
+    font-size: 0.9rem;
     color: var(--text-muted);
     line-height: 1.6;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     flex-grow: 1;
   }
 
-  .card-actions {
+  .tags-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .mono-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-pill);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+  }
+
+  .card-footer {
     display: flex;
     gap: 10px;
     margin-top: auto;
+    align-items: center;
   }
 
-  .btn-sm {
-    padding: 9px 12px;
-    font-size: 0.82rem;
-    flex: 1;
-    border-radius: var(--radius-md);
+  .btn-project {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 8px 12px !important;
+    border-radius: var(--radius-sm) !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    transition: var(--transition) !important;
+    cursor: pointer !important;
   }
 
-  .btn-archived {
-    background: #f1f5f9;
-    color: #64748b;
-    border: 1px dashed #cbd5e1;
-    cursor: default;
-    user-select: none;
+  .btn-ic {
+    display: inline-block !important;
+    margin-right: 6px !important;
+    font-size: 0.88rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .btn-primary-action {
+    background: var(--text-display) !important;
+    color: var(--bg-main) !important;
+    border: 1px solid var(--text-display) !important;
+    font-weight: 600 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .btn-primary-action:hover {
+    background: #e4e4e7 !important;
+    border-color: #e4e4e7 !important;
+    color: #000000 !important;
+  }
+
+  .btn-secondary-action {
+    background: var(--bg-pill) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-hover) !important;
+  }
+
+  .btn-secondary-action:hover {
+    background: var(--border) !important;
+    border-color: var(--border-focus) !important;
+    color: var(--text-display) !important;
+  }
+
+  .btn-project span {
+    white-space: nowrap !important;
+    display: inline-block !important;
+  }
+
+  .archived-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 8px 12px !important;
+    background: var(--bg-surface) !important;
+    border: 1px dashed var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-disabled) !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.78rem !important;
+    white-space: nowrap !important;
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
 </style>
-

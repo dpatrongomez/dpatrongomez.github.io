@@ -5,51 +5,47 @@ const studies = [
     date: "2017 - 2020",
     info: "I.E.S. Brianda de Mendoza",
     badge: "Grado Superior",
-    highlight: true,
-    icon: "fa-graduation-cap"
+    highlight: true
   },
   {
     name: "Administración y Programación en Sistemas ERP-CRM",
     date: "2019",
     info: "Ayla Diseño y Tecnología",
     badge: "Especialización",
-    highlight: false,
-    icon: "fa-laptop-code"
+    highlight: false
   },
   {
     name: "Técnico en Sistemas Microinformáticos y Redes (SMR)",
     date: "2015 - 2017",
     info: "I.E.S. Brianda de Mendoza",
     badge: "Grado Medio",
-    highlight: false,
-    icon: "fa-server"
+    highlight: false
   },
 ];
 ---
 
 <section id="education">
   <div class="container">
+    <div class="section-tag">
+      <i class="fa-solid fa-graduation-cap text-muted"></i> FORMACIÓN
+    </div>
     <h2 class="section-title">Formación Académica</h2>
     <div class="section-divider"></div>
 
-    <div class="education-grid">
+    <div class="edu-list">
       {studies.map((item) => (
-        <div class={`education-card ${item.highlight ? 'highlight-card' : ''}`}>
-          <div class="edu-icon-box">
-            <i class={`fa-solid ${item.icon}`}></i>
+        <div class={`edu-card ${item.highlight ? 'highlight-card' : ''}`}>
+          <div class="edu-top">
+            <div class="edu-title">{item.name}</div>
+            <div class="edu-date">{item.date}</div>
           </div>
-
-          <div class="edu-body">
-            <div class="edu-header">
-              <span class="edu-badge">{item.badge}</span>
-              <span class="edu-date">
-                <i class="fa-regular fa-calendar"></i> {item.date}
-              </span>
+          
+          <div class="edu-bottom">
+            <div class="edu-inst">
+              <i class="fa-solid fa-building-columns inst-ic"></i>
+              <span>{item.info}</span>
             </div>
-            <h3 class="edu-title">{item.name}</h3>
-            <p class="edu-institution">
-              <i class="fa-solid fa-building-columns"></i> {item.info}
-            </p>
+            <div class="edu-badge">{item.badge}</div>
           </div>
         </div>
       ))}
@@ -58,109 +54,89 @@ const studies = [
 </section>
 
 <style>
-  .education-grid {
+  .edu-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    max-width: 900px;
-    margin: 0 auto;
+    gap: 16px;
   }
 
-  .education-card {
-    background: #ffffff;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--card-border);
-    padding: 24px 28px;
-    box-shadow: var(--shadow-sm);
+  .edu-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
     display: flex;
-    align-items: flex-start;
-    gap: 20px;
+    flex-direction: column;
+    gap: 12px;
     transition: var(--transition);
   }
 
-  .education-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(221, 157, 20, 0.4);
+  .edu-card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-surface);
   }
 
   .highlight-card {
-    border-left: 4px solid var(--primary);
-    background: linear-gradient(135deg, #ffffff 0%, #fffdf8 100%);
+    border-left: 3px solid var(--accent);
   }
 
-  .edu-icon-box {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--primary-light);
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-
-  .highlight-card .edu-icon-box {
-    background: var(--primary);
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(221, 157, 20, 0.3);
-  }
-
-  .edu-body {
-    flex: 1;
-  }
-
-  .edu-header {
+  .edu-top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+    align-items: flex-start;
+    gap: 12px;
     flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .edu-badge {
-    background: #f1f5f9;
-    color: var(--navy-accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-  }
-
-  .highlight-card .edu-badge {
-    background: var(--primary-light);
-    color: var(--primary-hover);
-  }
-
-  .edu-date {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-weight: 500;
   }
 
   .edu-title {
-    font-size: 1.15rem;
-    color: var(--navy-accent);
-    margin-bottom: 6px;
-    font-weight: 700;
+    display: block !important;
+    font-size: 1.05rem;
+    color: var(--text-display);
+    font-weight: 600;
+    line-height: 1.3;
+    flex: 1;
+    min-width: 240px;
   }
 
-  .edu-institution {
-    font-size: 0.95rem;
+  .edu-date {
+    display: block !important;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
     color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .edu-bottom {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .edu-inst {
+    display: flex !important;
     align-items: center;
     gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
   }
 
-  @media (max-width: 600px) {
-    .education-card {
-      padding: 18px 20px;
-      gap: 14px;
-    }
+  .inst-ic {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .edu-badge {
+    display: inline-block !important;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
   }
 </style>
-

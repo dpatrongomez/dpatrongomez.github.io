@@ -2,31 +2,27 @@
 const socialLinks = [
   {
     name: "LinkedIn",
-    detail: "Conectemos profesionalmente",
+    detail: "in/dpatrongomez",
     url: "https://www.linkedin.com/in/dpatrongomez/",
-    icon: "fa-brands fa-linkedin",
-    color: "#0a66c2"
+    icon: "fa-brands fa-linkedin"
   },
   {
     name: "GitHub",
-    detail: "Revisa mi código y repositorio",
+    detail: "@dpatrongomez",
     url: "https://github.com/dpatrongomez",
-    icon: "fa-brands fa-github",
-    color: "#24292e"
+    icon: "fa-brands fa-github"
   },
   {
     name: "Email",
     detail: "dpatrongomez@gmail.com",
     url: "mailto:dpatrongomez@gmail.com",
-    icon: "fa-solid fa-envelope",
-    color: "#ea4335"
+    icon: "fa-solid fa-envelope"
   },
   {
     name: "Telegram",
     detail: "@dpatrongomez",
     url: "https://t.me/dpatrongomez",
-    icon: "fa-brands fa-telegram",
-    color: "#0088cc"
+    icon: "fa-brands fa-telegram"
   },
 ];
 ---
@@ -34,14 +30,17 @@ const socialLinks = [
 <section id="contact">
   <div class="container">
     <div class="contact-box">
-      <h2 class="section-title text-center">¿Hablamos?</h2>
-      <div class="section-divider center-divider"></div>
+      <div class="section-tag">
+        <i class="fa-solid fa-envelope text-muted"></i> CONTACTO
+      </div>
+      <h2 class="section-title">¿Hablamos?</h2>
+      <div class="section-divider"></div>
       
       <p class="contact-subtitle">
-        Si tienes alguna propuesta laboral, consulta o quieres colaborar en algún proyecto, ¡no dudes en contactarme!
+        Si tienes alguna propuesta laboral, consulta o quieres colaborar en algún proyecto, no dudes en escribirme.
       </p>
 
-      <div class="contact-cards-grid">
+      <div class="contact-grid">
         {socialLinks.map((social) => (
           <a 
             href={social.url} 
@@ -49,14 +48,16 @@ const socialLinks = [
             rel="noopener noreferrer" 
             class="contact-card"
           >
-            <div class="contact-icon-box" style={`background-color: ${social.color}`}>
-              <i class={`${social.icon}`}></i>
+            <div class="card-left">
+              <div class="card-ic-wrapper">
+                <i class={`${social.icon} card-ic`}></i>
+              </div>
+              <div class="card-text">
+                <div class="card-name">{social.name}</div>
+                <div class="card-detail">{social.detail}</div>
+              </div>
             </div>
-            <div class="contact-text-group">
-              <h3 class="contact-name">{social.name}</h3>
-              <span class="contact-detail">{social.detail}</span>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+            <i class="fa-solid fa-arrow-up-right-from-square arrow-ic"></i>
           </a>
         ))}
       </div>
@@ -65,111 +66,110 @@ const socialLinks = [
 </section>
 
 <style>
-  .text-center {
-    text-align: center;
-    display: block !important;
-  }
-
-  .center-divider {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .contact-box {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 850px;
   }
 
   .contact-subtitle {
-    text-align: center;
     color: var(--text-muted);
-    font-size: 1.05rem;
-    margin-bottom: 36px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 1.02rem;
+    margin-bottom: 32px;
+    line-height: 1.6;
   }
 
-  .contact-cards-grid {
+  .contact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 16px;
   }
 
-  @media (max-width: 680px) {
-    .contact-cards-grid {
+  @media (max-width: 640px) {
+    .contact-grid {
       grid-template-columns: 1fr;
     }
   }
 
   .contact-card {
-    background: #ffffff;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--card-border);
-    padding: 20px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
-    box-shadow: var(--shadow-sm);
     transition: var(--transition);
   }
 
   .contact-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(221, 157, 20, 0.4);
+    border-color: var(--border-hover);
+    background: var(--bg-surface);
   }
 
-  .contact-icon-box {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-md);
-    color: #ffffff;
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .card-ic-wrapper {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
     flex-shrink: 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   }
 
-  .contact-text-group {
-    flex: 1;
-    min-width: 0;
+  .card-ic {
+    font-size: 1.1rem;
+    color: var(--text-display);
+    transition: var(--transition);
+  }
+
+  .contact-card:hover .card-ic {
+    color: var(--accent);
+  }
+
+  .card-text {
     display: flex;
     flex-direction: column;
+    gap: 2px;
+    min-width: 0;
   }
 
-  .contact-name {
-    font-size: 1.1rem;
-    color: var(--navy-accent);
-    font-weight: 700;
+  .card-name {
+    display: block !important;
+    font-size: 0.98rem;
+    color: var(--text-display);
+    font-weight: 600;
+    line-height: 1.3;
   }
 
-  .contact-detail {
-    font-size: 0.85rem;
+  .card-detail {
+    display: block !important;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
     color: var(--text-muted);
-    font-weight: 500;
-    display: block;
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    white-space: normal;
-    line-height: 1.4;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  .arrow-icon {
-    font-size: 0.9rem;
+  .arrow-ic {
+    font-size: 0.8rem;
     color: var(--text-muted);
     flex-shrink: 0;
     transition: var(--transition);
   }
 
-  .contact-card:hover .arrow-icon {
-    color: var(--primary);
+  .contact-card:hover .arrow-ic {
+    color: var(--accent);
     transform: translate(2px, -2px);
   }
 </style>
-
-
-
-

@@ -2,129 +2,101 @@
 ---
 
 <section id="header" class="hero-section">
-  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-badge">
-      <span class="pulse-dot"></span> Disponible para nuevos retos
-    </div>
     <h1 class="hero-title">Daniel Patrón Gómez</h1>
-    <p class="hero-subtitle">
-      <span id="typed-text" class="typed-highlight"></span><span class="cursor">|</span>
-    </p>
-    <p class="hero-tagline">
-      Especialista Front-end en BBVA Technology y desarrollador de aplicaciones multiplataforma.
+
+    <div class="hero-headline">
+      <span class="headline-title">Front-End Developer</span> & desarrollador de aplicaciones multiplataforma.
+    </div>
+
+    <div class="hero-typed-row">
+      <span class="mono-prompt">&gt;</span>
+      <span id="typed-text" class="typed-text"></span>
+      <span class="cursor">|</span>
+    </div>
+
+    <p class="hero-bio">
+      Actualmente en <strong>BBVA Technology en Europa</strong>, construyendo interfaces para aplicaciones móviles de banca internacional con <strong>Lit, Web Components y Ember.js</strong>. Apasionado por la arquitectura frontend, la precisión visual y las buenas prácticas.
     </p>
 
     <div class="hero-actions">
-      <a href="#portfolio" class="btn btn-primary btn-hero">
-        <i class="fa-solid fa-folder-open"></i> Ver Proyectos
+      <a href="#portfolio" class="btn btn-primary">
+        Ver Proyectos <i class="fa-solid fa-arrow-right arrow-icon"></i>
       </a>
-      <a href="#experience" class="btn btn-glass btn-hero">
-        <i class="fa-solid fa-briefcase"></i> Experiencia
+      <a href="#experience" class="btn btn-outline">
+        Experiencia
       </a>
-      <a href="https://www.linkedin.com/in/dpatrongomez/" target="_blank" rel="noopener noreferrer" class="btn btn-linkedin btn-hero">
-        <i class="fa-brands fa-linkedin"></i> LinkedIn
+      <a href="https://www.linkedin.com/in/dpatrongomez/" target="_blank" rel="noopener noreferrer" class="link-social">
+        LinkedIn <i class="fa-solid fa-arrow-up-right-from-square micro-icon"></i>
+      </a>
+      <a href="https://github.com/dpatrongomez" target="_blank" rel="noopener noreferrer" class="link-social">
+        GitHub <i class="fa-solid fa-arrow-up-right-from-square micro-icon"></i>
       </a>
     </div>
-
-    <a href="#about" class="scroll-down-btn" aria-label="Desplazar a sobre mí">
-      <i class="fa-solid fa-chevron-down"></i>
-    </a>
   </div>
 </section>
 
 <style>
   .hero-section {
-    position: relative;
-    width: 100%;
-    max-width: 100% !important;
-    min-height: 100vh;
-    background: url('/assets/images/background.jpeg') center center / cover no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 100px 20px 60px;
-  }
-
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg, 
-      rgba(11, 29, 54, 0.75) 0%, 
-      rgba(15, 23, 42, 0.88) 100%
-    );
+    padding-top: 130px;
+    padding-bottom: 60px;
   }
 
   .hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: #ffffff;
-    max-width: 850px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    max-width: 780px;
   }
 
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #f8fafc;
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 6px 16px;
-    border-radius: var(--radius-full);
-    margin-bottom: 20px;
-  }
 
-  .pulse-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 10px #10b981;
-    animation: pulse 1.8s infinite;
-  }
-
-  @keyframes pulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-  }
 
   .hero-title {
-    font-size: 3.8rem;
+    font-size: 3.2rem;
     font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 12px;
-    letter-spacing: -0.5px;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    color: var(--text-display);
+    letter-spacing: -0.03em;
     line-height: 1.1;
+    margin-bottom: 12px;
   }
 
-  .hero-subtitle {
-    color: #f1f5f9;
-    font-size: 2rem;
+  .hero-headline {
+    font-size: 1.35rem;
+    color: var(--text-muted);
     font-weight: 400;
+    line-height: 1.4;
     margin-bottom: 16px;
-    min-height: 2.4rem;
   }
 
-  .typed-highlight {
-    color: var(--primary);
+  .headline-title {
+    color: var(--text-display);
     font-weight: 600;
   }
 
+  .hero-typed-row {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  .mono-prompt {
+    color: var(--text-muted);
+  }
+
+  .typed-text {
+    color: var(--text-display);
+  }
+
   .cursor {
-    display: inline-block;
-    color: var(--primary);
-    font-weight: 300;
+    color: var(--accent);
     animation: blink 0.8s infinite;
   }
 
@@ -133,97 +105,61 @@
     50% { opacity: 0; }
   }
 
-  .hero-tagline {
-    font-size: 1.15rem;
-    color: #cbd5e1;
-    max-width: 640px;
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.7;
     margin-bottom: 32px;
-    line-height: 1.6;
-    font-weight: 300;
+  }
+
+  .hero-bio strong {
+    color: var(--text-primary);
   }
 
   .hero-actions {
     display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 40px;
-  }
-
-  .btn-hero {
-    padding: 12px 24px;
-    font-size: 1rem;
-    border-radius: var(--radius-md);
-  }
-
-  .btn-glass {
-    background: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .btn-glass:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-    color: #ffffff;
-  }
-
-  .btn-linkedin {
-    background: #0a66c2;
-    color: #ffffff;
-  }
-
-  .btn-linkedin:hover {
-    background: #084e96;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(10, 102, 194, 0.4);
-  }
-
-  .scroll-down-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #ffffff;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    animation: bounce 2s infinite;
-    margin-top: 20px;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
-  .scroll-down-btn:hover {
-    background: var(--primary);
-    border-color: var(--primary);
+  .arrow-icon {
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
   }
 
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
+  .btn-primary:hover .arrow-icon {
+    transform: translateX(3px);
+  }
+
+  .link-social {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+  }
+
+  .link-social:hover {
+    color: var(--text-display);
+    background: var(--bg-surface);
+  }
+
+  .micro-icon {
+    font-size: 0.7rem;
+    opacity: 0.7;
   }
 
   @media (max-width: 768px) {
     .hero-title {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
     }
-    .hero-subtitle {
-      font-size: 1.4rem;
-    }
-    .hero-tagline {
-      font-size: 1rem;
-    }
-    .hero-actions {
-      flex-direction: column;
-      width: 100%;
-      max-width: 300px;
-    }
-    .btn-hero {
-      width: 100%;
+    .hero-headline {
+      font-size: 1.15rem;
     }
   }
 </style>
@@ -253,22 +189,21 @@
       charIndex++;
     }
 
-    let typeSpeed = isDeleting ? 60 : 100;
+    let typeSpeed = isDeleting ? 40 : 80;
 
     if (!isDeleting && charIndex === currentWord.length) {
-      typeSpeed = 2200; // Pause at full word
+      typeSpeed = 2000;
       isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
       wordIndex = (wordIndex + 1) % words.length;
-      typeSpeed = 400;
+      typeSpeed = 300;
     }
 
     setTimeout(typeEffect, typeSpeed);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(typeEffect, 400);
+    setTimeout(typeEffect, 300);
   });
 </script>
-

@@ -6,79 +6,66 @@ const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
 
 <section id="about">
   <div class="container">
-    <h2 class="section-title">Sobre mí</h2>
+    <div class="section-tag">
+      <i class="fa-solid fa-user text-muted"></i> SOBRE MÍ
+    </div>
+    <h2 class="section-title">Trayectoria & Enfoque</h2>
     <div class="section-divider"></div>
 
     <div class="grid-2 align-start">
       <div class="profile-column">
-        <div class="profile-image-container">
+        <div class="profile-image-wrapper">
           <img 
             src="/assets/images/perfil.jpg" 
             alt="Daniel Patrón Gómez - Foto de perfil" 
             class="profile-img"
           />
-          <div class="profile-badge-float">
-            <i class="fa-solid fa-code"></i> Front-End Dev
-          </div>
         </div>
 
-        <div class="about-stats">
-          <div class="stat-card">
-            <span class="stat-number">+4</span>
-            <span class="stat-label">Años en BBVA Tech</span>
+        <div class="about-stats-grid">
+          <div class="stat-box">
+            <div class="stat-val">+4</div>
+            <div class="stat-lbl">Años BBVA Tech</div>
           </div>
-          <div class="stat-card">
-            <span class="stat-number">6+</span>
-            <span class="stat-label">Apps Creadas</span>
+          <div class="stat-box">
+            <div class="stat-val">6+</div>
+            <div class="stat-lbl">Apps Creadas</div>
           </div>
-          <div class="stat-card">
-            <span class="stat-number">DAM</span>
-            <span class="stat-label">Grado Superior</span>
+          <div class="stat-box">
+            <div class="stat-val">DAM</div>
+            <div class="stat-lbl">Grado Superior</div>
           </div>
         </div>
       </div>
 
-      <div class="about-content">
-        <h3 class="about-subtitle">Desarrollador Front-End & Multiplataforma</h3>
+      <div class="about-bio-column">
+        <h3 class="about-heading">Desarrollador Front-End & Multiplataforma</h3>
         
-        <p class="about-text">
-          Soy Daniel, desarrollador apasionado por crear experiencias digitales ágiles, robustas y de alto impacto. Me especializo en la construcción de interfaces de usuario modernas y aplicaciones móviles de alta calidad.
+        <p class="about-para">
+          Soy Daniel, desarrollador enfocado en crear productos digitales rápidos, accesibles e intuitivos. Me especializo en la construcción de interfaces de usuario robustas y aplicaciones móviles multiplataforma.
         </p>
-        <p class="about-text">
-          Actualmente me desempeño como <strong>Front-end Developer en BBVA Technology en Europa</strong>, formando parte del desarrollo de la aplicación móvil de banca internacional (España, Italia y Alemania) utilizando tecnologías avanzadas como <strong>Lit, Web Components y Ember.js</strong>.
+        <p class="about-para">
+          En mi rol como <strong>Front-end Developer en BBVA Technology en Europa</strong>, formo parte del equipo encargado de evolucionar la aplicación móvil de banca internacional en España, Italia y Alemania, utilizando <strong>Lit, Web Components y Ember.js</strong>.
         </p>
 
-        <div class="info-grid">
-          <div class="info-pill">
-            <span class="icon-circle"><i class="fa-solid fa-location-dot"></i></span>
-            <div>
-              <span class="info-label">Ubicación</span>
-              <strong class="info-val">Guadalajara, España</strong>
+        <div class="meta-list">
+          <div class="meta-item">
+            <div class="meta-label">Ubicación</div>
+            <div class="meta-value">Guadalajara, España</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Email</div>
+            <div class="meta-value">
+              <a href="mailto:dpatrongomez@gmail.com" class="meta-link">dpatrongomez@gmail.com</a>
             </div>
           </div>
-
-          <div class="info-pill">
-            <span class="icon-circle"><i class="fa-solid fa-envelope"></i></span>
-            <div>
-              <span class="info-label">Email</span>
-              <strong class="info-val"><a href="mailto:dpatrongomez@gmail.com" class="email-link">dpatrongomez@gmail.com</a></strong>
-            </div>
+          <div class="meta-item">
+            <div class="meta-label">Edad</div>
+            <div class="meta-value">{age} años</div>
           </div>
-
-          <div class="info-pill">
-            <span class="icon-circle"><i class="fa-solid fa-cake-candles"></i></span>
-            <div>
-              <span class="info-label">Edad</span>
-              <strong class="info-val">{age} años</strong>
-            </div>
-          </div>
-
-          <div class="info-pill">
-            <span class="icon-circle"><i class="fa-solid fa-graduation-cap"></i></span>
-            <div>
-              <span class="info-label">Titulación</span>
-              <strong class="info-val">Técnico Superior DAM</strong>
-            </div>
+          <div class="meta-item">
+            <div class="meta-label">Titulación</div>
+            <div class="meta-value">Técnico Superior DAM</div>
           </div>
         </div>
       </div>
@@ -87,186 +74,130 @@ const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
 </section>
 
 <style>
-  .align-start {
-    align-items: flex-start;
-  }
-
   .profile-column {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
 
-  .profile-image-container {
-    position: relative;
-    border-radius: var(--radius-lg);
+  .profile-image-wrapper {
+    border-radius: var(--radius-md);
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition);
-  }
-
-  .profile-image-container:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glow);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    max-width: 280px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
 
   .profile-img {
     width: 100%;
     height: auto;
-    object-fit: cover;
     display: block;
-    border-radius: var(--radius-lg);
+    filter: grayscale(10%) contrast(105%);
+    transition: var(--transition);
   }
 
-  .profile-badge-float {
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    background: rgba(11, 29, 54, 0.85);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: var(--radius-full);
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  .profile-image-wrapper:hover .profile-img {
+    filter: grayscale(0%);
   }
 
-  .profile-badge-float i {
-    color: var(--primary);
-  }
-
-  .about-stats {
+  .about-stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 10px;
+    max-width: 280px;
   }
 
-  .stat-card {
-    background: #ffffff;
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius-md);
-    padding: 14px 10px;
+  .stat-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 8px;
     text-align: center;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 4px;
   }
 
-
-  .stat-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--primary);
-    box-shadow: var(--shadow-md);
-  }
-
-  .stat-number {
-    display: block;
-    font-size: 1.4rem;
+  .stat-val {
+    display: block !important;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--text-display);
+    line-height: 1.1;
+  }
+
+  .stat-lbl {
+    display: block !important;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
     line-height: 1.2;
   }
 
-  .stat-label {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .about-subtitle {
-    font-size: 1.6rem;
-    color: var(--navy-accent);
+  .about-heading {
+    font-size: 1.35rem;
+    color: var(--text-display);
     margin-bottom: 16px;
-    line-height: 1.3;
+    font-weight: 600;
   }
 
-  .about-text {
+  .about-para {
+    font-size: 0.98rem;
     color: var(--text-muted);
-    font-size: 1.02rem;
     line-height: 1.7;
     margin-bottom: 16px;
   }
 
-  .about-text strong {
-    color: var(--navy-accent);
+  .about-para strong {
+    color: var(--text-primary);
   }
 
-  .info-grid {
-    margin-top: 28px;
+  .meta-list {
+    margin-top: 24px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .info-pill {
-    display: flex;
-    align-items: center;
     gap: 12px;
-    background: #ffffff;
-    padding: 12px 16px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--card-border);
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
   }
 
-  .info-pill:hover {
-    border-color: rgba(221, 157, 20, 0.4);
-    transform: translateY(-2px);
+  .meta-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .info-label {
-    display: block;
-    font-size: 0.75rem;
+  .meta-label {
+    display: block !important;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
   }
 
-  .info-val {
+  .meta-value {
+    display: block !important;
     font-size: 0.92rem;
-    color: var(--navy-accent);
+    color: var(--text-display);
+    font-weight: 500;
   }
 
-  .icon-circle {
-    width: 40px;
-    height: 40px;
-    background: var(--primary-light);
-    color: var(--primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    transition: var(--transition);
+  .meta-link {
+    color: var(--text-display);
   }
 
-  .info-pill:hover .icon-circle {
-    background: var(--primary);
-    color: #ffffff;
-    transform: scale(1.08);
+  .meta-link:hover {
+    color: var(--accent);
   }
 
-  .email-link {
-    color: var(--navy-accent);
-  }
-
-  .email-link:hover {
-    color: var(--primary);
-  }
-
-  @media (max-width: 768px) {
-    .info-grid {
+  @media (max-width: 600px) {
+    .meta-list {
       grid-template-columns: 1fr;
     }
   }
 </style>
-
