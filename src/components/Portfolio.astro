@@ -59,6 +59,19 @@ const projects = [
     featured: false
   },
 ];
+
+function getTagData(tag: string) {
+  const lower = tag.toLowerCase();
+  if (lower.includes("flutter")) return { icon: "fa-brands fa-flutter" };
+  if (lower.includes("dart")) return { icon: "fa-brands fa-dart-lang" };
+  if (lower.includes("android")) return { icon: "fa-brands fa-android" };
+  if (lower.includes("angular")) return { icon: "fa-brands fa-angular" };
+  if (lower.includes("firebase")) return { icon: "devicon-firebase-plain" };
+  if (lower.includes("github") || lower.includes("action")) return { icon: "devicon-githubactions-plain" };
+  if (lower.includes("rest") || lower.includes("api")) return { icon: "fa-solid fa-network-wired" };
+  if (lower.includes("web")) return { icon: "fa-solid fa-globe" };
+  return { icon: "fa-solid fa-tag" };
+}
 ---
 
 <section id="portfolio">
@@ -96,9 +109,15 @@ const projects = [
             <p class="project-info">{project.info}</p>
 
             <div class="tags-flex">
-              {project.tags.map((tag) => (
-                <span class="mono-tag">{tag}</span>
-              ))}
+              {project.tags.map((tag) => {
+                const data = getTagData(tag);
+                return (
+                  <span class="mono-tag tag-with-icon">
+                    <i class={`${data.icon} tag-ic`}></i>
+                    {tag}
+                  </span>
+                );
+              })}
             </div>
 
             <div class="card-footer">
@@ -250,6 +269,17 @@ const projects = [
     background: var(--bg-pill);
     border: 1px solid var(--border-subtle);
     color: var(--text-muted);
+  }
+
+  .tag-with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .tag-ic {
+    font-size: 0.75rem;
+    color: var(--accent-hover);
   }
 
   .card-footer {

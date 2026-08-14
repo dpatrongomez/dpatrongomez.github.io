@@ -70,6 +70,28 @@ const experiences = [
     ]
   }
 ];
+
+function getSkillData(skillName: string) {
+  const lower = skillName.toLowerCase();
+  if (lower.includes("ember")) return { icon: "fa-brands fa-ember" };
+  if (lower.includes("javascript") || lower.includes("js")) return { icon: "fa-brands fa-js" };
+  if (lower.includes("lit")) return { svg: `<svg viewBox="0 0 24 24" class="skill-svg-ic" fill="currentColor"><path d="M6.719 0l5.485 5.485-2.743 2.743 5.486 5.486-2.743 2.743 8.228 8.229-5.485 5.485-10.971-10.971 2.742-2.743-5.485-5.486 2.743-2.743L6.719 0z"/></svg>` };
+  if (lower.includes("web components")) return { svg: `<svg viewBox="0 0 24 24" class="skill-svg-ic" fill="currentColor"><path d="M12 0l-5.196 3v6L1.608 12 12 18l10.392-6-5.196-3V3L12 0zm0 2.309l3.196 1.845v3.691L12 9.691 8.804 7.845V4.154L12 2.309zM3.608 12.845l3.196 1.846v3.691L3.608 16.537v-3.692zm16.784 0v3.692L17.196 18.382v-3.691l3.196-1.846z"/></svg>` };
+  if (lower.includes("flutter")) return { icon: "fa-brands fa-flutter" };
+  if (lower.includes("dart")) return { icon: "fa-brands fa-dart-lang" };
+  if (lower.includes("android")) return { icon: "fa-brands fa-android" };
+  if (lower.includes("angular")) return { icon: "fa-brands fa-angular" };
+  if (lower.includes("banca")) return { icon: "fa-solid fa-building-columns" };
+  if (lower.includes("migración") || lower.includes("migracion")) return { icon: "fa-solid fa-arrow-right-arrow-left" };
+  if (lower.includes("front-end") || lower.includes("desarrollo software")) return { icon: "fa-solid fa-code" };
+  if (lower.includes("ágil") || lower.includes("agile") || lower.includes("scrum")) return { icon: "fa-solid fa-diagram-project" };
+  if (lower.includes("gestión") || lower.includes("gestion") || lower.includes("coordinación") || lower.includes("coordinacion")) return { icon: "fa-solid fa-list-check" };
+  if (lower.includes("telecomunicaciones")) return { icon: "fa-solid fa-tower-broadcast" };
+  if (lower.includes("sistemas")) return { icon: "fa-solid fa-server" };
+  if (lower.includes("redes") || lower.includes("red")) return { icon: "fa-solid fa-network-wired" };
+  if (lower.includes("soporte")) return { icon: "fa-solid fa-headset" };
+  return { icon: "fa-solid fa-circle-check" };
+}
 ---
 
 <section id="experience">
@@ -131,11 +153,19 @@ const experiences = [
 
                   {role.skills && role.skills.length > 0 && (
                     <div class="role-skills">
-                      {role.skills.map((skill) => (
-                        <span class="skill-tag">
-                          <i class="fa-solid fa-gem skill-icon"></i> {skill}
-                        </span>
-                      ))}
+                      {role.skills.map((skill) => {
+                        const data = getSkillData(skill);
+                        return (
+                          <span class="skill-tag">
+                            {data.svg ? (
+                              <Fragment set:html={data.svg} />
+                            ) : (
+                              <i class={`${data.icon} skill-icon`}></i>
+                            )}
+                            {skill}
+                          </span>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
@@ -379,8 +409,17 @@ const experiences = [
   }
 
   .skill-icon {
-    font-size: 0.7rem;
+    font-size: 0.78rem;
     color: var(--accent-hover);
+  }
+
+  :global(.skill-svg-ic) {
+    width: 12px;
+    height: 12px;
+    color: var(--accent-hover);
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
   }
 
   @media (max-width: 768px) {

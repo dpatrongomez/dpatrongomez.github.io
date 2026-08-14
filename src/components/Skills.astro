@@ -4,9 +4,15 @@ const skillCategories = [
     title: "Frontend & Web",
     skills: [
       { name: "JavaScript / ES6+", icon: "fa-brands fa-js" },
-      { name: "Web Components", icon: "fa-solid fa-cubes" },
-      { name: "Lit", icon: "fa-solid fa-fire" },
-      { name: "Ember.js", icon: "fa-solid fa-layer-group" },
+      { 
+        name: "Web Components", 
+        svg: `<svg viewBox="0 0 24 24" class="chip-svg-ic" fill="currentColor"><path d="M12 0l-5.196 3v6L1.608 12 12 18l10.392-6-5.196-3V3L12 0zm0 2.309l3.196 1.845v3.691L12 9.691 8.804 7.845V4.154L12 2.309zM3.608 12.845l3.196 1.846v3.691L3.608 16.537v-3.692zm16.784 0v3.692L17.196 18.382v-3.691l3.196-1.846z"/></svg>` 
+      },
+      { 
+        name: "Lit", 
+        svg: `<svg viewBox="0 0 24 24" class="chip-svg-ic" fill="currentColor"><path d="M6.719 0l5.485 5.485-2.743 2.743 5.486 5.486-2.743 2.743 8.228 8.229-5.485 5.485-10.971-10.971 2.742-2.743-5.485-5.486 2.743-2.743L6.719 0z"/></svg>` 
+      },
+      { name: "Ember.js", icon: "fa-brands fa-ember" },
       { name: "HTML5 & CSS3", icon: "fa-brands fa-html5" },
       { name: "Angular", icon: "fa-brands fa-angular" },
     ]
@@ -14,17 +20,17 @@ const skillCategories = [
   {
     title: "Desarrollo Mobile",
     skills: [
-      { name: "Flutter", icon: "fa-solid fa-mobile-screen-button" },
-      { name: "Dart", icon: "fa-solid fa-bolt" },
+      { name: "Flutter", icon: "fa-brands fa-flutter" },
+      { name: "Dart", icon: "fa-brands fa-dart-lang" },
       { name: "Android Native", icon: "fa-brands fa-android" },
-      { name: "Firebase", icon: "fa-solid fa-flame" },
+      { name: "Firebase", icon: "devicon-firebase-plain" },
       { name: "Banca Móvil", icon: "fa-solid fa-building-columns" },
     ]
   },
   {
     title: "Backend & Datos",
     skills: [
-      { name: "MySQL", icon: "fa-solid fa-database" },
+      { name: "MySQL", icon: "devicon-mysql-plain" },
       { name: "REST APIs", icon: "fa-solid fa-network-wired" },
       { name: "PHP", icon: "fa-brands fa-php" },
       { name: "Python", icon: "fa-brands fa-python" },
@@ -34,10 +40,10 @@ const skillCategories = [
   {
     title: "Herramientas & Ágil",
     skills: [
-      { name: "Git & GitHub", icon: "fa-brands fa-github" },
-      { name: "GitHub Actions", icon: "fa-solid fa-gears" },
+      { name: "Git & GitHub", icon: "fa-brands fa-git-alt" },
+      { name: "GitHub Actions", icon: "devicon-githubactions-plain" },
       { name: "Scrum / Agile", icon: "fa-solid fa-diagram-project" },
-      { name: "Jira / Confluence", icon: "fa-solid fa-list-check" },
+      { name: "Jira / Confluence", icon: "fa-brands fa-jira" },
     ]
   }
 ];
@@ -59,7 +65,11 @@ const skillCategories = [
           <div class="chips-grid">
             {category.skills.map((skill) => (
               <div class="tech-pill">
-                <i class={`${skill.icon} chip-ic`}></i>
+                {skill.svg ? (
+                  <Fragment set:html={skill.svg} />
+                ) : (
+                  <i class={`${skill.icon} chip-ic`}></i>
+                )}
                 <span class="chip-label">{skill.name}</span>
               </div>
             ))}
@@ -129,6 +139,16 @@ const skillCategories = [
     text-align: center !important;
     margin-right: 8px !important;
     flex-shrink: 0 !important;
+  }
+
+  :global(.chip-svg-ic) {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 8px !important;
+    color: var(--accent-hover) !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
   }
 
   .chip-label {
