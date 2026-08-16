@@ -5,9 +5,18 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   appName?: string;
+  appIcon?: string;
 }
 
-const { title, appName = 'Pluggy' } = Astro.props;
+const { title, appName = 'Pluggy', appIcon } = Astro.props;
+
+const defaultIcon = appName.toLowerCase() === 'mercalist' 
+  ? 'fa-basket-shopping' 
+  : appName.toLowerCase() === 'pluggy' 
+    ? 'fa-charging-station' 
+    : 'fa-mobile-screen';
+
+const resolvedIcon = appIcon ?? defaultIcon;
 ---
 
 <Layout title={`${title} - ${appName}`}>
@@ -18,7 +27,7 @@ const { title, appName = 'Pluggy' } = Astro.props;
         <span>Volver a inicio</span>
       </a>
       <div class="app-badge">
-        <i class="fa-solid fa-charging-station"></i>
+        <i class={`fa-solid ${resolvedIcon}`}></i>
         <span>{appName}</span>
       </div>
     </div>
