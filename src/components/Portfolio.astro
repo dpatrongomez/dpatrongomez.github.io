@@ -1,6 +1,16 @@
 ---
 const projects = [
   {
+    name: "Pluggy",
+    info: "Aplicación móvil para localizar y consultar puntos de recarga de vehículos eléctricos (EV) en tiempo real.",
+    tags: ["Flutter", "Dart", "Android"],
+    image: "https://play-lh.googleusercontent.com/-HjHI8Wu9V1HEeDjHTo0HAWFQUChx-v7TQe36cN_adi2iv8ks-0pbtDTgAFKmj-gmhxqhSJH471toQjCZLMrng",
+    web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.pluggy",
+    googleplay: true,
+    github: "https://github.com/dpatrongomez/pluggy",
+    featured: true
+  },
+  {
     name: "Urbanos Guadalajara",
     info: "Aplicación móvil para consultar los itinerarios y horarios de los autobuses urbanos de Guadalajara.",
     tags: ["Flutter", "Dart", "Android"],
@@ -69,6 +79,7 @@ function getTagData(tag: string) {
   if (lower.includes("firebase")) return { icon: "devicon-firebase-plain" };
   if (lower.includes("github") || lower.includes("action")) return { icon: "devicon-githubactions-plain" };
   if (lower.includes("rest") || lower.includes("api")) return { icon: "fa-solid fa-network-wired" };
+  if (lower.includes("map")) return { icon: "fa-solid fa-map-location-dot" };
   if (lower.includes("web")) return { icon: "fa-solid fa-globe" };
   return { icon: "fa-solid fa-tag" };
 }
