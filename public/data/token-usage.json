@@ -1142,5 +1142,49 @@
     "reasoning": 218574,
     "cacheRead": 37410566,
     "cacheWrite": 0
+  },
+  {
+    "day": "2026-10-05",
+    "model": "muse-spark-1.3-contributor-free",
+    "provider": "opencode",
+    "requests": 443,
+    "input": 1973536,
+    "output": 118753,
+    "reasoning": 113170,
+    "cacheRead": 20936774,
+    "cacheWrite": 0
+  },
+  {
+    "day": "2026-10-06",
+    "model": "claude-haiku-4-5-20251001",
+    "provider": "anthropic",
+    "requests": 3,
+    "input": 30,
+    "output": 199,
+    "reasoning": 2448,
+    "cacheRead": 9743,
+    "cacheWrite": 21296
+  },
+  {
+    "day": "2026-10-06",
+    "model": "claude-sonnet-5-5",
+    "provider": "anthropic",
+    "requests": 18,
+    "input": 36,
+    "output": 12969,
+    "reasoning": 4900,
+    "cacheRead": 673229,
+    "cacheWrite": 86627
+  },
+  {
+    "day": "2026-10-06",
+    "model": "muse-spark-1.3-contributor-free",
+    "provider": "opencode",
+    "requests": 305,
+    "input": 1167634,
+    "output": 83786,
+    "reasoning": 69825,
+    "cacheRead": 13386295,
+    "cacheWrite": 0
   }
 ]
