@@ -1158,23 +1158,34 @@
     "day": "2026-10-06",
     "model": "claude-haiku-4-5-20251001",
     "provider": "anthropic",
-    "requests": 3,
-    "input": 30,
-    "output": 199,
-    "reasoning": 2448,
-    "cacheRead": 9743,
-    "cacheWrite": 21296
+    "requests": 13,
+    "input": 130,
+    "output": 1088,
+    "reasoning": 10120,
+    "cacheRead": 22649,
+    "cacheWrite": 112215
+  },
+  {
+    "day": "2026-10-06",
+    "model": "claude-opus-5-5",
+    "provider": "anthropic",
+    "requests": 157,
+    "input": 314,
+    "output": 51353,
+    "reasoning": 21011,
+    "cacheRead": 35558740,
+    "cacheWrite": 606067
   },
   {
     "day": "2026-10-06",
     "model": "claude-sonnet-5-5",
     "provider": "anthropic",
-    "requests": 18,
-    "input": 36,
-    "output": 12969,
-    "reasoning": 4900,
-    "cacheRead": 673229,
-    "cacheWrite": 86627
+    "requests": 214,
+    "input": 428,
+    "output": 117670,
+    "reasoning": 51174,
+    "cacheRead": 16347414,
+    "cacheWrite": 789006
   },
   {
     "day": "2026-10-06",
@@ -1185,6 +1196,17 @@
     "output": 83786,
     "reasoning": 69825,
     "cacheRead": 13386295,
+    "cacheWrite": 0
+  },
+  {
+    "day": "2026-10-06",
+    "model": "space-bunny-free",
+    "provider": "opencode",
+    "requests": 6,
+    "input": 29757,
+    "output": 996,
+    "reasoning": 1141,
+    "cacheRead": 136752,
     "cacheWrite": 0
   }
 ]
