@@ -1,7 +1,16 @@
 ---
+import { currentYearMonth, monthsBetween } from "../lib/durations";
+import { companySpan, experiences } from "../lib/experience";
+import { projects } from "../lib/projects";
+
 const birthDate = new Date('1998-06-16');
 const ageDiff = Math.abs(Date.now() - birthDate.getTime());
 const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
+
+const bbva = experiences.find((c) => c.company.startsWith("BBVA"));
+const bbvaSpan = bbva && companySpan(bbva);
+const bbvaYears = bbvaSpan ? Math.floor(monthsBetween(bbvaSpan.start, bbvaSpan.end ?? currentYearMonth()) / 12) : 0;
+const appCount = projects.length;
 ---
 
 <section id="about">
@@ -24,11 +33,11 @@ const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
 
         <div class="about-stats-grid">
           <div class="stat-box">
-            <div class="stat-val">+4</div>
+            <div class="stat-val">+{bbvaYears}</div>
             <div class="stat-lbl">Años BBVA Tech</div>
           </div>
           <div class="stat-box">
-            <div class="stat-val">6+</div>
+            <div class="stat-val">{appCount}+</div>
             <div class="stat-lbl">Apps Creadas</div>
           </div>
           <div class="stat-box">

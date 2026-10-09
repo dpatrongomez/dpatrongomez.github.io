@@ -1,75 +1,6 @@
 ---
-const experiences = [
-  {
-    company: "BBVA Technology en Europa",
-    location: "Madrid, Comunidad de Madrid, España",
-    period: "4 años 9 meses",
-    type: "Jornada completa",
-    logo: "/assets/images/companies/bbva.webp",
-    icon: "fa-building-columns",
-    roles: [
-      {
-        title: "Front-end Developer",
-        date: "ene. 2025 - actualidad · 1 año 8 meses",
-        workplace: "Híbrido",
-        description: "Desarrollador front-end en la aplicación móvil de banca de BBVA Italia y Alemania.",
-        skills: ["Ember.js", "JavaScript", "Banca Móvil"]
-      },
-      {
-        title: "Front-end Developer",
-        date: "ene. 2024 - ene. 2025 · 1 año 1 mes",
-        workplace: "Híbrido",
-        description: "Desarrollador front-end en la aplicación móvil de banca de BBVA España migrando la tecnología de la aplicación.",
-        skills: ["Web Components", "Lit", "Migración Tecnológica"]
-      },
-      {
-        title: "Front-end Developer",
-        date: "dic. 2021 - ene. 2024 · 2 años 2 meses",
-        workplace: "Híbrido",
-        description: "Desarrollador front-end en la aplicación móvil de banca de BBVA España haciendo uso de Ember.js como framework.",
-        skills: ["Ember.js", "Metodologías Ágiles", "Front-end"]
-      }
-    ]
-  },
-  {
-    company: "Azonix Tec",
-    location: "Guadalajara, España",
-    period: "2018 - 2021",
-    type: "Jornada parcial / Temporal",
-    logo: "/assets/images/companies/azonix.webp",
-    icon: "fa-network-wired",
-    roles: [
-      {
-        title: "Responsable de proyectos",
-        date: "nov. 2021 - dic. 2021 · 2 meses",
-        workplace: "Jornada parcial",
-        description: "Gestión, coordinación y supervisión de proyectos informáticos y de telecomunicaciones.",
-        skills: ["Gestión de Proyectos", "Coordinación"]
-      },
-      {
-        title: "Desarrollador y Técnico de Telecomunicaciones e Informática",
-        date: "jul. 2020 - dic. 2021 · 1 año 6 meses",
-        workplace: "Jornada parcial",
-        description: "Desarrollo de software y mantenimiento técnico de infraestructuras informáticas y de redes.",
-        skills: ["Desarrollo Software", "Sistemas", "Redes"]
-      },
-      {
-        title: "Técnico de Telecomunicaciones e Informática",
-        date: "may. 2019 - sept. 2019 · 5 meses",
-        workplace: "Contrato temporal",
-        description: "Mantenimiento e instalación de infraestructura de telecomunicaciones e informática.",
-        skills: ["Telecomunicaciones", "Sistemas"]
-      },
-      {
-        title: "Técnico de Telecomunicaciones e Informática",
-        date: "abr. 2018 - nov. 2018 · 8 meses",
-        workplace: "Contrato temporal",
-        description: "Soporte técnico, configuración de equipos informáticos y mantenimiento de red.",
-        skills: ["Soporte Técnico", "Redes"]
-      }
-    ]
-  }
-];
+import { formatPeriodES } from "../lib/durations";
+import { experiences, formatCompanyPeriod } from "../lib/experience";
 
 function getSkillData(skillName: string) {
   const lower = skillName.toLowerCase();
@@ -118,7 +49,7 @@ function getSkillData(skillName: string) {
               <div class="company-title-row">
                 <h3 class="company-name">{companyGroup.company}</h3>
                 <span class="company-period-badge">
-                  <i class="fa-regular fa-clock"></i> {companyGroup.period}
+                  <i class="fa-regular fa-clock"></i> {formatCompanyPeriod(companyGroup)}
                 </span>
               </div>
               <p class="company-meta">
@@ -145,7 +76,7 @@ function getSkillData(skillName: string) {
                       {role.workplace && <span class="workplace-badge">{role.workplace}</span>}
                     </div>
                     <div class="role-date">
-                      <i class="fa-regular fa-calendar"></i> {role.date}
+                      <i class="fa-regular fa-calendar"></i> {formatPeriodES(role.start, role.end)}
                     </div>
                   </div>
 
