@@ -25,7 +25,7 @@ const menuItems = [
     <ul id="navbar-menu" class="nav-links">
       {menuItems.map((item) => (
         <li>
-          <a href={item.url} class="nav-link">
+          <a href={item.url} class="nav-link" data-goatcounter-click={`section-${item.url.slice(1)}`}>
             {item.label}
           </a>
         </li>
