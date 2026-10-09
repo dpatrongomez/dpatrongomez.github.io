@@ -8,7 +8,8 @@ const projects = [
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.pluggy",
     googleplay: true,
     github: "https://github.com/dpatrongomez/pluggy",
-    featured: true
+    featured: true,
+    caseStudy: "pluggy"
   },
   {
     name: "Urbanos Guadalajara",
@@ -130,6 +131,14 @@ function getTagData(tag: string) {
                 );
               })}
             </div>
+
+            {project.caseStudy && (
+              <a href={`/proyectos/${project.caseStudy}`} class="case-link">
+                <i class="fa-solid fa-book-open case-link-ic"></i>
+                <span>Caso de estudio</span>
+                <i class="fa-solid fa-arrow-right case-link-arrow"></i>
+              </a>
+            )}
 
             <div class="card-footer">
               {project.web && (
@@ -291,6 +300,34 @@ function getTagData(tag: string) {
   .tag-ic {
     font-size: 0.75rem;
     color: var(--accent-hover);
+  }
+
+  .case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .case-link:hover {
+    color: var(--accent-hover);
+  }
+
+  .case-link-ic {
+    color: var(--accent-hover);
+  }
+
+  .case-link-arrow {
+    font-size: 0.72rem;
+    transition: transform 0.2s ease;
+  }
+
+  .case-link:hover .case-link-arrow {
+    transform: translateX(3px);
   }
 
   .card-footer {
