@@ -1,4 +1,8 @@
 ---
+import { useTranslations } from '../i18n';
+
+const { t } = useTranslations(Astro.currentLocale);
+
 const birthDate = new Date('1998-06-16');
 const ageDiff = Math.abs(Date.now() - birthDate.getTime());
 const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
@@ -7,17 +11,17 @@ const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
 <section id="about">
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-user text-muted"></i> SOBRE MÍ
+      <i class="fa-solid fa-user text-muted"></i> {t('about.label')}
     </div>
-    <h2 class="section-title">Trayectoria & Enfoque</h2>
+    <h2 class="section-title">{t('about.title')}</h2>
     <div class="section-divider"></div>
 
     <div class="grid-2 align-start">
       <div class="profile-column">
         <div class="profile-image-wrapper">
-          <img 
-            src="/assets/images/perfil.jpg" 
-            alt="Daniel Patrón Gómez - Foto de perfil" 
+          <img
+            src="/assets/images/perfil.jpg"
+            alt={t('about.photoAlt')}
             class="profile-img"
           />
         </div>
@@ -25,47 +29,45 @@ const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
         <div class="about-stats-grid">
           <div class="stat-box">
             <div class="stat-val">+4</div>
-            <div class="stat-lbl">Años BBVA Tech</div>
+            <div class="stat-lbl">{t('about.statBbva')}</div>
           </div>
           <div class="stat-box">
             <div class="stat-val">6+</div>
-            <div class="stat-lbl">Apps Creadas</div>
+            <div class="stat-lbl">{t('about.statApps')}</div>
           </div>
           <div class="stat-box">
             <div class="stat-val">DAM</div>
-            <div class="stat-lbl">Grado Superior</div>
+            <div class="stat-lbl">{t('about.statDegree')}</div>
           </div>
         </div>
       </div>
 
       <div class="about-bio-column">
-        <h3 class="about-heading">Desarrollador Front-End & Multiplataforma</h3>
-        
+        <h3 class="about-heading">{t('about.heading')}</h3>
+
         <p class="about-para">
-          Soy Daniel, desarrollador enfocado en crear productos digitales rápidos, accesibles e intuitivos. Me especializo en la construcción de interfaces de usuario robustas y aplicaciones móviles multiplataforma.
+          {t('about.p1')}
         </p>
-        <p class="about-para">
-          En mi rol como <strong>Front-end Developer en BBVA Technology en Europa</strong>, formo parte del equipo encargado de evolucionar la aplicación móvil de banca internacional en España, Italia y Alemania, utilizando <strong>Lit, Web Components y Ember.js</strong>.
-        </p>
+        <p class="about-para" set:html={t('about.p2')}></p>
 
         <div class="meta-list">
           <div class="meta-item">
-            <div class="meta-label">Ubicación</div>
-            <div class="meta-value">Guadalajara, España</div>
+            <div class="meta-label">{t('about.location')}</div>
+            <div class="meta-value">{t('about.locationValue')}</div>
           </div>
           <div class="meta-item">
-            <div class="meta-label">Email</div>
+            <div class="meta-label">{t('about.email')}</div>
             <div class="meta-value">
               <a href="mailto:dpatrongomez@gmail.com" class="meta-link">dpatrongomez@gmail.com</a>
             </div>
           </div>
           <div class="meta-item">
-            <div class="meta-label">Edad</div>
-            <div class="meta-value">{age} años</div>
+            <div class="meta-label">{t('about.age')}</div>
+            <div class="meta-value">{t('about.ageValue', { age })}</div>
           </div>
           <div class="meta-item">
-            <div class="meta-label">Titulación</div>
-            <div class="meta-value">Técnico Superior DAM</div>
+            <div class="meta-label">{t('about.qualification')}</div>
+            <div class="meta-value">{t('about.qualificationValue')}</div>
           </div>
         </div>
       </div>

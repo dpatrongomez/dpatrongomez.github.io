@@ -1,38 +1,62 @@
 ---
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
 import '../styles/global.css';
+import { defaultLang, languages, locales, useTranslations } from '../i18n';
 
 interface Props {
   title?: string;
   description?: string;
+  /** La página existe en todos los idiomas: emite canonical y hreflang. */
+  alternates?: boolean;
 }
 
-const { 
-  title = "Daniel Patrón Gómez - Desarrollador Web & Mobile", 
-  description = "Portfolio profesional de Daniel Patrón Gómez. Desarrollador de Aplicaciones Multiplataforma especializado en Flutter, Web y Android."
+const { lang, t } = useTranslations(Astro.currentLocale);
+const {
+  title = t('meta.defaultTitle'),
+  description = t('meta.description'),
+  alternates = false,
 } = Astro.props;
+
+const canonicalUrl = alternates ? getAbsoluteLocaleUrl(lang, '') : 'https://dpatrongomez.github.io';
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
-    
+
     <!-- SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Daniel Patrón Gómez" />
     <meta name="keywords" content="Daniel Patron Gomez, dpatrongomez, Desarrollador, Flutter, Angular, Android, Web, Portfolio, Guadalajara" />
-    
+
+    <!-- Idiomas: canonical y hreflang solo en las páginas con versión en cada idioma -->
+    {alternates && (
+      <>
+        <link rel="canonical" href={canonicalUrl} />
+        {locales.map((code) => (
+          <link rel="alternate" hreflang={code} href={getAbsoluteLocaleUrl(code, '')} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl(defaultLang, '')} />
+      </>
+    )}
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/assets/images/perfil.jpg" />
-    <meta property="og:url" content="https://dpatrongomez.github.io" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={languages[lang].ogLocale} />
+    {alternates &&
+      locales
+        .filter((code) => code !== lang)
+        .map((code) => <meta property="og:locale:alternate" content={languages[code].ogLocale} />)}
 
     <!-- Google Fonts: Inter, Space Grotesk & Space Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

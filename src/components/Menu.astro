@@ -1,23 +1,35 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { languages, locales, useTranslations } from '../i18n';
+
+const { lang, t } = useTranslations(Astro.currentLocale);
+
 const menuItems = [
-  { label: "Sobre mí", url: "#about" },
-  { label: "Experiencia", url: "#experience" },
-  { label: "Habilidades", url: "#skills" },
-  { label: "Tokens", url: "#tokens" },
-  { label: "Formación", url: "#education" },
-  { label: "Proyectos", url: "#portfolio" },
-  { label: "Contacto", url: "#contact" },
+  { label: t('nav.about'), url: "#about" },
+  { label: t('nav.experience'), url: "#experience" },
+  { label: t('nav.skills'), url: "#skills" },
+  { label: t('nav.tokens'), url: "#tokens" },
+  { label: t('nav.education'), url: "#education" },
+  { label: t('nav.projects'), url: "#portfolio" },
+  { label: t('nav.contact'), url: "#contact" },
 ];
+
+const languageOptions = locales.map((code) => ({
+  code,
+  name: languages[code].name,
+  href: getRelativeLocaleUrl(code, ''),
+  active: code === lang,
+}));
 ---
 
 <header class="navbar-wrapper">
   <nav class="navbar-container">
-    <a href="#header" class="navbar-brand" aria-label="Inicio">
+    <a href="#header" class="navbar-brand" aria-label={t('nav.home')}>
       <span class="brand-name">dpatrongomez</span>
       <span class="brand-badge">dev</span>
     </a>
 
-    <button id="menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
+    <button id="menu-toggle" class="mobile-toggle" aria-label={t('nav.toggle')}>
       <i class="fa-solid fa-bars icon-open"></i>
       <i class="fa-solid fa-xmark icon-close hidden"></i>
     </button>
@@ -30,6 +42,19 @@ const menuItems = [
           </a>
         </li>
       ))}
+      <li class="lang-switch" role="group" aria-label={t('lang.label')}>
+        {languageOptions.map((option) =>
+          option.active ? (
+            <span class="lang-option is-active" aria-current="true" title={option.name}>
+              {option.code.toUpperCase()}
+            </span>
+          ) : (
+            <a href={option.href} class="lang-option" hreflang={option.code} lang={option.code} title={option.name}>
+              {option.code.toUpperCase()}
+            </a>
+          ),
+        )}
+      </li>
     </ul>
   </nav>
 </header>
@@ -99,6 +124,33 @@ const menuItems = [
 
   .nav-link:hover {
     color: var(--text-display);
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 4px;
+  }
+
+  .lang-option {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 2px 7px;
+    transition: var(--transition);
+  }
+
+  a.lang-option:hover {
+    color: var(--text-display);
+    border-color: var(--border-hover);
+  }
+
+  .lang-option.is-active {
+    color: var(--accent-hover);
+    background: var(--accent-subtle);
+    border-color: var(--accent-subtle);
   }
 
   .mobile-toggle {

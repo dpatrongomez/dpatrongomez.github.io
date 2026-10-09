@@ -1,4 +1,8 @@
 ---
+import { useTranslations } from '../i18n';
+
+const { t } = useTranslations(Astro.currentLocale);
+
 const socialLinks = [
   {
     name: "LinkedIn",
@@ -31,13 +35,13 @@ const socialLinks = [
   <div class="container">
     <div class="contact-box">
       <div class="section-tag">
-        <i class="fa-solid fa-envelope text-muted"></i> CONTACTO
+        <i class="fa-solid fa-envelope text-muted"></i> {t('contact.label')}
       </div>
-      <h2 class="section-title">¿Hablamos?</h2>
+      <h2 class="section-title">{t('contact.title')}</h2>
       <div class="section-divider"></div>
-      
+
       <p class="contact-subtitle">
-        Si tienes alguna propuesta laboral, consulta o quieres colaborar en algún proyecto, no dudes en escribirme.
+        {t('contact.subtitle')}
       </p>
 
       <div class="contact-grid">
