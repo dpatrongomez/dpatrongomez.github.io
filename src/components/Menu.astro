@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 const menuItems = [
   { label: "Sobre mí", url: "#about" },
   { label: "Experiencia", url: "#experience" },
@@ -18,8 +19,8 @@ const menuItems = [
     </a>
 
     <button id="menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
-      <i class="fa-solid fa-bars icon-open"></i>
-      <i class="fa-solid fa-xmark icon-close hidden"></i>
+      <Icon name="fa6-solid:bars" class="icon-open" />
+      <Icon name="fa6-solid:xmark" class="icon-close hidden" />
     </button>
 
     <ul id="navbar-menu" class="nav-links">

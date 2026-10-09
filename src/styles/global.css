@@ -250,3 +250,13 @@ section {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+/* Iconos SVG (astro-icon): alineados como los antiguos <i class="fa-*"> */
+svg[data-icon] {
+  vertical-align: -0.125em;
+}
+
+/* Los iconos de devicon se muestran monocromos (color del texto), como el glifo anterior */
+svg[data-icon^='devicon:'] path {
+  fill: currentColor;
+}
