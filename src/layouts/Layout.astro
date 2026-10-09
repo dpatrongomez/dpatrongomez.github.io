@@ -26,6 +26,10 @@ const personJsonLd = {
     'https://github.com/dpatrongomez',
   ],
 };
+
+// Analítica GoatCounter (sin cookies). Solo se inyecta si PUBLIC_GOATCOUNTER_CODE está definida.
+const goatcounterCode = import.meta.env.PUBLIC_GOATCOUNTER_CODE ?? '';
+const hasGoatcounter = /^[a-z0-9-]+$/i.test(goatcounterCode);
 ---
 
 <!doctype html>
@@ -71,6 +75,10 @@ const personJsonLd = {
     <!-- FontAwesome 7.3.0 & Devicon Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+    {hasGoatcounter && (
+      <script is:inline async data-goatcounter={`https://${goatcounterCode}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>
+    )}
   </head>
   <body>
     <slot />
