@@ -3,6 +3,15 @@ import { localized, useTranslations } from '../i18n';
 
 const { lang, t } = useTranslations(Astro.currentLocale);
 
+import { Image } from "astro:assets";
+import pluggyImg from "../assets/projects/pluggy.png";
+import urbanosImg from "../assets/projects/urbanosguadalajara.jpg";
+import mercalistImg from "../assets/projects/mercalist.png";
+import precioluzImg from "../assets/projects/precioluz.webp";
+import tiempoappImg from "../assets/projects/tiempoapp.png";
+import educamosclmImg from "../assets/projects/educamosclm.jpg";
+import varesImg from "../assets/projects/vares.png";
+
 const projects = [
   {
     name: "Pluggy",
@@ -11,7 +20,7 @@ const projects = [
       "Mobile app to locate and check electric vehicle (EV) charging points in real time."
     ),
     tags: ["Flutter", "Dart", "Android"],
-    image: "https://play-lh.googleusercontent.com/-HjHI8Wu9V1HEeDjHTo0HAWFQUChx-v7TQe36cN_adi2iv8ks-0pbtDTgAFKmj-gmhxqhSJH471toQjCZLMrng",
+    image: pluggyImg,
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.pluggy",
     googleplay: true,
     github: "https://github.com/dpatrongomez/pluggy",
@@ -24,7 +33,7 @@ const projects = [
       "Mobile app to check the routes and timetables of Guadalajara's urban buses."
     ),
     tags: ["Flutter", "Dart", "Android"],
-    image: "https://play-lh.googleusercontent.com/7vsRTxvaj9xDOhunhwzYwn_HlLQW4YwXcxBcQ4kvvSCfVFT01nCnAOIsJHPhV9fTyZg",
+    image: urbanosImg,
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.urbanosguadalajara",
     googleplay: true,
     github: "https://github.com/dpatrongomez/urbanosguadalajara",
@@ -37,7 +46,7 @@ const projects = [
       "Interactive app to create shopping lists connected to Mercadona's official catalogue."
     ),
     tags: ["Flutter", "REST API", "Android"],
-    image: "https://play-lh.googleusercontent.com/FX_XrlIS2I68S2YULJxmfnozd5_AaiOcmMwAu44-hOYU0CPExCHeg13HYIztJoP2VAg",
+    image: mercalistImg,
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.mercalist",
     googleplay: true,
     github: "https://github.com/dpatrongomez/mercalist",
@@ -50,7 +59,7 @@ const projects = [
       "Mobile app to check hourly electricity prices in Spain."
     ),
     tags: ["Flutter", "REST API", "Android"],
-    image: "https://play-lh.googleusercontent.com/A8uaRfrlgFdjv6foFiuMKZqJmBxp3OwB-TEWZ4jsGIQTicioKl-_C2DBaoQ_CgbI4Sw=w240-h480-rw",
+    image: precioluzImg,
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.precioluz",
     googleplay: true,
     github: "https://github.com/dpatrongomez/precioluz",
@@ -63,7 +72,7 @@ const projects = [
       "Progressive web app to check the weather in municipalities across Spain."
     ),
     tags: ["Angular", "GitHub Actions", "Web"],
-    image: "https://www.freeiconspng.com/uploads/weather-icon-png-2.png",
+    image: tiempoappImg,
     web: "https://dpatrongomez.github.io/tiempoApp/",
     googleplay: false,
     github: "https://github.com/dpatrongomez/tiempoApp",
@@ -76,7 +85,7 @@ const projects = [
       "Mobile access to modules and notices from the Castilla-La Mancha education platform."
     ),
     tags: ["Flutter", "Dart"],
-    image: "https://play-lh.googleusercontent.com/D3Qw9e43W_y9MSrHX42i5XCST_0WYxY9OfmOUJ6c6trVtte-JcST6HRT_0avVjG8Q4Y",
+    image: educamosclmImg,
     archived: true,
     github: "https://github.com/dpatrongomez/EducamosCLM",
     featured: false
@@ -88,7 +97,7 @@ const projects = [
       "Platform to rate shops and bars in Guadalajara, supporting local businesses."
     ),
     tags: ["Flutter", "Firebase"],
-    image: "https://play-lh.googleusercontent.com/G58ZEGH2yFBRHz6Wnetl8h4SQ7viSyFIj0-2hmOFB7185AShTa7RfzOV54MuYoCpmW0W",
+    image: varesImg,
     archived: true,
     github: "https://github.com/dpatrongomez/vares",
     featured: false
@@ -122,7 +131,7 @@ function getTagData(tag: string) {
       {projects.map((project) => (
         <div class="project-card">
           <div class="card-media">
-            <img src={project.image} alt={project.name} loading="lazy" class="media-img" />
+            <Image src={project.image} alt={project.name} format="webp" width={256} loading="lazy" class="media-img" />
             {project.featured && (
               <span class="badge-feat">{t('projects.featured')}</span>
             )}

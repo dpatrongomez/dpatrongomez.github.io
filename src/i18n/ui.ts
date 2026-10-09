@@ -47,8 +47,8 @@ const es = {
   'about.location': 'Ubicación',
   'about.locationValue': 'Guadalajara, España',
   'about.email': 'Email',
-  'about.age': 'Edad',
-  'about.ageValue': '{age} años',
+  'about.specialty': 'Especialidad',
+  'about.specialtyValue': 'Front-end y apps multiplataforma',
   'about.qualification': 'Titulación',
   'about.qualificationValue': 'Técnico Superior DAM',
 
@@ -163,8 +163,8 @@ const en: Dictionary = {
   'about.location': 'Location',
   'about.locationValue': 'Guadalajara, Spain',
   'about.email': 'Email',
-  'about.age': 'Age',
-  'about.ageValue': '{age} years old',
+  'about.specialty': 'Specialty',
+  'about.specialtyValue': 'Front-end and cross-platform apps',
   'about.qualification': 'Qualification',
   'about.qualificationValue': 'Higher Technician DAM',
 

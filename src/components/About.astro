@@ -2,10 +2,6 @@
 import { useTranslations } from '../i18n';
 
 const { t } = useTranslations(Astro.currentLocale);
-
-const birthDate = new Date('1998-06-16');
-const ageDiff = Math.abs(Date.now() - birthDate.getTime());
-const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
 ---
 
 <section id="about">
@@ -62,8 +58,8 @@ const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
             </div>
           </div>
           <div class="meta-item">
-            <div class="meta-label">{t('about.age')}</div>
-            <div class="meta-value">{t('about.ageValue', { age })}</div>
+            <div class="meta-label">{t('about.specialty')}</div>
+            <div class="meta-value">{t('about.specialtyValue')}</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">{t('about.qualification')}</div>
