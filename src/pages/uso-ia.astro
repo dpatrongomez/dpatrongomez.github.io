@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import TokenUsage from '../components/TokenUsage.astro';
+---
+
+<Layout
+  title="Consumo de Tokens de IA - Daniel Patrón Gómez"
+  description="Histórico de consumo de tokens de modelos de IA usados en el desarrollo, con gráficos diarios y mensuales y ranking de modelos."
+>
+  <nav class="page-nav">
+    <div class="container page-nav-content">
+      <a href="/" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Volver a inicio</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="page-main">
+    <TokenUsage />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    background: rgba(9, 9, 11, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .page-nav-content {
+    max-width: 850px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-display);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+    transform: translateX(-3px);
+  }
+
+  .page-main {
+    min-height: calc(100vh - 140px);
+    background-color: var(--bg-main);
+  }
+</style>

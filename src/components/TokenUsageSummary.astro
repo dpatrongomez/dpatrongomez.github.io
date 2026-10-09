@@ -1,0 +1,103 @@
+---
+import { compact, formatDayRangeES } from "../lib/token-usage";
+import { loadTokenUsage } from "../lib/token-usage-data";
+
+/* Resumen de una línea de datos para la home. El detalle vive en /uso-ia. */
+const usage = loadTokenUsage();
+
+/* Misma base que el gráfico (input + output + reasoning, sin caché). */
+const totalTokens = usage.dailySeries.reduce((acc, point) => acc + point.value, 0);
+const topModel = usage.topModels[0];
+---
+<section id="tokens">
+  <div class="container">
+    <div class="section-tag">
+      <i class="fa-solid fa-microchip text-muted"></i> CONSUMO DE TOKENS
+    </div>
+    <h2 class="section-title">Consumo de Tokens de IA</h2>
+    <div class="section-divider"></div>
+
+    {!usage.hasData ? (
+      <div class="tokens-summary-empty">
+        <p>Todavía no hay datos de consumo</p>
+      </div>
+    ) : (
+      <div class="tokens-summary">
+        <dl class="tokens-stats">
+          <div class="tokens-stat">
+            <dt class="tokens-stat-lbl">Tokens (sin caché)</dt>
+            <dd class="tokens-stat-val">{compact(totalTokens)}</dd>
+          </div>
+          <div class="tokens-stat">
+            <dt class="tokens-stat-lbl">Periodo</dt>
+            <dd class="tokens-stat-val">{formatDayRangeES(usage.minDay, usage.maxDay)}</dd>
+          </div>
+          {topModel && (
+            <div class="tokens-stat">
+              <dt class="tokens-stat-lbl">Modelo principal</dt>
+              <dd class="tokens-stat-val">{topModel.label}</dd>
+            </div>
+          )}
+        </dl>
+
+        <a href="/uso-ia" class="btn btn-outline tokens-link">
+          Ver el detalle <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .tokens-summary-empty {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    text-align: center;
+    color: var(--text-muted);
+  }
+
+  .tokens-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  .tokens-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-sm);
+    flex: 1 1 420px;
+    margin: 0;
+  }
+
+  .tokens-stat {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+  }
+
+  .tokens-stat-lbl {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    line-height: 1.2;
+  }
+
+  .tokens-stat-val {
+    margin: 4px 0 0;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-display);
+    line-height: 1.2;
+  }
+
+  .tokens-link {
+    flex-shrink: 0;
+  }
+</style>
