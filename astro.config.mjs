@@ -22,7 +22,7 @@ export default defineConfig({
           'android', 'angular', 'dart-lang', 'ember', 'flutter', 'git-alt', 'github', 'google-play',
           'html5', 'java', 'jira', 'js', 'linkedin', 'php', 'python', 'telegram',
         ],
-        devicon: ['firebase', 'githubactions', 'mysql'],
+        'devicon-plain': ['firebase', 'githubactions', 'mysql'],
       },
     }),
     sitemap(),

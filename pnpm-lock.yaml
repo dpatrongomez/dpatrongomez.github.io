@@ -20,9 +20,9 @@ importers:
       '@fontsource/space-mono':
         specifier: ^5.3.0
         version: 5.3.0
-      '@iconify-json/devicon':
-        specifier: 1.2.69
-        version: 1.2.69
+      '@iconify-json/devicon-plain':
+        specifier: ^1.2.62
+        version: 1.2.62
       '@iconify-json/fa6-brands':
         specifier: ^1.2.6
         version: 1.2.6
@@ -439,8 +439,8 @@ packages:
   '@fontsource/space-mono@5.3.0':
     resolution: {integrity: sha512-FrpBMOVWn3PRdRHlrZWC55X3kZG/2BTH7SM5ZyS/bky3iKya2BturI5lk+t0RoDQL2JyHzURsVq/EisCsxpI5A==}
 
-  '@iconify-json/devicon@1.2.69':
-    resolution: {integrity: sha512-x/9EP4pKlbVVwfqA8d3bzUFltMBsJF+Jz0/UJupSnY2CjoKROxDoYoORUXwZyaAC8HsDat7okzmBWZwL2jrP8g==}
+  '@iconify-json/devicon-plain@1.2.62':
+    resolution: {integrity: sha512-3jZJ80bBym2ZOZOKvFh2NaJjzmESHmXrSd8DKOmIMV5iEEZNYFgF5eJYAvOmk7v2t4dOOAEd6jdcjkZa/QGf4w==}
 
   '@iconify-json/fa6-brands@1.2.6':
     resolution: {integrity: sha512-twL3X4KWcxAhbc1vz/mIDsVr+CAItk1/EIfxKUVQtpv6O4eydk5KNYqTZWdvJNHGInUgd6vKg21aWfVgb5DXEg==}
@@ -2461,7 +2461,7 @@ snapshots:
 
   '@fontsource/space-mono@5.3.0': {}
 
-  '@iconify-json/devicon@1.2.69':
+  '@iconify-json/devicon-plain@1.2.62':
     dependencies:
       '@iconify/types': 2.0.0
 
