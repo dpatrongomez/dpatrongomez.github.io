@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { projects } from "../lib/projects";
 
 function getTagData(tag: string) {
@@ -28,7 +29,7 @@ function getTagData(tag: string) {
       {projects.map((project) => (
         <div class="project-card">
           <div class="card-media">
-            <img src={project.image} alt={project.name} loading="lazy" class="media-img" />
+            <Image src={project.image} alt={project.name} format="webp" width={256} loading="lazy" class="media-img" />
             {project.featured && (
               <span class="badge-feat">Destacado</span>
             )}
