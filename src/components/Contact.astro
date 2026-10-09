@@ -1,28 +1,29 @@
 ---
+import { Icon } from 'astro-icon/components';
 const socialLinks = [
   {
     name: "LinkedIn",
     detail: "in/dpatrongomez",
     url: "https://www.linkedin.com/in/dpatrongomez/",
-    icon: "fa-brands fa-linkedin"
+    icon: "fa6-brands:linkedin"
   },
   {
     name: "GitHub",
     detail: "@dpatrongomez",
     url: "https://github.com/dpatrongomez",
-    icon: "fa-brands fa-github"
+    icon: "fa6-brands:github"
   },
   {
     name: "Email",
     detail: "dpatrongomez@gmail.com",
     url: "mailto:dpatrongomez@gmail.com",
-    icon: "fa-solid fa-envelope"
+    icon: "fa6-solid:envelope"
   },
   {
     name: "Telegram",
     detail: "@dpatrongomez",
     url: "https://t.me/dpatrongomez",
-    icon: "fa-brands fa-telegram"
+    icon: "fa6-brands:telegram"
   },
 ];
 ---
@@ -31,7 +32,7 @@ const socialLinks = [
   <div class="container">
     <div class="contact-box">
       <div class="section-tag">
-        <i class="fa-solid fa-envelope text-muted"></i> CONTACTO
+        <Icon name="fa6-solid:envelope" class="text-muted" /> CONTACTO
       </div>
       <h2 class="section-title">¿Hablamos?</h2>
       <div class="section-divider"></div>
@@ -50,14 +51,14 @@ const socialLinks = [
           >
             <div class="card-left">
               <div class="card-ic-wrapper">
-                <i class={`${social.icon} card-ic`}></i>
+                <Icon name={social.icon} class="card-ic" />
               </div>
               <div class="card-text">
                 <div class="card-name">{social.name}</div>
                 <div class="card-detail">{social.detail}</div>
               </div>
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square arrow-ic"></i>
+            <Icon name="fa6-solid:arrow-up-right-from-square" class="arrow-ic" />
           </a>
         ))}
       </div>

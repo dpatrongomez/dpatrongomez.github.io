@@ -250,3 +250,8 @@ section {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+/* Iconos SVG (astro-icon): alineados como los antiguos <i class="fa-*"> */
+svg[data-icon] {
+  vertical-align: -0.125em;
+}

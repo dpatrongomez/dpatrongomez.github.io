@@ -1,9 +1,10 @@
 ---
+import { Icon } from 'astro-icon/components';
 const skillCategories = [
   {
     title: "Frontend & Web",
     skills: [
-      { name: "JavaScript / ES6+", icon: "fa-brands fa-js" },
+      { name: "JavaScript / ES6+", icon: "fa6-brands:js" },
       { 
         name: "Web Components", 
         svg: `<svg viewBox="0 0 24 24" class="chip-svg-ic" fill="currentColor"><path d="M12 0l-5.196 3v6L1.608 12 12 18l10.392-6-5.196-3V3L12 0zm0 2.309l3.196 1.845v3.691L12 9.691 8.804 7.845V4.154L12 2.309zM3.608 12.845l3.196 1.846v3.691L3.608 16.537v-3.692zm16.784 0v3.692L17.196 18.382v-3.691l3.196-1.846z"/></svg>` 
@@ -12,38 +13,38 @@ const skillCategories = [
         name: "Lit", 
         svg: `<svg viewBox="0 0 24 24" class="chip-svg-ic" fill="currentColor"><path d="M6.719 0l5.485 5.485-2.743 2.743 5.486 5.486-2.743 2.743 8.228 8.229-5.485 5.485-10.971-10.971 2.742-2.743-5.485-5.486 2.743-2.743L6.719 0z"/></svg>` 
       },
-      { name: "Ember.js", icon: "fa-brands fa-ember" },
-      { name: "HTML5 & CSS3", icon: "fa-brands fa-html5" },
-      { name: "Angular", icon: "fa-brands fa-angular" },
+      { name: "Ember.js", icon: "fa6-brands:ember" },
+      { name: "HTML5 & CSS3", icon: "fa6-brands:html5" },
+      { name: "Angular", icon: "fa6-brands:angular" },
     ]
   },
   {
     title: "Desarrollo Mobile",
     skills: [
-      { name: "Flutter", icon: "fa-brands fa-flutter" },
-      { name: "Dart", icon: "fa-brands fa-dart-lang" },
-      { name: "Android Native", icon: "fa-brands fa-android" },
-      { name: "Firebase", icon: "devicon-firebase-plain" },
-      { name: "Banca Móvil", icon: "fa-solid fa-building-columns" },
+      { name: "Flutter", icon: "fa6-brands:flutter" },
+      { name: "Dart", icon: "fa6-brands:dart-lang" },
+      { name: "Android Native", icon: "fa6-brands:android" },
+      { name: "Firebase", icon: "devicon-plain:firebase" },
+      { name: "Banca Móvil", icon: "fa6-solid:building-columns" },
     ]
   },
   {
     title: "Backend & Datos",
     skills: [
-      { name: "MySQL", icon: "devicon-mysql-plain" },
-      { name: "REST APIs", icon: "fa-solid fa-network-wired" },
-      { name: "PHP", icon: "fa-brands fa-php" },
-      { name: "Python", icon: "fa-brands fa-python" },
-      { name: "Java", icon: "fa-brands fa-java" },
+      { name: "MySQL", icon: "devicon-plain:mysql" },
+      { name: "REST APIs", icon: "fa6-solid:network-wired" },
+      { name: "PHP", icon: "fa6-brands:php" },
+      { name: "Python", icon: "fa6-brands:python" },
+      { name: "Java", icon: "fa6-brands:java" },
     ]
   },
   {
     title: "Herramientas & Ágil",
     skills: [
-      { name: "Git & GitHub", icon: "fa-brands fa-git-alt" },
-      { name: "GitHub Actions", icon: "devicon-githubactions-plain" },
-      { name: "Scrum / Agile", icon: "fa-solid fa-diagram-project" },
-      { name: "Jira / Confluence", icon: "fa-brands fa-jira" },
+      { name: "Git & GitHub", icon: "fa6-brands:git-alt" },
+      { name: "GitHub Actions", icon: "devicon-plain:githubactions" },
+      { name: "Scrum / Agile", icon: "fa6-solid:diagram-project" },
+      { name: "Jira / Confluence", icon: "fa6-brands:jira" },
     ]
   }
 ];
@@ -52,7 +53,7 @@ const skillCategories = [
 <section id="skills">
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-code text-muted"></i> STACK TÉCNICO
+      <Icon name="fa6-solid:code" class="text-muted" /> STACK TÉCNICO
     </div>
     <h2 class="section-title">Habilidades & Tecnologías</h2>
     <div class="section-divider"></div>
@@ -68,7 +69,7 @@ const skillCategories = [
                 {skill.svg ? (
                   <Fragment set:html={skill.svg} />
                 ) : (
-                  <i class={`${skill.icon} chip-ic`}></i>
+                  <Icon name={skill.icon} class="chip-ic" />
                 )}
                 <span class="chip-label">{skill.name}</span>
               </div>

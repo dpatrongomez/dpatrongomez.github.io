@@ -18,7 +18,8 @@ Todos los comandos se ejecutan desde la raíz del proyecto:
 
 - **Framework**: [Astro](https://astro.build/)
 - **Estilos**: Vanilla CSS con variables de diseño moderno, responsive y glassmorphism.
-- **Iconos**: [FontAwesome 6](https://fontawesome.com/)
+- **Iconos**: [astro-icon](https://www.astroicon.dev/) con sets de Iconify (Font Awesome 6 y Devicon) autoalojados en el build; solo se incluyen los iconos listados en `astro.config.mjs`
+- **Fuentes**: Inter, Space Grotesk y Space Mono autoalojadas con [@fontsource](https://fontsource.org/)
 - **Despliegue**: GitHub Pages a través de GitHub Actions (.github/workflows/astro.yml).
 
 ## 📄 Estructura del Proyecto

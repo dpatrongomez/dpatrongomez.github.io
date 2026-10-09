@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { Icon } from 'astro-icon/components';
 import pluggyImg from "../assets/projects/pluggy.png";
 import urbanosImg from "../assets/projects/urbanosguadalajara.jpg";
 import mercalistImg from "../assets/projects/mercalist.png";
@@ -81,23 +82,23 @@ const projects = [
 
 function getTagData(tag: string) {
   const lower = tag.toLowerCase();
-  if (lower.includes("flutter")) return { icon: "fa-brands fa-flutter" };
-  if (lower.includes("dart")) return { icon: "fa-brands fa-dart-lang" };
-  if (lower.includes("android")) return { icon: "fa-brands fa-android" };
-  if (lower.includes("angular")) return { icon: "fa-brands fa-angular" };
-  if (lower.includes("firebase")) return { icon: "devicon-firebase-plain" };
-  if (lower.includes("github") || lower.includes("action")) return { icon: "devicon-githubactions-plain" };
-  if (lower.includes("rest") || lower.includes("api")) return { icon: "fa-solid fa-network-wired" };
-  if (lower.includes("map")) return { icon: "fa-solid fa-map-location-dot" };
-  if (lower.includes("web")) return { icon: "fa-solid fa-globe" };
-  return { icon: "fa-solid fa-tag" };
+  if (lower.includes("flutter")) return { icon: "fa6-brands:flutter" };
+  if (lower.includes("dart")) return { icon: "fa6-brands:dart-lang" };
+  if (lower.includes("android")) return { icon: "fa6-brands:android" };
+  if (lower.includes("angular")) return { icon: "fa6-brands:angular" };
+  if (lower.includes("firebase")) return { icon: "devicon-plain:firebase" };
+  if (lower.includes("github") || lower.includes("action")) return { icon: "devicon-plain:githubactions" };
+  if (lower.includes("rest") || lower.includes("api")) return { icon: "fa6-solid:network-wired" };
+  if (lower.includes("map")) return { icon: "fa6-solid:map-location-dot" };
+  if (lower.includes("web")) return { icon: "fa6-solid:globe" };
+  return { icon: "fa6-solid:tag" };
 }
 ---
 
 <section id="portfolio">
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-folder-open text-muted"></i> PROYECTOS
+      <Icon name="fa6-solid:folder-open" class="text-muted" /> PROYECTOS
     </div>
     <h2 class="section-title">Proyectos Destacados & Apps</h2>
     <div class="section-divider"></div>
@@ -118,7 +119,7 @@ function getTagData(tag: string) {
                 {project.web ? (
                   <a href={project.web} target="_blank" rel="noopener noreferrer" class="title-link">
                     {project.name}
-                    <i class="fa-solid fa-arrow-up-right-from-square title-ic"></i>
+                    <Icon name="fa6-solid:arrow-up-right-from-square" class="title-ic" />
                   </a>
                 ) : (
                   <span>{project.name}</span>
@@ -133,7 +134,7 @@ function getTagData(tag: string) {
                 const data = getTagData(tag);
                 return (
                   <span class="mono-tag tag-with-icon">
-                    <i class={`${data.icon} tag-ic`}></i>
+                    <Icon name={data.icon} class="tag-ic" />
                     {tag}
                   </span>
                 );
@@ -148,13 +149,13 @@ function getTagData(tag: string) {
                   rel="noopener noreferrer" 
                   class="btn-project btn-primary-action"
                 >
-                  <i class={project.googleplay ? "fa-brands fa-google-play btn-ic" : "fa-solid fa-globe btn-ic"}></i>
+                  <Icon name={project.googleplay ? "fa6-brands:google-play" : "fa6-solid:globe"} class="btn-ic" />
                   <span>{project.googleplay ? "Google Play" : "Ver Web"}</span>
                 </a>
               )}
               {project.archived && (
                 <div class="archived-tag">
-                  <i class="fa-solid fa-box-archive btn-ic"></i>
+                  <Icon name="fa6-solid:box-archive" class="btn-ic" />
                   <span>Archivada</span>
                 </div>
               )}
@@ -164,7 +165,7 @@ function getTagData(tag: string) {
                 rel="noopener noreferrer" 
                 class="btn-project btn-secondary-action"
               >
-                <i class="fa-brands fa-github btn-ic"></i>
+                <Icon name="fa6-brands:github" class="btn-ic" />
                 <span>Código</span>
               </a>
             </div>
