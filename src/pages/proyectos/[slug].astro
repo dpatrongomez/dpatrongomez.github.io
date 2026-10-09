@@ -1,0 +1,333 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import { caseStudies } from '../../data/case-studies';
+
+export function getStaticPaths() {
+  return caseStudies.map((study) => ({ params: { slug: study.slug }, props: { study } }));
+}
+
+const { study } = Astro.props;
+---
+
+<Layout title={`${study.name} - Caso de estudio`} description={study.summary}>
+  <nav class="cs-nav">
+    <div class="container cs-nav-content">
+      <a href="/#portfolio" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Volver a proyectos</span>
+      </a>
+      <div class="cs-badge">
+        <i class="fa-solid fa-folder-open"></i>
+        <span>Caso de estudio</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="cs-main">
+    <article class="cs-card container">
+      <header class="cs-header">
+        <div class="cs-tag">
+          <i class="fa-solid fa-folder-open"></i> PROYECTO
+        </div>
+        <h1>{study.name}</h1>
+        <p class="cs-summary">{study.summary}</p>
+        <div class="cs-tags">
+          {study.tags.map((tag) => (
+            <span class="mono-tag">{tag}</span>
+          ))}
+        </div>
+        <div class="cs-links">
+          {study.links.map((link) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="cs-link">
+              <i class={`${link.icon} cs-link-ic`}></i>
+              <span>{link.label}</span>
+            </a>
+          ))}
+        </div>
+      </header>
+
+      <section class="cs-block">
+        <h2>Problema</h2>
+        {study.problem.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </section>
+
+      <section class="cs-block">
+        <h2>Decisiones técnicas</h2>
+        <div class="cs-items">
+          {study.decisions.map((decision) => (
+            <div class="cs-item">
+              <h3>{decision.title}</h3>
+              <ul>
+                {decision.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="cs-block">
+        <h2>Retos</h2>
+        <div class="cs-items">
+          {study.challenges.map((challenge) => (
+            <div class="cs-item">
+              <h3>{challenge.title}</h3>
+              <ul>
+                {challenge.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="cs-block">
+        <h2>Resultados</h2>
+        <ul class="cs-results">
+          {study.results.map((result) => (
+            <li>{result}</li>
+          ))}
+        </ul>
+      </section>
+
+      {study.screenshots.length > 0 && (
+        <section class="cs-block">
+          <h2>Capturas</h2>
+          <div class="cs-shots">
+            {study.screenshots.map((shot) => (
+              <figure class="cs-shot">
+                <img src={shot.src} alt={shot.alt} width="1080" height="1780" loading="lazy" />
+                <figcaption>{shot.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .cs-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    background: rgba(9, 9, 11, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .cs-nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 850px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-display);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+    transform: translateX(-3px);
+  }
+
+  .cs-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-display);
+    font-family: var(--font-mono);
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+  }
+
+  .cs-main {
+    padding: 40px 20px 80px;
+    background-color: var(--bg-main);
+    min-height: calc(100vh - 140px);
+  }
+
+  .cs-card {
+    max-width: 850px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 40px;
+    color: var(--text-muted);
+  }
+
+  .cs-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 28px;
+    margin-bottom: 8px;
+  }
+
+  .cs-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .cs-header h1 {
+    font-size: 2.2rem;
+    color: var(--text-display);
+    margin-bottom: 12px;
+  }
+
+  .cs-summary {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .cs-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .cs-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .cs-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-pill);
+    border: 1px solid var(--border-hover);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .cs-link:hover {
+    color: var(--text-display);
+    border-color: var(--border-focus);
+  }
+
+  .cs-link-ic {
+    color: var(--accent-hover);
+  }
+
+  .cs-block {
+    padding: 28px 0 0;
+    max-width: none;
+    margin: 0;
+  }
+
+  .cs-block h2 {
+    font-size: 1.35rem;
+    color: var(--text-display);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  .cs-block p {
+    line-height: 1.7;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+  }
+
+  .cs-items {
+    display: grid;
+    gap: 14px;
+  }
+
+  .cs-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+  }
+
+  .cs-item h3 {
+    font-size: 1.05rem;
+    color: var(--text-display);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .cs-item ul,
+  .cs-results {
+    padding-left: 18px;
+    list-style: disc;
+  }
+
+  .cs-item li,
+  .cs-results li {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 6px;
+    color: var(--text-muted);
+  }
+
+  .cs-results li {
+    margin-bottom: 8px;
+  }
+
+  .cs-shots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .cs-shot {
+    margin: 0;
+  }
+
+  .cs-shot img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+  }
+
+  .cs-shot figcaption {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .cs-card {
+      padding: 24px 18px;
+    }
+
+    .cs-header h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>
