@@ -13,12 +13,12 @@ const menuItems = [
 
 <header class="navbar-wrapper">
   <nav class="navbar-container">
-    <a href="#header" class="navbar-brand" aria-label="Inicio">
+    <a href="#header" class="navbar-brand">
       <span class="brand-name">dpatrongomez</span>
       <span class="brand-badge">dev</span>
     </a>
 
-    <button id="menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
+    <button id="menu-toggle" class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbar-menu">
       <Icon name="fa6-solid:bars" class="icon-open" />
       <Icon name="fa6-solid:xmark" class="icon-close hidden" />
     </button>
@@ -158,9 +158,10 @@ const menuItems = [
   const iconClose = toggleBtn?.querySelector('.icon-close');
 
   toggleBtn?.addEventListener('click', () => {
-    navMenu?.classList.toggle('active');
+    const isOpen = navMenu?.classList.toggle('active') ?? false;
     iconOpen?.classList.toggle('hidden');
     iconClose?.classList.toggle('hidden');
+    toggleBtn.setAttribute('aria-expanded', String(isOpen));
   });
 
   // Close menu when clicking link on mobile
@@ -169,6 +170,7 @@ const menuItems = [
       navMenu.classList.remove('active');
       iconOpen?.classList.remove('hidden');
       iconClose?.classList.add('hidden');
+      toggleBtn?.setAttribute('aria-expanded', 'false');
     });
   });
 </script>
