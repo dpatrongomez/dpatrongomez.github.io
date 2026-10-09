@@ -1,4 +1,15 @@
 ---
+import { useTranslations } from '../i18n';
+
+const { t } = useTranslations(Astro.currentLocale);
+
+// Frases del efecto de escritura; se pasan al script por atributo de datos.
+const typedWords = [
+  t('header.word1'),
+  t('header.word2'),
+  t('header.word3'),
+  t('header.word4'),
+];
 ---
 
 <section id="header" class="hero-section">
@@ -6,25 +17,23 @@
     <h1 class="hero-title">Daniel Patrón Gómez</h1>
 
     <div class="hero-headline">
-      <span class="headline-title">Front-End Developer</span> & desarrollador de aplicaciones multiplataforma.
+      <span class="headline-title">Front-End Developer</span> {t('header.headline')}
     </div>
 
     <div class="hero-typed-row">
       <span class="mono-prompt">&gt;</span>
-      <span id="typed-text" class="typed-text"></span>
+      <span id="typed-text" class="typed-text" data-words={JSON.stringify(typedWords)}></span>
       <span class="cursor">|</span>
     </div>
 
-    <p class="hero-bio">
-      Actualmente en <strong>BBVA Technology en Europa</strong>, construyendo interfaces para aplicaciones móviles de banca internacional con <strong>Lit, Web Components y Ember.js</strong>. Apasionado por la arquitectura frontend, la precisión visual y las buenas prácticas.
-    </p>
+    <p class="hero-bio" set:html={t('header.bio')}></p>
 
     <div class="hero-actions">
       <a href="#portfolio" class="btn btn-primary">
-        Ver Proyectos <i class="fa-solid fa-arrow-right arrow-icon"></i>
+        {t('header.viewProjects')} <i class="fa-solid fa-arrow-right arrow-icon"></i>
       </a>
       <a href="#experience" class="btn btn-outline">
-        Experiencia
+        {t('nav.experience')}
       </a>
       <a href="https://www.linkedin.com/in/dpatrongomez/" target="_blank" rel="noopener noreferrer" class="link-social">
         LinkedIn <i class="fa-solid fa-arrow-up-right-from-square micro-icon"></i>
@@ -171,16 +180,11 @@
 </style>
 
 <script>
-  const words = [
-    'Front-End Developer', 
-    'Desarrollador Flutter & Web', 
-    'Especialista en Web Components', 
-    'Técnico Superior DAM'
-  ];
+  const typedTarget = document.getElementById('typed-text');
+  const words = JSON.parse(typedTarget?.dataset.words ?? '[]');
   let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-  const typedTarget = document.getElementById('typed-text');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function typeEffect() {

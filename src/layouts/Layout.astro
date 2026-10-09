@@ -1,17 +1,23 @@
 ---
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
 import '../styles/global.css';
+import { defaultLang, languages, locales, useTranslations } from '../i18n';
 
 interface Props {
   title?: string;
   description?: string;
+  /** La página existe en todos los idiomas: emite canonical y hreflang. */
+  alternates?: boolean;
 }
 
-const { 
-  title = "Daniel Patrón Gómez - Desarrollador Web & Mobile", 
-  description = "Portfolio profesional de Daniel Patrón Gómez. Desarrollador de Aplicaciones Multiplataforma especializado en Flutter, Web y Android."
+const { lang, t } = useTranslations(Astro.currentLocale);
+const {
+  title = t('meta.defaultTitle'),
+  description = t('meta.description'),
+  alternates = false,
 } = Astro.props;
 
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const canonicalUrl = alternates ? getAbsoluteLocaleUrl(lang, '') : new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL('/assets/images/og-image.png', Astro.site).href;
 
 const personJsonLd = {
@@ -29,20 +35,31 @@ const personJsonLd = {
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
-    
+
     <!-- SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Daniel Patrón Gómez" />
     <meta name="keywords" content="Daniel Patron Gomez, dpatrongomez, Desarrollador, Flutter, Angular, Android, Web, Portfolio, Guadalajara" />
+
     <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Idiomas: hreflang solo en las páginas con versión en cada idioma -->
+    {alternates && (
+      <>
+        {locales.map((code) => (
+          <link rel="alternate" hreflang={code} href={getAbsoluteLocaleUrl(code, '')} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl(defaultLang, '')} />
+      </>
+    )}
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
@@ -53,6 +70,12 @@ const personJsonLd = {
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Daniel Patrón Gómez - Front-End Developer" />
     <meta property="og:url" content={canonicalUrl} />
+
+    <meta property="og:locale" content={languages[lang].ogLocale} />
+    {alternates &&
+      locales
+        .filter((code) => code !== lang)
+        .map((code) => <meta property="og:locale:alternate" content={languages[code].ogLocale} />)}
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -73,7 +96,7 @@ const personJsonLd = {
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Saltar al contenido</a>
+    <a href="#main-content" class="skip-link">{t('nav.skip')}</a>
     <slot />
   </body>
 </html>

@@ -1,9 +1,9 @@
 /**
- * Consumo de tokens: formato es-ES, series completas y geometría del gráfico de
- * `#tokens`.
+ * Consumo de tokens: formato por idioma (es/en), series completas y geometría del
+ * gráfico de `#tokens`.
  *
- * Módulo puro: sin dependencias y sin `node:*`. La lectura del JSON (que solo
- * tiene sentido en build time) se queda en el frontmatter de
+ * Módulo puro: sin `node:*`. Solo depende de `../i18n` para los textos. La lectura
+ * del JSON (que solo tiene sentido en build time) se queda en el frontmatter de
  * `TokenUsage.astro` y entra aquí ya parseada vía `parseUsageRows`.
  *
  * Reglas del contrato:
@@ -18,6 +18,8 @@
  * - Todas las claves de día se comparan como cadenas en espacio UTC
  *   (`dayToMs`/`msToDay`); nada depende de la fecha de build.
  */
+
+import { defaultLang, useTranslations, type Lang } from "../i18n";
 
 /* -------------------------------------------------------------------------- */
 /* Tipos                                                                       */
@@ -205,11 +207,12 @@ function toText(value: unknown, fallback: string): string {
  *
  * Lanza si la forma no es un array; el llamador lo traduce a estado vacío.
  */
-export function parseUsageRows(parsed: unknown): UsageRow[] {
+export function parseUsageRows(parsed: unknown, lang: Lang = defaultLang): UsageRow[] {
   if (!Array.isArray(parsed)) {
     throw new Error("el JSON no es un array");
   }
 
+  const { t } = useTranslations(lang);
   const rows: UsageRow[] = [];
   for (const raw of parsed) {
     if (raw === null || typeof raw !== "object") continue;
@@ -217,8 +220,8 @@ export function parseUsageRows(parsed: unknown): UsageRow[] {
     if (typeof item.day !== "string" || !isValidDayKey(item.day)) continue;
     rows.push({
       day: item.day,
-      model: toText(item.model, "modelo desconocido"),
-      provider: toText(item.provider, "proveedor desconocido"),
+      model: toText(item.model, t("tokens.unknownModel")),
+      provider: toText(item.provider, t("tokens.unknownProvider")),
       requests: toNumber(item.requests),
       input: toNumber(item.input),
       output: toNumber(item.output),
@@ -231,21 +234,25 @@ export function parseUsageRows(parsed: unknown): UsageRow[] {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Formato (es-ES)                                                            */
+/* Formato (por idioma)                                                            */
 /* -------------------------------------------------------------------------- */
 
 /** Espacio duro: separa número y unidad sin permitir un salto de línea. */
 const NBSP = "\u00A0";
 
-const integerFormatter = new Intl.NumberFormat("es-ES");
-const decimalFormatters = new Map<number, Intl.NumberFormat>();
+const integerFormatters: Record<Lang, Intl.NumberFormat> = {
+  es: new Intl.NumberFormat("es-ES"),
+  en: new Intl.NumberFormat("en-US"),
+};
+const decimalFormatters = new Map<string, Intl.NumberFormat>();
 
-/** Decimal es-ES con un tope de decimales estable para toda la vista. */
-function decimal(value: number, maxDigits: number): string {
-  let formatter = decimalFormatters.get(maxDigits);
+/** Decimal con un tope de decimales estable para toda la vista. */
+function decimal(value: number, maxDigits: number, lang: Lang): string {
+  const key = `${lang}:${maxDigits}`;
+  let formatter = decimalFormatters.get(key);
   if (!formatter) {
-    formatter = new Intl.NumberFormat("es-ES", { maximumFractionDigits: maxDigits });
-    decimalFormatters.set(maxDigits, formatter);
+    formatter = new Intl.NumberFormat(lang === "es" ? "es-ES" : "en-US", { maximumFractionDigits: maxDigits });
+    decimalFormatters.set(key, formatter);
   }
   return formatter.format(Number.isFinite(value) ? value : 0);
 }
@@ -261,33 +268,42 @@ interface Magnitude {
  * `99 M` y `1,4 M` conviven en la misma fila sin contradecirse: nunca aparece
  * un mills con tres decimales junto a otro con uno.
  */
-const MAGNITUDES: readonly Magnitude[] = [
-  { limit: 1e12, unit: "B", digits: 2 },
-  { limit: 1e9, unit: `mil${NBSP}M`, digits: 2 },
-  { limit: 1e6, unit: "M", digits: 1 },
-  { limit: 1e3, unit: "k", digits: 1 },
-];
+const MAGNITUDES: Record<Lang, readonly Magnitude[]> = {
+  es: [
+    { limit: 1e12, unit: "B", digits: 2 },
+    { limit: 1e9, unit: `mil${NBSP}M`, digits: 2 },
+    { limit: 1e6, unit: "M", digits: 1 },
+    { limit: 1e3, unit: "k", digits: 1 },
+  ],
+  en: [
+    { limit: 1e12, unit: "T", digits: 2 },
+    { limit: 1e9, unit: "B", digits: 2 },
+    { limit: 1e6, unit: "M", digits: 1 },
+    { limit: 1e3, unit: "k", digits: 1 },
+  ],
+};
 
-/** Compacta a `99 M` / `1,4 M` / `980 k` / `456`. */
-export function compact(value: number): string {
+/** Compacta a `99 M` / `1,4 M` / `980 k` / `456` (en inglés: `1.4 M`). */
+export function compact(value: number, lang: Lang): string {
   const amount = Number.isFinite(value) ? value : 0;
-  const magnitude = MAGNITUDES.find((candidate) => Math.abs(amount) >= candidate.limit);
-  if (!magnitude) return integerFormatter.format(Math.round(amount));
-  return `${decimal(amount / magnitude.limit, magnitude.digits)}${NBSP}${magnitude.unit}`;
+  const magnitude = MAGNITUDES[lang].find((candidate) => Math.abs(amount) >= candidate.limit);
+  if (!magnitude) return integerFormatters[lang].format(Math.round(amount));
+  return `${decimal(amount / magnitude.limit, magnitude.digits, lang)}${NBSP}${magnitude.unit}`;
 }
 
-/** Entero con separador de miles es-ES: `99.003.567`. */
-export function formatFull(value: number): string {
-  return integerFormatter.format(Math.round(Number.isFinite(value) ? value : 0));
+/** Entero con separador de miles: `99.003.567` (es) o `99,003,567` (en). */
+export function formatFull(value: number, lang: Lang): string {
+  return integerFormatters[lang].format(Math.round(Number.isFinite(value) ? value : 0));
 }
 
-/** Cobertura observada de un periodo: `3 de 31 días`. */
-export function formatCoverageES(observedDays: number, daysInPeriod: number): string {
-  if (!(observedDays > 0)) return "sin actividad registrada";
+/** Cobertura observada de un periodo: `3 de 31 días` / `3 of 31 days`. */
+export function formatCoverage(observedDays: number, daysInPeriod: number, lang: Lang): string {
+  const { t } = useTranslations(lang);
+  if (!(observedDays > 0)) return t("tokens.coverageNone");
   if (!(daysInPeriod > observedDays)) {
-    return observedDays === 1 ? `1${NBSP}día con datos` : `${observedDays}${NBSP}días con datos`;
+    return observedDays === 1 ? t("tokens.coverageOneDay") : t("tokens.coverageDays", { count: observedDays });
   }
-  return `${observedDays} de ${formatFull(daysInPeriod)}${NBSP}días`;
+  return t("tokens.coverageOf", { observed: observedDays, total: formatFull(daysInPeriod, lang) });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -372,41 +388,50 @@ export function crossesYearBoundary(firstKey: string, lastKey: string): boolean 
   return firstKey.slice(0, 4) !== lastKey.slice(0, 4);
 }
 
-export const MONTHS_ES = [
-  "enero", "febrero", "marzo", "abril", "mayo", "junio",
-  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
-];
-export const MONTHS_SHORT_ES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+/** Nombres de mes por idioma; los patrones de fecha van en `tokens.*`/`date.*` de `../i18n/ui`. */
+const MONTHS: Record<Lang, { long: string[]; short: string[] }> = {
+  es: {
+    long: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+    short: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+  },
+  en: {
+    long: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    short: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  },
+};
 
-export function longDateES(key: string): string {
+export function longDate(key: string, lang: Lang): string {
   const [year, month, day] = key.split("-").map(Number);
-  return `${day} de ${MONTHS_ES[month - 1]} de ${year}`;
+  return useTranslations(lang).t("date.long", { day, month: MONTHS[lang].long[month - 1], year });
 }
 
 /**
  * `3 oct`, o `3 oct 26` cuando el rango cruza el año: fuera de ese caso el año
  * es ruido y lo aporta el pie ("Datos actualizados hasta el ...").
  */
-export function shortDateES(key: string, includeYear = false): string {
+export function shortDate(key: string, lang: Lang, includeYear = false): string {
   const [year, month, day] = key.split("-").map(Number);
-  const short = `${day} ${MONTHS_SHORT_ES[month - 1]}`;
-  return includeYear ? `${short} ${String(year).slice(2)}` : short;
+  const { t } = useTranslations(lang);
+  const monthName = MONTHS[lang].short[month - 1];
+  return includeYear
+    ? t("date.shortYear", { day, month: monthName, yy: String(year).slice(2) })
+    : t("date.short", { day, month: monthName });
 }
 
 /** Rango de días con el año solo si el rango salta de año: `22 dic 25 – 10 ene 26`. */
-export function formatDayRangeES(firstKey: string, lastKey: string): string {
+export function formatDayRange(firstKey: string, lastKey: string, lang: Lang): string {
   const includeYear = crossesYearBoundary(firstKey, lastKey);
-  return `${shortDateES(firstKey, includeYear)} – ${shortDateES(lastKey, includeYear)}`;
+  return `${shortDate(firstKey, lang, includeYear)} – ${shortDate(lastKey, lang, includeYear)}`;
 }
 
-export function monthLabelES(key: string): string {
+export function monthLabel(key: string, lang: Lang): string {
   const [year, month] = key.split("-").map(Number);
-  return `${MONTHS_SHORT_ES[month - 1]} ${String(year).slice(2)}`;
+  return useTranslations(lang).t("date.monthShort", { month: MONTHS[lang].short[month - 1], yy: String(year).slice(2) });
 }
 
-export function monthLongES(key: string): string {
+export function monthLong(key: string, lang: Lang): string {
   const [year, month] = key.split("-").map(Number);
-  return `${MONTHS_ES[month - 1]} de ${year}`;
+  return useTranslations(lang).t("date.monthLong", { month: MONTHS[lang].long[month - 1], year });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -567,7 +592,12 @@ export const MOVING_AVERAGE_DAYS = 7;
  * `nowKey` solo se usa como ancla de reserva cuando no hay datos, para que el
  * estado vacío siga teniendo ejes con rótulos.
  */
-export function buildTokenUsage(rows: UsageRow[], nowKey: string = todayKeyUTC()): TokenUsageModel {
+export function buildTokenUsage(
+  rows: UsageRow[],
+  lang: Lang = defaultLang,
+  nowKey: string = todayKeyUTC(),
+): TokenUsageModel {
+  const { t } = useTranslations(lang);
   const hasData = rows.length > 0;
 
   /* Top 5 modelos por tokens (sin caché) sobre todo el histórico. */
@@ -626,8 +656,8 @@ export function buildTokenUsage(rows: UsageRow[], nowKey: string = todayKeyUTC()
     const value = dailyTokens.get(key);
     return {
       key,
-      label: shortDateES(key, dailyIncludeYear),
-      longLabel: longDateES(key),
+      label: shortDate(key, lang, dailyIncludeYear),
+      longLabel: longDate(key, lang),
       value: value ?? 0,
       missing: value === undefined,
       partial: false,
@@ -646,8 +676,8 @@ export function buildTokenUsage(rows: UsageRow[], nowKey: string = todayKeyUTC()
     const isLast = index === monthlyKeys.length - 1;
     return {
       key,
-      label: monthLabelES(key),
-      longLabel: monthLongES(key),
+      label: monthLabel(key, lang),
+      longLabel: monthLong(key, lang),
       value: value ?? 0,
       missing: value === undefined,
       partial: isFirst || (isLast && maxDay < lastMonthEnd),
@@ -657,16 +687,17 @@ export function buildTokenUsage(rows: UsageRow[], nowKey: string = todayKeyUTC()
   });
 
   const dailyChart = hasData
-    ? buildChart(dailySeries, { movingAverage: MOVING_AVERAGE_DAYS })
+    ? buildChart(dailySeries, lang, { movingAverage: MOVING_AVERAGE_DAYS })
     : null;
-  const monthlyChart = hasData ? buildChart(monthlySeries, { peak: true }) : null;
+  const monthlyChart = hasData ? buildChart(monthlySeries, lang, { peak: true }) : null;
 
   /* La línea solo se anuncia si el chart la trae de verdad: en el estado vacío no
    * hay chart, y con datos insuficientes para una ventana tampoco habría línea. */
   const dailyAria = chartAriaLabel(
-    "diario",
+    t("tokens.periodDaily"),
     dailySeries,
-    (dailyChart?.line.length ?? 0) > 0 ? { line: "media móvil de 7 días" } : {},
+    lang,
+    (dailyChart?.line.length ?? 0) > 0 ? { withLine: true } : {},
   );
 
   return {
@@ -677,12 +708,12 @@ export function buildTokenUsage(rows: UsageRow[], nowKey: string = todayKeyUTC()
     topTokens,
     dailySeries,
     monthlySeries,
-    monthlyRangeLabel: `${monthLabelES(monthlyKeys[0])} – ${monthLabelES(monthlyKeys[monthlyKeys.length - 1])}`,
+    monthlyRangeLabel: `${monthLabel(monthlyKeys[0], lang)} – ${monthLabel(monthlyKeys[monthlyKeys.length - 1], lang)}`,
     dailyChart,
     monthlyChart,
     dailyAria,
-    monthlyAria: chartAriaLabel("mensual", monthlySeries),
-    updatedAt: longDateES(maxDay),
+    monthlyAria: chartAriaLabel(t("tokens.periodMonthly"), monthlySeries, lang),
+    updatedAt: longDate(maxDay, lang),
   };
 }
 
@@ -747,7 +778,8 @@ const topY = (value: number, max: number): number => BASE_Y - barHeight(value, m
  * etiquetas del eje X se calcula aquí (no lo fija la vista) a partir del ancho
  * nominal de una etiqueta más su margen.
  */
-export function buildChart(series: SeriesPoint[], options: ChartOptions = {}): Chart {
+export function buildChart(series: SeriesPoint[], lang: Lang, options: ChartOptions = {}): Chart {
+  const { t } = useTranslations(lang);
   const observed = series.filter((point) => !point.missing);
   const peak = observed.reduce<SeriesPoint | null>(
     (acc, point) => (acc === null || point.value > acc.value ? point : acc),
@@ -760,7 +792,7 @@ export function buildChart(series: SeriesPoint[], options: ChartOptions = {}): C
   const grid: Gridline[] = [];
   for (let i = 0; i <= GRID_TICKS; i++) {
     const value = (max / GRID_TICKS) * i;
-    grid.push({ y: BASE_Y - (PLOT_H / GRID_TICKS) * i, label: compact(value) });
+    grid.push({ y: BASE_Y - (PLOT_H / GRID_TICKS) * i, label: compact(value, lang) });
   }
 
   const bars: Bar[] = [];
@@ -769,7 +801,7 @@ export function buildChart(series: SeriesPoint[], options: ChartOptions = {}): C
     const h = barHeight(point.value, max);
     // Un mes a medio cerrar se anuncia en el propio tooltip de la barra.
     const coverage = point.partial
-      ? ` (parcial: ${formatCoverageES(point.observedDays, point.daysInPeriod)})`
+      ? t("tokens.partial", { coverage: formatCoverage(point.observedDays, point.daysInPeriod, lang) })
       : "";
     bars.push({
       x: PLOT_LEFT + slot * index + (slot - barW) / 2,
@@ -777,8 +809,8 @@ export function buildChart(series: SeriesPoint[], options: ChartOptions = {}): C
       w: barW,
       h,
       zero: point.value === 0,
-      title: `${point.longLabel}${coverage}: ${formatFull(point.value)} tokens`,
-      hover: compact(point.value),
+      title: `${point.longLabel}${coverage}: ${formatFull(point.value, lang)} tokens`,
+      hover: compact(point.value, lang),
     });
   });
 
@@ -832,7 +864,7 @@ export function buildChart(series: SeriesPoint[], options: ChartOptions = {}): C
   const peakIndex = peak ? series.indexOf(peak) : -1;
   const peakLabel: PeakLabel | null =
     options.peak && peak && peak.value > 0 && peakIndex >= 0
-      ? { x: centerX(peakIndex, slot), y: topY(peak.value, max) - 8, text: compact(peak.value) }
+      ? { x: centerX(peakIndex, slot), y: topY(peak.value, max) - 8, text: compact(peak.value, lang) }
       : null;
 
   /* El reloj de arena marca la última barra de un periodo sin cerrar. Se eleva
@@ -852,7 +884,7 @@ export function buildChart(series: SeriesPoint[], options: ChartOptions = {}): C
           y: topY(partialPoint.value, max) - PARTIAL_MARKER_GAP,
           key: partialPoint.key,
           label: partialPoint.longLabel,
-          coverage: formatCoverageES(partialPoint.observedDays, partialPoint.daysInPeriod),
+          coverage: formatCoverage(partialPoint.observedDays, partialPoint.daysInPeriod, lang),
         }
       : null;
 
@@ -873,9 +905,11 @@ export function buildChart(series: SeriesPoint[], options: ChartOptions = {}): C
 export function chartAriaLabel(
   period: string,
   series: SeriesPoint[],
-  options: { line?: string } = {},
+  lang: Lang,
+  options: { withLine?: boolean } = {},
 ): string {
-  if (series.length === 0) return `Gráfico de consumo de tokens ${period}, sin datos`;
+  const { t } = useTranslations(lang);
+  if (series.length === 0) return t("tokens.ariaEmpty", { period });
   const observed = series.filter((point) => !point.missing);
   const peak = observed.reduce<SeriesPoint | null>(
     (acc, point) => (acc === null || point.value > acc.value ? point : acc),
@@ -883,20 +917,30 @@ export function chartAriaLabel(
   );
   const total = observed.reduce((acc, point) => acc + point.value, 0);
   const gaps = series.length - observed.length;
+  const isMonthly = series[0].daysInPeriod > 1;
   const parts = [
-    `Gráfico de barras del consumo ${period} de tokens, de ${series[0].longLabel} a ${series[series.length - 1].longLabel}`,
+    t("tokens.ariaIntro", {
+      period,
+      from: series[0].longLabel,
+      to: series[series.length - 1].longLabel,
+    }),
     peak
-      ? `pico de ${formatFull(peak.value)} tokens ${peak.daysInPeriod > 1 ? "en" : "el"} ${peak.longLabel}`
-      : "sin consumo registrado en el periodo",
+      ? t(isMonthly ? "tokens.ariaPeakMonth" : "tokens.ariaPeakDay", {
+          tokens: formatFull(peak.value, lang),
+          date: peak.longLabel,
+        })
+      : t("tokens.ariaNoUsage"),
   ];
-  // El llamador solo pasa `line` cuando el chart trae línea de verdad: sin ella no
+  // El llamador solo pasa `withLine` cuando el chart trae línea de verdad: sin ella no
   // se anuncia. El total y el pico se anuncian siempre: no se ven en pantalla y
   // son el resumen del periodo.
-  if (options.line) parts.push(`con línea de ${options.line}`);
-  parts.push(`total del periodo ${formatFull(total)} tokens`);
+  if (options.withLine) parts.push(t("tokens.ariaLine"));
+  parts.push(t("tokens.ariaTotal", { total: formatFull(total, lang) }));
   if (gaps > 0) {
-    const unit = series[0].daysInPeriod > 1 ? "mes" : "día";
-    parts.push(`${formatFull(gaps)} ${gaps === 1 ? unit : `${unit}s`} sin datos`);
+    const key = isMonthly
+      ? gaps === 1 ? "tokens.gapMonth" : "tokens.gapMonths"
+      : gaps === 1 ? "tokens.gapDay" : "tokens.gapDays";
+    parts.push(t(key, { count: formatFull(gaps, lang) }));
   }
   return parts.join(". ") + ".";
 }

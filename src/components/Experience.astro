@@ -1,71 +1,101 @@
 ---
+import { localized, useTranslations } from '../i18n';
+
+const { lang, t } = useTranslations(Astro.currentLocale);
+
+// Los textos traducibles van como `localized(es, en)`. Los iconos se eligen
+// por el nombre en español (`skill.es`), así que ese valor no se debe cambiar.
 const experiences = [
   {
     company: "BBVA Technology en Europa",
-    location: "Madrid, Comunidad de Madrid, España",
-    period: "4 años 9 meses",
-    type: "Jornada completa",
+    location: localized("Madrid, Comunidad de Madrid, España", "Madrid, Community of Madrid, Spain"),
+    period: localized("4 años 9 meses", "4 years 9 months"),
+    type: localized("Jornada completa", "Full-time"),
     logo: "/assets/images/companies/bbva.webp",
     icon: "fa-building-columns",
     roles: [
       {
-        title: "Front-end Developer",
-        date: "ene. 2025 - actualidad · 1 año 8 meses",
-        workplace: "Híbrido",
-        description: "Desarrollador front-end en la aplicación móvil de banca de BBVA Italia y Alemania.",
-        skills: ["Ember.js", "JavaScript", "Banca Móvil"]
+        title: localized("Front-end Developer"),
+        date: localized("ene. 2025 - actualidad · 1 año 8 meses", "Jan 2025 - present · 1 year 8 months"),
+        workplace: localized("Híbrido", "Hybrid"),
+        description: localized(
+          "Desarrollador front-end en la aplicación móvil de banca de BBVA Italia y Alemania.",
+          "Front-end developer on the mobile banking app of BBVA Italy and Germany."
+        ),
+        skills: [localized("Ember.js"), localized("JavaScript"), localized("Banca Móvil", "Mobile Banking")]
       },
       {
-        title: "Front-end Developer",
-        date: "ene. 2024 - ene. 2025 · 1 año 1 mes",
-        workplace: "Híbrido",
-        description: "Desarrollador front-end en la aplicación móvil de banca de BBVA España migrando la tecnología de la aplicación.",
-        skills: ["Web Components", "Lit", "Migración Tecnológica"]
+        title: localized("Front-end Developer"),
+        date: localized("ene. 2024 - ene. 2025 · 1 año 1 mes", "Jan 2024 - Jan 2025 · 1 year 1 month"),
+        workplace: localized("Híbrido", "Hybrid"),
+        description: localized(
+          "Desarrollador front-end en la aplicación móvil de banca de BBVA España migrando la tecnología de la aplicación.",
+          "Front-end developer on the mobile banking app of BBVA Spain, migrating the app's technology."
+        ),
+        skills: [localized("Web Components"), localized("Lit"), localized("Migración Tecnológica", "Technology Migration")]
       },
       {
-        title: "Front-end Developer",
-        date: "dic. 2021 - ene. 2024 · 2 años 2 meses",
-        workplace: "Híbrido",
-        description: "Desarrollador front-end en la aplicación móvil de banca de BBVA España haciendo uso de Ember.js como framework.",
-        skills: ["Ember.js", "Metodologías Ágiles", "Front-end"]
+        title: localized("Front-end Developer"),
+        date: localized("dic. 2021 - ene. 2024 · 2 años 2 meses", "Dec 2021 - Jan 2024 · 2 years 2 months"),
+        workplace: localized("Híbrido", "Hybrid"),
+        description: localized(
+          "Desarrollador front-end en la aplicación móvil de banca de BBVA España haciendo uso de Ember.js como framework.",
+          "Front-end developer on the mobile banking app of BBVA Spain, using Ember.js as the framework."
+        ),
+        skills: [localized("Ember.js"), localized("Metodologías Ágiles", "Agile Methodologies"), localized("Front-end")]
       }
     ]
   },
   {
     company: "Azonix Tec",
-    location: "Guadalajara, España",
-    period: "2018 - 2021",
-    type: "Jornada parcial / Temporal",
+    location: localized("Guadalajara, España", "Guadalajara, Spain"),
+    period: localized("2018 - 2021"),
+    type: localized("Jornada parcial / Temporal", "Part-time / Temporary"),
     logo: "/assets/images/companies/azonix.webp",
     icon: "fa-network-wired",
     roles: [
       {
-        title: "Responsable de proyectos",
-        date: "nov. 2021 - dic. 2021 · 2 meses",
-        workplace: "Jornada parcial",
-        description: "Gestión, coordinación y supervisión de proyectos informáticos y de telecomunicaciones.",
-        skills: ["Gestión de Proyectos", "Coordinación"]
+        title: localized("Responsable de proyectos", "Project Manager"),
+        date: localized("nov. 2021 - dic. 2021 · 2 meses", "Nov 2021 - Dec 2021 · 2 months"),
+        workplace: localized("Jornada parcial", "Part-time"),
+        description: localized(
+          "Gestión, coordinación y supervisión de proyectos informáticos y de telecomunicaciones.",
+          "Management, coordination and supervision of IT and telecommunications projects."
+        ),
+        skills: [localized("Gestión de Proyectos", "Project Management"), localized("Coordinación", "Coordination")]
       },
       {
-        title: "Desarrollador y Técnico de Telecomunicaciones e Informática",
-        date: "jul. 2020 - dic. 2021 · 1 año 6 meses",
-        workplace: "Jornada parcial",
-        description: "Desarrollo de software y mantenimiento técnico de infraestructuras informáticas y de redes.",
-        skills: ["Desarrollo Software", "Sistemas", "Redes"]
+        title: localized(
+          "Desarrollador y Técnico de Telecomunicaciones e Informática",
+          "Developer and Telecommunications & IT Technician"
+        ),
+        date: localized("jul. 2020 - dic. 2021 · 1 año 6 meses", "Jul 2020 - Dec 2021 · 1 year 6 months"),
+        workplace: localized("Jornada parcial", "Part-time"),
+        description: localized(
+          "Desarrollo de software y mantenimiento técnico de infraestructuras informáticas y de redes.",
+          "Software development and technical maintenance of IT and network infrastructure."
+        ),
+        skills: [localized("Desarrollo Software", "Software Development"), localized("Sistemas", "Systems"), localized("Redes", "Networking")]
       },
       {
-        title: "Técnico de Telecomunicaciones e Informática",
-        date: "may. 2019 - sept. 2019 · 5 meses",
-        workplace: "Contrato temporal",
-        description: "Mantenimiento e instalación de infraestructura de telecomunicaciones e informática.",
-        skills: ["Telecomunicaciones", "Sistemas"]
+        title: localized("Técnico de Telecomunicaciones e Informática", "Telecommunications & IT Technician"),
+        date: localized("may. 2019 - sept. 2019 · 5 meses", "May 2019 - Sep 2019 · 5 months"),
+        workplace: localized("Contrato temporal", "Temporary contract"),
+        description: localized(
+          "Mantenimiento e instalación de infraestructura de telecomunicaciones e informática.",
+          "Maintenance and installation of telecommunications and IT infrastructure."
+        ),
+        skills: [localized("Telecomunicaciones", "Telecommunications"), localized("Sistemas", "Systems")]
       },
       {
-        title: "Técnico de Telecomunicaciones e Informática",
-        date: "abr. 2018 - nov. 2018 · 8 meses",
-        workplace: "Contrato temporal",
-        description: "Soporte técnico, configuración de equipos informáticos y mantenimiento de red.",
-        skills: ["Soporte Técnico", "Redes"]
+        title: localized("Técnico de Telecomunicaciones e Informática", "Telecommunications & IT Technician"),
+        date: localized("abr. 2018 - nov. 2018 · 8 meses", "Apr 2018 - Nov 2018 · 8 months"),
+        workplace: localized("Contrato temporal", "Temporary contract"),
+        description: localized(
+          "Soporte técnico, configuración de equipos informáticos y mantenimiento de red.",
+          "Technical support, IT equipment configuration and network maintenance."
+        ),
+        skills: [localized("Soporte Técnico", "Technical Support"), localized("Redes", "Networking")]
       }
     ]
   }
@@ -97,9 +127,9 @@ function getSkillData(skillName: string) {
 <section id="experience">
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-briefcase text-muted"></i> EXPERIENCIA
+      <i class="fa-solid fa-briefcase text-muted"></i> {t('experience.label')}
     </div>
-    <h2 class="section-title">Experiencia laboral</h2>
+    <h2 class="section-title">{t('experience.title')}</h2>
     <div class="section-divider"></div>
 
     <div class="experience-feed">
@@ -118,13 +148,13 @@ function getSkillData(skillName: string) {
               <div class="company-title-row">
                 <h3 class="company-name">{companyGroup.company}</h3>
                 <span class="company-period-badge">
-                  <i class="fa-regular fa-clock"></i> {companyGroup.period}
+                  <i class="fa-regular fa-clock"></i> {companyGroup.period[lang]}
                 </span>
               </div>
               <p class="company-meta">
-                <span><i class="fa-solid fa-location-dot"></i> {companyGroup.location}</span>
+                <span><i class="fa-solid fa-location-dot"></i> {companyGroup.location[lang]}</span>
                 <span class="bullet-dot">•</span>
-                <span><i class="fa-solid fa-briefcase"></i> {companyGroup.type}</span>
+                <span><i class="fa-solid fa-briefcase"></i> {companyGroup.type[lang]}</span>
               </p>
             </div>
           </div>
@@ -141,20 +171,20 @@ function getSkillData(skillName: string) {
                 <div class="role-content">
                   <div class="role-header">
                     <div class="role-title-group">
-                      <h4 class="role-title">{role.title}</h4>
-                      {role.workplace && <span class="workplace-badge">{role.workplace}</span>}
+                      <h4 class="role-title">{role.title[lang]}</h4>
+                      {role.workplace && <span class="workplace-badge">{role.workplace[lang]}</span>}
                     </div>
                     <div class="role-date">
-                      <i class="fa-regular fa-calendar"></i> {role.date}
+                      <i class="fa-regular fa-calendar"></i> {role.date[lang]}
                     </div>
                   </div>
 
-                  {role.description && <p class="role-description">{role.description}</p>}
+                  {role.description && <p class="role-description">{role.description[lang]}</p>}
 
                   {role.skills && role.skills.length > 0 && (
                     <div class="role-skills">
                       {role.skills.map((skill) => {
-                        const data = getSkillData(skill);
+                        const data = getSkillData(skill.es);
                         return (
                           <span class="skill-tag">
                             {data.svg ? (
@@ -162,7 +192,7 @@ function getSkillData(skillName: string) {
                             ) : (
                               <i class={`${data.icon} skill-icon`}></i>
                             )}
-                            {skill}
+                            {skill[lang]}
                           </span>
                         );
                       })}

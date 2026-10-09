@@ -1,16 +1,19 @@
 ---
+import { useTranslations } from '../i18n';
+
+const { t } = useTranslations(Astro.currentLocale);
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="footer-wrapper">
   <div class="container footer-content">
     <p class="copyright-text">
-      &copy; {currentYear} Daniel Patrón Gómez. Todos los derechos reservados.
+      {t('footer.copyright', { year: currentYear })}
     </p>
-    
+
     <div class="footer-links">
       <a href="#header" class="top-link">
-        Subir arriba <i class="fa-solid fa-arrow-up"></i>
+        {t('footer.top')} <i class="fa-solid fa-arrow-up"></i>
       </a>
     </div>
   </div>

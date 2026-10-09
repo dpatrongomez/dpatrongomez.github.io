@@ -2,17 +2,16 @@
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 
+import { useTranslations, type Lang } from "../i18n";
 import {
   buildTokenUsage,
   compact,
-  formatCoverageES,
-  formatDayRangeES,
-  formatFull,
-  monthLabelES,
+  formatDayRange,
   parseUsageRows,
-  shortDateES,
   type UsageRow,
 } from "../lib/token-usage";
+
+const { lang, t } = useTranslations(Astro.currentLocale);
 
 /* -------------------------------------------------------------------------- */
 /* Carga de datos (build time). Cualquier fallo => estado vacío, nunca throw.  */
@@ -43,10 +42,10 @@ function findDataPath(): string {
   return resolve(process.cwd(), DATA_RELATIVE_PATH);
 }
 
-function loadRows(): UsageRow[] {
+function loadRows(lang: Lang): UsageRow[] {
   try {
     const parsed: unknown = JSON.parse(readFileSync(findDataPath(), "utf8"));
-    return parseUsageRows(parsed);
+    return parseUsageRows(parsed, lang);
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
     console.warn(`[TokenUsage] No se pudieron cargar los datos de consumo de tokens (${reason}). Se renderiza el estado vacío.`);
@@ -59,7 +58,7 @@ function loadRows(): UsageRow[] {
 /* adaptan sus exports a los nombres que usa la plantilla.                    */
 /* -------------------------------------------------------------------------- */
 
-const usage = buildTokenUsage(loadRows());
+const usage = buildTokenUsage(loadRows(lang), lang);
 
 const hasData = usage.hasData;
 
@@ -83,24 +82,24 @@ const updatedAt = usage.updatedAt;
 <section id="tokens" data-tokens-root>
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-microchip text-muted"></i> CONSUMO DE TOKENS
+      <i class="fa-solid fa-microchip text-muted"></i> {t('tokens.label')}
     </div>
-    <h2 class="section-title">Consumo de Tokens de IA</h2>
+    <h2 class="section-title">{t('tokens.title')}</h2>
     <div class="section-divider"></div>
 
     {!hasData ? (
       <div class="tokens-empty">
         <i class="fa-solid fa-chart-column"></i>
-        <p>Todavía no hay datos de consumo</p>
+        <p>{t('tokens.empty')}</p>
       </div>
     ) : (
       <>
         <div class="panel">
           <div class="panel-head">
-            <h3 class="panel-title">Tokens por periodo</h3>
-            <div class="range-toggle" role="group" aria-label="Periodo del gráfico">
-              <button type="button" class="range-btn" data-range="day" aria-pressed="true">Diario</button>
-              <button type="button" class="range-btn" data-range="month" aria-pressed="false">Mensual</button>
+            <h3 class="panel-title">{t('tokens.panelTitle')}</h3>
+            <div class="range-toggle" role="group" aria-label={t('tokens.rangeLabel')}>
+              <button type="button" class="range-btn" data-range="day" aria-pressed="true">{t('tokens.daily')}</button>
+              <button type="button" class="range-btn" data-range="month" aria-pressed="false">{t('tokens.monthly')}</button>
             </div>
           </div>
 
@@ -116,18 +115,17 @@ const updatedAt = usage.updatedAt;
               panel: "day",
               chart: dailyChart,
               aria: dailyAria,
-              caption:
-                "Histórico completo · " +
-                dailySeries.length +
-                " días naturales · " +
-                formatDayRangeES(minDay, maxDay),
+              caption: t("tokens.captionDaily", {
+                count: dailySeries.length,
+                range: formatDayRange(minDay, maxDay, lang),
+              }),
               legend: true,
             },
             {
               panel: "month",
               chart: monthlyChart,
               aria: monthlyAria,
-              caption: "Histórico completo · " + monthlySeries.length + " meses · " + monthlyRangeLabel,
+              caption: t("tokens.captionMonthly", { count: monthlySeries.length, range: monthlyRangeLabel }),
               legend: false,
             },
           ].map((view) => (
@@ -136,11 +134,11 @@ const updatedAt = usage.updatedAt;
                 <ul class="chart-legend">
                   <li class="legend-item">
                     <span class="legend-swatch is-bar" aria-hidden="true"></span>
-                    Tokens diarios
+                    {t('tokens.legendDaily')}
                   </li>
                   <li class="legend-item">
                     <span class="legend-swatch is-line" aria-hidden="true"></span>
-                    Media de 7 días
+                    {t('tokens.legendAverage')}
                   </li>
                 </ul>
               )}
@@ -261,7 +259,7 @@ const updatedAt = usage.updatedAt;
         </div>
 
         <div class="panel">
-          <h3 class="panel-title">Top 5 modelos</h3>
+          <h3 class="panel-title">{t('tokens.topModels')}</h3>
           <ol class="model-list">
             {topModels.map((model) => (
               <li class="model-row">
@@ -272,13 +270,13 @@ const updatedAt = usage.updatedAt;
                     style={`width: ${topTokens > 0 ? Math.max(2, (model.tokens / topTokens) * 100) : 0}%`}
                   ></span>
                 </span>
-                <span class="model-tokens">{compact(model.tokens)}</span>
+                <span class="model-tokens">{compact(model.tokens, lang)}</span>
               </li>
             ))}
           </ol>
         </div>
 
-        <p class="tokens-updated">Datos actualizados hasta el {updatedAt}</p>
+        <p class="tokens-updated">{t('tokens.updated', { date: updatedAt })}</p>
       </>
     )}
   </div>
