@@ -105,6 +105,12 @@
     50% { opacity: 0; }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .cursor {
+      animation: none;
+    }
+  }
+
   .hero-bio {
     font-size: 1.05rem;
     color: var(--text-muted);
@@ -175,6 +181,7 @@
   let charIndex = 0;
   let isDeleting = false;
   const typedTarget = document.getElementById('typed-text');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function typeEffect() {
     if (!typedTarget) return;
@@ -204,6 +211,11 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    // With reduced motion, show the first word statically instead of typing/deleting
+    if (prefersReducedMotion) {
+      if (typedTarget) typedTarget.textContent = words[0];
+      return;
+    }
     setTimeout(typeEffect, 300);
   });
 </script>
