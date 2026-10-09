@@ -16,6 +16,7 @@ const es = {
   // Navegación
   'nav.home': 'Inicio',
   'nav.toggle': 'Alternar navegación',
+  'nav.skip': 'Saltar al contenido',
   'nav.about': 'Sobre mí',
   'nav.experience': 'Experiencia',
   'nav.skills': 'Habilidades',
@@ -134,6 +135,7 @@ const en: Dictionary = {
 
   'nav.home': 'Home',
   'nav.toggle': 'Toggle navigation',
+  'nav.skip': 'Skip to content',
   'nav.about': 'About',
   'nav.experience': 'Experience',
   'nav.skills': 'Skills',

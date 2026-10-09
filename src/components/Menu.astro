@@ -29,7 +29,7 @@ const languageOptions = locales.map((code) => ({
       <span class="brand-badge">dev</span>
     </a>
 
-    <button id="menu-toggle" class="mobile-toggle" aria-label={t('nav.toggle')}>
+    <button id="menu-toggle" class="mobile-toggle" aria-label={t('nav.toggle')} aria-expanded="false" aria-controls="navbar-menu">
       <i class="fa-solid fa-bars icon-open"></i>
       <i class="fa-solid fa-xmark icon-close hidden"></i>
     </button>
@@ -209,9 +209,10 @@ const languageOptions = locales.map((code) => ({
   const iconClose = toggleBtn?.querySelector('.icon-close');
 
   toggleBtn?.addEventListener('click', () => {
-    navMenu?.classList.toggle('active');
+    const isOpen = navMenu?.classList.toggle('active') ?? false;
     iconOpen?.classList.toggle('hidden');
     iconClose?.classList.toggle('hidden');
+    toggleBtn.setAttribute('aria-expanded', String(isOpen));
   });
 
   // Close menu when clicking link on mobile
@@ -220,6 +221,7 @@ const languageOptions = locales.map((code) => ({
       navMenu.classList.remove('active');
       iconOpen?.classList.remove('hidden');
       iconClose?.classList.add('hidden');
+      toggleBtn?.setAttribute('aria-expanded', 'false');
     });
   });
 </script>

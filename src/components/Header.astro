@@ -114,6 +114,12 @@ const typedWords = [
     50% { opacity: 0; }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .cursor {
+      animation: none;
+    }
+  }
+
   .hero-bio {
     font-size: 1.05rem;
     color: var(--text-muted);
@@ -179,6 +185,7 @@ const typedWords = [
   let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function typeEffect() {
     if (!typedTarget) return;
@@ -208,6 +215,11 @@ const typedWords = [
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    // With reduced motion, show the first word statically instead of typing/deleting
+    if (prefersReducedMotion) {
+      if (typedTarget) typedTarget.textContent = words[0];
+      return;
+    }
     setTimeout(typeEffect, 300);
   });
 </script>
