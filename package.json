@@ -20,7 +20,8 @@
     "@iconify-json/fa6-regular": "^1.2.4",
     "@iconify-json/fa6-solid": "^1.2.4",
     "astro": "^7.2.1",
-    "astro-icon": "^1.2.0"
+    "astro-icon": "^1.2.0",
+    "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

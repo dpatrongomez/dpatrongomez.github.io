@@ -22,6 +22,22 @@ const {
   title = "Daniel Patrón Gómez - Desarrollador Web & Mobile", 
   description = "Portfolio profesional de Daniel Patrón Gómez. Desarrollador de Aplicaciones Multiplataforma especializado en Flutter, Web y Android."
 } = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL('/assets/images/og-image.png', Astro.site).href;
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Daniel Patrón Gómez',
+  url: new URL('/', Astro.site).href,
+  image: ogImageUrl,
+  jobTitle: 'Front-End Developer',
+  sameAs: [
+    'https://www.linkedin.com/in/dpatrongomez/',
+    'https://github.com/dpatrongomez',
+  ],
+};
 ---
 
 <!doctype html>
@@ -38,13 +54,26 @@ const {
     <meta name="description" content={description} />
     <meta name="author" content="Daniel Patrón Gómez" />
     <meta name="keywords" content="Daniel Patron Gomez, dpatrongomez, Desarrollador, Flutter, Angular, Android, Web, Portfolio, Guadalajara" />
-    
+    <link rel="canonical" href={canonicalUrl} />
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/assets/images/perfil.jpg" />
-    <meta property="og:url" content="https://dpatrongomez.github.io" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Daniel Patrón Gómez - Front-End Developer" />
+    <meta property="og:url" content={canonicalUrl} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- JSON-LD: Person -->
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
 
   </head>
   <body>
