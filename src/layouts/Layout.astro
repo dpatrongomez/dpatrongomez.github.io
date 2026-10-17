@@ -1,5 +1,17 @@
 ---
 import '../styles/global.css';
+// Fuentes autoalojadas (@fontsource), subconjunto latin, solo los pesos usados
+import '@fontsource/inter/latin-300.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/space-grotesk/latin-400.css';
+import '@fontsource/space-grotesk/latin-500.css';
+import '@fontsource/space-grotesk/latin-600.css';
+import '@fontsource/space-grotesk/latin-700.css';
+import '@fontsource/space-mono/latin-400.css';
+import '@fontsource/space-mono/latin-700.css';
 
 interface Props {
   title?: string;
@@ -10,6 +22,22 @@ const {
   title = "Daniel Patrón Gómez - Desarrollador Web & Mobile", 
   description = "Portfolio profesional de Daniel Patrón Gómez. Desarrollador de Aplicaciones Multiplataforma especializado en Flutter, Web y Android."
 } = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL('/assets/images/og-image.png', Astro.site).href;
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Daniel Patrón Gómez',
+  url: new URL('/', Astro.site).href,
+  image: ogImageUrl,
+  jobTitle: 'Front-End Developer',
+  sameAs: [
+    'https://www.linkedin.com/in/dpatrongomez/',
+    'https://github.com/dpatrongomez',
+  ],
+};
 ---
 
 <!doctype html>
@@ -26,24 +54,52 @@ const {
     <meta name="description" content={description} />
     <meta name="author" content="Daniel Patrón Gómez" />
     <meta name="keywords" content="Daniel Patron Gomez, dpatrongomez, Desarrollador, Flutter, Angular, Android, Web, Portfolio, Guadalajara" />
-    
+    <link rel="canonical" href={canonicalUrl} />
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/assets/images/perfil.jpg" />
-    <meta property="og:url" content="https://dpatrongomez.github.io" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Daniel Patrón Gómez - Front-End Developer" />
+    <meta property="og:url" content={canonicalUrl} />
 
-    <!-- Google Fonts: Inter, Space Grotesk & Space Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome 7.3.0 & Devicon Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- JSON-LD: Person -->
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <slot />
   </body>
 </html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 8px;
+    z-index: 2000;
+    padding: 8px 16px;
+    background: var(--text-display);
+    color: var(--bg-main);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+  }
+
+  .skip-link:focus {
+    top: 8px;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>

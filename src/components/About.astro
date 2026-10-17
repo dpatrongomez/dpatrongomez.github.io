@@ -1,13 +1,11 @@
 ---
-const birthDate = new Date('1998-06-16');
-const ageDiff = Math.abs(Date.now() - birthDate.getTime());
-const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
+import { Icon } from 'astro-icon/components';
 ---
 
 <section id="about">
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-user text-muted"></i> SOBRE MÍ
+      <Icon name="fa6-solid:user" class="text-muted" /> SOBRE MÍ
     </div>
     <h2 class="section-title">Trayectoria & Enfoque</h2>
     <div class="section-divider"></div>
@@ -60,8 +58,8 @@ const age = Math.floor((ageDiff / (1000 * 3600 * 24)) / 365.25);
             </div>
           </div>
           <div class="meta-item">
-            <div class="meta-label">Edad</div>
-            <div class="meta-value">{age} años</div>
+            <div class="meta-label">Especialidad</div>
+            <div class="meta-value">Front-end y apps multiplataforma</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Titulación</div>

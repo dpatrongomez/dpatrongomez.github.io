@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 const studies = [
   {
     name: "Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)",
@@ -27,7 +28,7 @@ const studies = [
 <section id="education">
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-graduation-cap text-muted"></i> FORMACIÓN
+      <Icon name="fa6-solid:graduation-cap" class="text-muted" /> FORMACIÓN
     </div>
     <h2 class="section-title">Formación Académica</h2>
     <div class="section-divider"></div>
@@ -42,7 +43,7 @@ const studies = [
           
           <div class="edu-bottom">
             <div class="edu-inst">
-              <i class="fa-solid fa-building-columns inst-ic"></i>
+              <Icon name="fa6-solid:building-columns" class="inst-ic" />
               <span>{item.info}</span>
             </div>
             <div class="edu-badge">{item.badge}</div>

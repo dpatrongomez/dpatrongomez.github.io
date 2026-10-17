@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 
@@ -79,18 +80,25 @@ const dailyAria = usage.dailyAria;
 const monthlyAria = usage.monthlyAria;
 
 const updatedAt = usage.updatedAt;
+
+// Reloj de arena (fa6-solid "hourglass", viewBox 384x512) que marca los periodos
+// parciales dentro del SVG. Va como path inline: 12px de alto con la base en `y`,
+// igual que el glifo U+F254 de FontAwesome que sustituye.
+const HOURGLASS_PATH = "M0 32C0 14.3 14.3 0 32 0h320c17.7 0 32 14.3 32 32s-14.3 32-32 32v11c0 42.4-16.9 83.1-46.9 113.1L237.3 256l67.9 67.9c30 30 46.9 70.7 46.9 113.1v11c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32v-11c0-42.4 16.9-83.1 46.9-113.1l67.8-67.9l-67.8-67.9C48.9 158.1 32 117.4 32 75V64C14.3 64 0 49.7 0 32m96 32v11c0 25.5 10.1 49.9 28.1 67.9l67.9 67.8l67.9-67.9c18-18 28.1-42.4 28.1-67.9v-11zm0 384h192v-11c0-25.5-10.1-49.9-28.1-67.9L192 301.3l-67.9 67.9c-18 18-28.1 42.4-28.1 67.9v11z";
+const HOURGLASS_SCALE = 12 / 512;
+const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) scale(${HOURGLASS_SCALE})`;
 ---
 <section id="tokens" data-tokens-root>
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-microchip text-muted"></i> CONSUMO DE TOKENS
+      <Icon name="fa6-solid:microchip" class="text-muted" /> CONSUMO DE TOKENS
     </div>
     <h2 class="section-title">Consumo de Tokens de IA</h2>
     <div class="section-divider"></div>
 
     {!hasData ? (
       <div class="tokens-empty">
-        <i class="fa-solid fa-chart-column"></i>
+        <Icon name="fa6-solid:chart-column" />
         <p>Todavía no hay datos de consumo</p>
       </div>
     ) : (
@@ -189,17 +197,12 @@ const updatedAt = usage.updatedAt;
                         </text>
                         {view.chart.partialMarker &&
                           Math.abs(bar.x + bar.w / 2 - view.chart.partialMarker.x) < 0.01 && (
-                            <text
-                              class="chart-partial-glyph"
-                              x={view.chart.partialMarker.x}
-                              y={view.chart.partialMarker.y}
-                              text-anchor="middle"
-                            >
+                            <g class="chart-partial-glyph" transform={`translate(${view.chart.partialMarker.x} ${view.chart.partialMarker.y})`}>
                               <title>
                                 {view.chart.partialMarker.label} ({view.chart.partialMarker.coverage})
                               </title>
-                              {"\uF254"}
-                            </text>
+                              <path d={HOURGLASS_PATH} transform={HOURGLASS_TRANSFORM} vector-effect="non-scaling-stroke" />
+                            </g>
                           )}
                       </g>
                     ) : (
@@ -236,20 +239,16 @@ const updatedAt = usage.updatedAt;
                   {/*
                     El reloj de arena marca la barra del periodo sin cerrar; su
                     cobertura solo vive en el tooltip, igual que la del resto de
-                    periodos parciales. `U+F254` es `fa-hourglass` en la fuente
-                    de FontAwesome 7 (peso 900).
+                    periodos parciales.
                   */}
                   {view.chart.partialMarker && view.panel !== "month" && (
                     <g>
                       <title>
                         {view.chart.partialMarker.label} ({view.chart.partialMarker.coverage})
                       </title>
-                      <text
-                        class="chart-partial-glyph"
-                        x={view.chart.partialMarker.x}
-                        y={view.chart.partialMarker.y}
-                        text-anchor="middle"
-                      >{"\uF254"}</text>
+                      <g class="chart-partial-glyph" transform={`translate(${view.chart.partialMarker.x} ${view.chart.partialMarker.y})`}>
+                        <path d={HOURGLASS_PATH} transform={HOURGLASS_TRANSFORM} vector-effect="non-scaling-stroke" />
+                      </g>
                     </g>
                   )}
                 </svg>
@@ -298,7 +297,7 @@ const updatedAt = usage.updatedAt;
     gap: var(--space-sm);
   }
 
-  .tokens-empty i {
+  .tokens-empty svg {
     color: var(--text-muted);
   }
 
