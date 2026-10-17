@@ -30,7 +30,7 @@ export const experiences: Company[] = [
     location: "Madrid, Comunidad de Madrid, España",
     type: "Jornada completa",
     logo: "/assets/images/companies/bbva.webp",
-    icon: "fa-building-columns",
+    icon: "fa6-solid:building-columns",
     periodStyle: "duration",
     roles: [
       {
@@ -64,7 +64,7 @@ export const experiences: Company[] = [
     location: "Guadalajara, España",
     type: "Jornada parcial / Temporal",
     logo: "/assets/images/companies/azonix.webp",
-    icon: "fa-network-wired",
+    icon: "fa6-solid:network-wired",
     periodStyle: "years",
     roles: [
       {
