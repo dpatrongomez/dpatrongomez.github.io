@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer.astro';
 import { caseStudies } from '../../data/case-studies';
@@ -14,11 +15,11 @@ const { study } = Astro.props;
   <nav class="cs-nav">
     <div class="container cs-nav-content">
       <a href="/#portfolio" class="back-link">
-        <i class="fa-solid fa-arrow-left"></i>
+        <Icon name="fa6-solid:arrow-left" />
         <span>Volver a proyectos</span>
       </a>
       <div class="cs-badge">
-        <i class="fa-solid fa-folder-open"></i>
+        <Icon name="fa6-solid:folder-open" />
         <span>Caso de estudio</span>
       </div>
     </div>
@@ -28,7 +29,7 @@ const { study } = Astro.props;
     <article class="cs-card container">
       <header class="cs-header">
         <div class="cs-tag">
-          <i class="fa-solid fa-folder-open"></i> PROYECTO
+          <Icon name="fa6-solid:folder-open" /> PROYECTO
         </div>
         <h1>{study.name}</h1>
         <p class="cs-summary">{study.summary}</p>
@@ -40,7 +41,7 @@ const { study } = Astro.props;
         <div class="cs-links">
           {study.links.map((link) => (
             <a href={link.url} target="_blank" rel="noopener noreferrer" class="cs-link">
-              <i class={`${link.icon} cs-link-ic`}></i>
+              <Icon name={link.icon} class="cs-link-ic" />
               <span>{link.label}</span>
             </a>
           ))}

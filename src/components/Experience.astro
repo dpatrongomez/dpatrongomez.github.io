@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 const experiences = [
   {
     company: "BBVA Technology en Europa",
@@ -6,7 +7,7 @@ const experiences = [
     period: "4 años 9 meses",
     type: "Jornada completa",
     logo: "/assets/images/companies/bbva.webp",
-    icon: "fa-building-columns",
+    icon: "fa6-solid:building-columns",
     roles: [
       {
         title: "Front-end Developer",
@@ -37,7 +38,7 @@ const experiences = [
     period: "2018 - 2021",
     type: "Jornada parcial / Temporal",
     logo: "/assets/images/companies/azonix.webp",
-    icon: "fa-network-wired",
+    icon: "fa6-solid:network-wired",
     roles: [
       {
         title: "Responsable de proyectos",
@@ -73,31 +74,31 @@ const experiences = [
 
 function getSkillData(skillName: string) {
   const lower = skillName.toLowerCase();
-  if (lower.includes("ember")) return { icon: "fa-brands fa-ember" };
-  if (lower.includes("javascript") || lower.includes("js")) return { icon: "fa-brands fa-js" };
+  if (lower.includes("ember")) return { icon: "fa6-brands:ember" };
+  if (lower.includes("javascript") || lower.includes("js")) return { icon: "fa6-brands:js" };
   if (lower.includes("lit")) return { svg: `<svg viewBox="0 0 24 24" class="skill-svg-ic" fill="currentColor"><path d="M6.719 0l5.485 5.485-2.743 2.743 5.486 5.486-2.743 2.743 8.228 8.229-5.485 5.485-10.971-10.971 2.742-2.743-5.485-5.486 2.743-2.743L6.719 0z"/></svg>` };
   if (lower.includes("web components")) return { svg: `<svg viewBox="0 0 24 24" class="skill-svg-ic" fill="currentColor"><path d="M12 0l-5.196 3v6L1.608 12 12 18l10.392-6-5.196-3V3L12 0zm0 2.309l3.196 1.845v3.691L12 9.691 8.804 7.845V4.154L12 2.309zM3.608 12.845l3.196 1.846v3.691L3.608 16.537v-3.692zm16.784 0v3.692L17.196 18.382v-3.691l3.196-1.846z"/></svg>` };
-  if (lower.includes("flutter")) return { icon: "fa-brands fa-flutter" };
-  if (lower.includes("dart")) return { icon: "fa-brands fa-dart-lang" };
-  if (lower.includes("android")) return { icon: "fa-brands fa-android" };
-  if (lower.includes("angular")) return { icon: "fa-brands fa-angular" };
-  if (lower.includes("banca")) return { icon: "fa-solid fa-building-columns" };
-  if (lower.includes("migración") || lower.includes("migracion")) return { icon: "fa-solid fa-arrow-right-arrow-left" };
-  if (lower.includes("front-end") || lower.includes("desarrollo software")) return { icon: "fa-solid fa-code" };
-  if (lower.includes("ágil") || lower.includes("agile") || lower.includes("scrum")) return { icon: "fa-solid fa-diagram-project" };
-  if (lower.includes("gestión") || lower.includes("gestion") || lower.includes("coordinación") || lower.includes("coordinacion")) return { icon: "fa-solid fa-list-check" };
-  if (lower.includes("telecomunicaciones")) return { icon: "fa-solid fa-tower-broadcast" };
-  if (lower.includes("sistemas")) return { icon: "fa-solid fa-server" };
-  if (lower.includes("redes") || lower.includes("red")) return { icon: "fa-solid fa-network-wired" };
-  if (lower.includes("soporte")) return { icon: "fa-solid fa-headset" };
-  return { icon: "fa-solid fa-circle-check" };
+  if (lower.includes("flutter")) return { icon: "fa6-brands:flutter" };
+  if (lower.includes("dart")) return { icon: "fa6-brands:dart-lang" };
+  if (lower.includes("android")) return { icon: "fa6-brands:android" };
+  if (lower.includes("angular")) return { icon: "fa6-brands:angular" };
+  if (lower.includes("banca")) return { icon: "fa6-solid:building-columns" };
+  if (lower.includes("migración") || lower.includes("migracion")) return { icon: "fa6-solid:arrow-right-arrow-left" };
+  if (lower.includes("front-end") || lower.includes("desarrollo software")) return { icon: "fa6-solid:code" };
+  if (lower.includes("ágil") || lower.includes("agile") || lower.includes("scrum")) return { icon: "fa6-solid:diagram-project" };
+  if (lower.includes("gestión") || lower.includes("gestion") || lower.includes("coordinación") || lower.includes("coordinacion")) return { icon: "fa6-solid:list-check" };
+  if (lower.includes("telecomunicaciones")) return { icon: "fa6-solid:tower-broadcast" };
+  if (lower.includes("sistemas")) return { icon: "fa6-solid:server" };
+  if (lower.includes("redes") || lower.includes("red")) return { icon: "fa6-solid:network-wired" };
+  if (lower.includes("soporte")) return { icon: "fa6-solid:headset" };
+  return { icon: "fa6-solid:circle-check" };
 }
 ---
 
 <section id="experience">
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-briefcase text-muted"></i> EXPERIENCIA
+      <Icon name="fa6-solid:briefcase" class="text-muted" /> EXPERIENCIA
     </div>
     <h2 class="section-title">Experiencia laboral</h2>
     <div class="section-divider"></div>
@@ -111,20 +112,20 @@ function getSkillData(skillName: string) {
               {companyGroup.logo ? (
                 <img src={companyGroup.logo} alt={`Logo ${companyGroup.company}`} class="company-logo-img" />
               ) : (
-                <i class={`fa-solid ${companyGroup.icon}`}></i>
+                <Icon name={companyGroup.icon} />
               )}
             </div>
             <div class="company-details">
               <div class="company-title-row">
                 <h3 class="company-name">{companyGroup.company}</h3>
                 <span class="company-period-badge">
-                  <i class="fa-regular fa-clock"></i> {companyGroup.period}
+                  <Icon name="fa6-regular:clock" /> {companyGroup.period}
                 </span>
               </div>
               <p class="company-meta">
-                <span><i class="fa-solid fa-location-dot"></i> {companyGroup.location}</span>
+                <span><Icon name="fa6-solid:location-dot" /> {companyGroup.location}</span>
                 <span class="bullet-dot">•</span>
-                <span><i class="fa-solid fa-briefcase"></i> {companyGroup.type}</span>
+                <span><Icon name="fa6-solid:briefcase" /> {companyGroup.type}</span>
               </p>
             </div>
           </div>
@@ -145,7 +146,7 @@ function getSkillData(skillName: string) {
                       {role.workplace && <span class="workplace-badge">{role.workplace}</span>}
                     </div>
                     <div class="role-date">
-                      <i class="fa-regular fa-calendar"></i> {role.date}
+                      <Icon name="fa6-regular:calendar" /> {role.date}
                     </div>
                   </div>
 
@@ -160,7 +161,7 @@ function getSkillData(skillName: string) {
                             {data.svg ? (
                               <Fragment set:html={data.svg} />
                             ) : (
-                              <i class={`${data.icon} skill-icon`}></i>
+                              <Icon name={data.icon} class="skill-icon" />
                             )}
                             {skill}
                           </span>

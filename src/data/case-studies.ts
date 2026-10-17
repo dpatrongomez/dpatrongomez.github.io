@@ -42,12 +42,12 @@ export const caseStudies: CaseStudy[] = [
       {
         label: "Google Play",
         url: "https://play.google.com/store/apps/details?id=com.dpatrongomez.pluggy",
-        icon: "fa-brands fa-google-play",
+        icon: "fa6-brands:google-play",
       },
       {
         label: "Código",
         url: "https://github.com/dpatrongomez/pluggy",
-        icon: "fa-brands fa-github",
+        icon: "fa6-brands:github",
       },
     ],
     problem: [
