@@ -6,12 +6,8 @@ import { dirname, join, resolve } from "node:path";
 import {
   buildTokenUsage,
   compact,
-  formatCoverageES,
   formatDayRangeES,
-  formatFull,
-  monthLabelES,
   parseUsageRows,
-  shortDateES,
   type UsageRow,
 } from "../lib/token-usage";
 
@@ -138,7 +134,10 @@ const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) sc
               caption: "Histórico completo · " + monthlySeries.length + " meses · " + monthlyRangeLabel,
               legend: false,
             },
-          ].map((view) => (
+          ].map((view) => {
+            // Local `const` para que TypeScript conserve el narrowing de `chart` dentro de los callbacks del SVG.
+            const chart = view.chart;
+            return (
             <div class="chart-view" data-panel={view.panel}>
               {view.legend && (
                 <ul class="chart-legend">
@@ -153,24 +152,24 @@ const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) sc
                 </ul>
               )}
 
-              {view.chart && (
+              {chart && (
                 <svg
-                  viewBox={`0 0 ${view.chart.width} ${view.chart.height}`}
+                  viewBox={`0 0 ${chart.width} ${chart.height}`}
                   width="100%"
                   class="chart-svg"
                   role="img"
                   aria-label={view.aria}
                 >
-                  {view.chart.grid.map((line) => (
+                  {chart.grid.map((line) => (
                     <>
                       <line
                         class="chart-grid-line"
-                        x1={view.chart.plotLeft}
+                        x1={chart.plotLeft}
                         y1={line.y}
-                        x2={view.chart.width - view.chart.plotRight}
+                        x2={chart.width - chart.plotRight}
                         y2={line.y}
                       />
-                      <text class="chart-axis-label" x={view.chart.plotLeft - 10} y={line.y + 4} text-anchor="end">
+                      <text class="chart-axis-label" x={chart.plotLeft - 10} y={line.y + 4} text-anchor="end">
                         {line.label}
                       </text>
                     </>
@@ -179,12 +178,12 @@ const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) sc
                   {/* Un día sin filas no dibuja barra: el hueco es el dato.
                       Solo la vista mensual envuelve cada barra en un grupo con
                       su valor encima al hover, como la etiqueta del pico. */}
-                  {view.chart.bars.map((bar) =>
+                  {chart.bars.map((bar) =>
                     view.panel === "month" ? (
                       <g
                         class={
-                          view.chart.partialMarker &&
-                          Math.abs(bar.x + bar.w / 2 - view.chart.partialMarker.x) < 0.01
+                          chart.partialMarker &&
+                          Math.abs(bar.x + bar.w / 2 - chart.partialMarker.x) < 0.01
                             ? "chart-bar-group is-partial"
                             : "chart-bar-group"
                         }
@@ -195,11 +194,11 @@ const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) sc
                         <text class="chart-hover-label" x={bar.x + bar.w / 2} y={bar.y - 8} text-anchor="middle">
                           {bar.hover}
                         </text>
-                        {view.chart.partialMarker &&
-                          Math.abs(bar.x + bar.w / 2 - view.chart.partialMarker.x) < 0.01 && (
-                            <g class="chart-partial-glyph" transform={`translate(${view.chart.partialMarker.x} ${view.chart.partialMarker.y})`}>
+                        {chart.partialMarker &&
+                          Math.abs(bar.x + bar.w / 2 - chart.partialMarker.x) < 0.01 && (
+                            <g class="chart-partial-glyph" transform={`translate(${chart.partialMarker.x} ${chart.partialMarker.y})`}>
                               <title>
-                                {view.chart.partialMarker.label} ({view.chart.partialMarker.coverage})
+                                {chart.partialMarker.label} ({chart.partialMarker.coverage})
                               </title>
                               <path d={HOURGLASS_PATH} transform={HOURGLASS_TRANSFORM} vector-effect="non-scaling-stroke" />
                             </g>
@@ -212,8 +211,8 @@ const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) sc
                     ),
                   )}
 
-                  {view.chart.labels.map((label) => (
-                    <text class="chart-axis-label" x={label.x} y={view.chart.height - 14} text-anchor="middle">
+                  {chart.labels.map((label) => (
+                    <text class="chart-axis-label" x={label.x} y={chart.height - 14} text-anchor="middle">
                       {label.text}
                     </text>
                   ))}
@@ -223,16 +222,16 @@ const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) sc
                     tendería una recta por encima del hueco y lo leería como
                     consumo.
                   */}
-                  {view.chart.line.map((segment) => (
+                  {chart.line.map((segment) => (
                     <path
                       class="chart-line"
                       d={segment.points.map((point, index) => `${index === 0 ? "M" : "L"}${point.x} ${point.y}`).join(" ")}
                     />
                   ))}
 
-                  {view.chart.peakLabel && (
-                    <text class="chart-peak-label" x={view.chart.peakLabel.x} y={view.chart.peakLabel.y} text-anchor="middle">
-                      {view.chart.peakLabel.text}
+                  {chart.peakLabel && (
+                    <text class="chart-peak-label" x={chart.peakLabel.x} y={chart.peakLabel.y} text-anchor="middle">
+                      {chart.peakLabel.text}
                     </text>
                   )}
 
@@ -241,12 +240,12 @@ const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) sc
                     cobertura solo vive en el tooltip, igual que la del resto de
                     periodos parciales.
                   */}
-                  {view.chart.partialMarker && view.panel !== "month" && (
+                  {chart.partialMarker && view.panel !== "month" && (
                     <g>
                       <title>
-                        {view.chart.partialMarker.label} ({view.chart.partialMarker.coverage})
+                        {chart.partialMarker.label} ({chart.partialMarker.coverage})
                       </title>
-                      <g class="chart-partial-glyph" transform={`translate(${view.chart.partialMarker.x} ${view.chart.partialMarker.y})`}>
+                      <g class="chart-partial-glyph" transform={`translate(${chart.partialMarker.x} ${chart.partialMarker.y})`}>
                         <path d={HOURGLASS_PATH} transform={HOURGLASS_TRANSFORM} vector-effect="non-scaling-stroke" />
                       </g>
                     </g>
@@ -256,7 +255,8 @@ const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) sc
 
               <p class="chart-caption">{view.caption}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <div class="panel">
@@ -575,13 +575,13 @@ const HOURGLASS_TRANSFORM = `translate(${(-384 * HOURGLASS_SCALE) / 2} -10.5) sc
 
   roots.forEach((root) => {
     const buttons = root.querySelectorAll('.range-btn');
-    const panels = root.querySelectorAll('.chart-view');
+    const panels = root.querySelectorAll<HTMLElement>('.chart-view');
 
     if (buttons.length === 0) return;
 
     root.setAttribute('data-tokens-enhanced', '');
 
-    const select = (range) => {
+    const select = (range: string | null) => {
       buttons.forEach((button) => {
         button.setAttribute('aria-pressed', String(button.getAttribute('data-range') === range));
       });
