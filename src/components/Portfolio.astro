@@ -1,4 +1,7 @@
 ---
+const slugify = (name: string) =>
+  name.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 import { Image } from "astro:assets";
 import { Icon } from 'astro-icon/components';
 import pluggyImg from "../assets/projects/pluggy.png";
@@ -117,7 +120,7 @@ function getTagData(tag: string) {
             <div class="card-header">
               <h3 class="project-title">
                 {project.web ? (
-                  <a href={project.web} target="_blank" rel="noopener noreferrer" class="title-link">
+                  <a href={project.web} target="_blank" rel="noopener noreferrer" class="title-link" data-goatcounter-click={`project-${slugify(project.name)}-web`}>
                     {project.name}
                     <Icon name="fa6-solid:arrow-up-right-from-square" class="title-ic" />
                   </a>
@@ -148,6 +151,7 @@ function getTagData(tag: string) {
                   target="_blank" 
                   rel="noopener noreferrer" 
                   class="btn-project btn-primary-action"
+                  data-goatcounter-click={`project-${slugify(project.name)}-web`}
                 >
                   <Icon name={project.googleplay ? "fa6-brands:google-play" : "fa6-solid:globe"} class="btn-ic" />
                   <span>{project.googleplay ? "Google Play" : "Ver Web"}</span>
@@ -164,6 +168,7 @@ function getTagData(tag: string) {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 class="btn-project btn-secondary-action"
+                data-goatcounter-click={`project-${slugify(project.name)}-code`}
               >
                 <Icon name="fa6-brands:github" class="btn-ic" />
                 <span>Código</span>
