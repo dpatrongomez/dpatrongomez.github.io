@@ -1,50 +1,54 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { localized, useTranslations } from '../i18n';
+
+const { lang, t } = useTranslations(Astro.currentLocale);
+
 const skillCategories = [
   {
-    title: "Frontend & Web",
+    title: localized("Frontend & Web"),
     skills: [
-      { name: "JavaScript / ES6+", icon: "fa6-brands:js" },
-      { 
-        name: "Web Components", 
-        svg: `<svg viewBox="0 0 24 24" class="chip-svg-ic" fill="currentColor"><path d="M12 0l-5.196 3v6L1.608 12 12 18l10.392-6-5.196-3V3L12 0zm0 2.309l3.196 1.845v3.691L12 9.691 8.804 7.845V4.154L12 2.309zM3.608 12.845l3.196 1.846v3.691L3.608 16.537v-3.692zm16.784 0v3.692L17.196 18.382v-3.691l3.196-1.846z"/></svg>` 
+      { name: localized("JavaScript / ES6+"), icon: "fa6-brands:js" },
+      {
+        name: localized("Web Components"),
+        svg: `<svg viewBox="0 0 24 24" class="chip-svg-ic" fill="currentColor"><path d="M12 0l-5.196 3v6L1.608 12 12 18l10.392-6-5.196-3V3L12 0zm0 2.309l3.196 1.845v3.691L12 9.691 8.804 7.845V4.154L12 2.309zM3.608 12.845l3.196 1.846v3.691L3.608 16.537v-3.692zm16.784 0v3.692L17.196 18.382v-3.691l3.196-1.846z"/></svg>`
       },
-      { 
-        name: "Lit", 
-        svg: `<svg viewBox="0 0 24 24" class="chip-svg-ic" fill="currentColor"><path d="M6.719 0l5.485 5.485-2.743 2.743 5.486 5.486-2.743 2.743 8.228 8.229-5.485 5.485-10.971-10.971 2.742-2.743-5.485-5.486 2.743-2.743L6.719 0z"/></svg>` 
+      {
+        name: localized("Lit"),
+        svg: `<svg viewBox="0 0 24 24" class="chip-svg-ic" fill="currentColor"><path d="M6.719 0l5.485 5.485-2.743 2.743 5.486 5.486-2.743 2.743 8.228 8.229-5.485 5.485-10.971-10.971 2.742-2.743-5.485-5.486 2.743-2.743L6.719 0z"/></svg>`
       },
-      { name: "Ember.js", icon: "fa6-brands:ember" },
-      { name: "HTML5 & CSS3", icon: "fa6-brands:html5" },
-      { name: "Angular", icon: "fa6-brands:angular" },
+      { name: localized("Ember.js"), icon: "fa6-brands:ember" },
+      { name: localized("HTML5 & CSS3"), icon: "fa6-brands:html5" },
+      { name: localized("Angular"), icon: "fa6-brands:angular" },
     ]
   },
   {
-    title: "Desarrollo Mobile",
+    title: localized("Desarrollo Mobile", "Mobile Development"),
     skills: [
-      { name: "Flutter", icon: "fa6-brands:flutter" },
-      { name: "Dart", icon: "fa6-brands:dart-lang" },
-      { name: "Android Native", icon: "fa6-brands:android" },
-      { name: "Firebase", icon: "devicon-plain:firebase" },
-      { name: "Banca Móvil", icon: "fa6-solid:building-columns" },
+      { name: localized("Flutter"), icon: "fa6-brands:flutter" },
+      { name: localized("Dart"), icon: "fa6-brands:dart-lang" },
+      { name: localized("Android Native"), icon: "fa6-brands:android" },
+      { name: localized("Firebase"), icon: "devicon-plain:firebase" },
+      { name: localized("Banca Móvil", "Mobile Banking"), icon: "fa6-solid:building-columns" },
     ]
   },
   {
-    title: "Backend & Datos",
+    title: localized("Backend & Datos", "Backend & Data"),
     skills: [
-      { name: "MySQL", icon: "devicon-plain:mysql" },
-      { name: "REST APIs", icon: "fa6-solid:network-wired" },
-      { name: "PHP", icon: "fa6-brands:php" },
-      { name: "Python", icon: "fa6-brands:python" },
-      { name: "Java", icon: "fa6-brands:java" },
+      { name: localized("MySQL"), icon: "devicon-plain:mysql" },
+      { name: localized("REST APIs"), icon: "fa6-solid:network-wired" },
+      { name: localized("PHP"), icon: "fa6-brands:php" },
+      { name: localized("Python"), icon: "fa6-brands:python" },
+      { name: localized("Java"), icon: "fa6-brands:java" },
     ]
   },
   {
-    title: "Herramientas & Ágil",
+    title: localized("Herramientas & Ágil", "Tools & Agile"),
     skills: [
-      { name: "Git & GitHub", icon: "fa6-brands:git-alt" },
-      { name: "GitHub Actions", icon: "devicon-plain:githubactions" },
-      { name: "Scrum / Agile", icon: "fa6-solid:diagram-project" },
-      { name: "Jira / Confluence", icon: "fa6-brands:jira" },
+      { name: localized("Git & GitHub"), icon: "fa6-brands:git-alt" },
+      { name: localized("GitHub Actions"), icon: "devicon-plain:githubactions" },
+      { name: localized("Scrum / Agile"), icon: "fa6-solid:diagram-project" },
+      { name: localized("Jira / Confluence"), icon: "fa6-brands:jira" },
     ]
   }
 ];
@@ -53,15 +57,15 @@ const skillCategories = [
 <section id="skills">
   <div class="container">
     <div class="section-tag">
-      <Icon name="fa6-solid:code" class="text-muted" /> STACK TÉCNICO
+      <Icon name="fa6-solid:code" class="text-muted" /> {t('skills.label')}
     </div>
-    <h2 class="section-title">Habilidades & Tecnologías</h2>
+    <h2 class="section-title">{t('skills.title')}</h2>
     <div class="section-divider"></div>
 
     <div class="grid-2">
       {skillCategories.map((category) => (
         <div class="skills-card">
-          <h3 class="category-title">{category.title}</h3>
+          <h3 class="category-title">{category.title[lang]}</h3>
 
           <div class="chips-grid">
             {category.skills.map((skill) => (
@@ -71,7 +75,7 @@ const skillCategories = [
                 ) : (
                   <Icon name={skill.icon} class="chip-ic" />
                 )}
-                <span class="chip-label">{skill.name}</span>
+                <span class="chip-label">{skill.name[lang]}</span>
               </div>
             ))}
           </div>

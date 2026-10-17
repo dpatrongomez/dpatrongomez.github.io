@@ -1,6 +1,10 @@
 ---
-import { Image } from "astro:assets";
 import { Icon } from 'astro-icon/components';
+import { localized, useTranslations } from '../i18n';
+
+const { lang, t } = useTranslations(Astro.currentLocale);
+
+import { Image } from "astro:assets";
 import pluggyImg from "../assets/projects/pluggy.png";
 import urbanosImg from "../assets/projects/urbanosguadalajara.jpg";
 import mercalistImg from "../assets/projects/mercalist.png";
@@ -12,7 +16,10 @@ import varesImg from "../assets/projects/vares.png";
 const projects = [
   {
     name: "Pluggy",
-    info: "Aplicación móvil para localizar y consultar puntos de recarga de vehículos eléctricos (EV) en tiempo real.",
+    info: localized(
+      "Aplicación móvil para localizar y consultar puntos de recarga de vehículos eléctricos (EV) en tiempo real.",
+      "Mobile app to locate and check electric vehicle (EV) charging points in real time."
+    ),
     tags: ["Flutter", "Dart", "Android"],
     image: pluggyImg,
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.pluggy",
@@ -22,7 +29,10 @@ const projects = [
   },
   {
     name: "Urbanos Guadalajara",
-    info: "Aplicación móvil para consultar los itinerarios y horarios de los autobuses urbanos de Guadalajara.",
+    info: localized(
+      "Aplicación móvil para consultar los itinerarios y horarios de los autobuses urbanos de Guadalajara.",
+      "Mobile app to check the routes and timetables of Guadalajara's urban buses."
+    ),
     tags: ["Flutter", "Dart", "Android"],
     image: urbanosImg,
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.urbanosguadalajara",
@@ -32,7 +42,10 @@ const projects = [
   },
   {
     name: "MercaList",
-    info: "Aplicación interactiva para crear listas de la compra conectada con el catálogo oficial de Mercadona.",
+    info: localized(
+      "Aplicación interactiva para crear listas de la compra conectada con el catálogo oficial de Mercadona.",
+      "Interactive app to create shopping lists connected to Mercadona's official catalogue."
+    ),
     tags: ["Flutter", "REST API", "Android"],
     image: mercalistImg,
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.mercalist",
@@ -42,7 +55,10 @@ const projects = [
   },
   {
     name: "Precio Luz",
-    info: "Aplicación móvil para consultar el precio de la electricidad por horas en España.",
+    info: localized(
+      "Aplicación móvil para consultar el precio de la electricidad por horas en España.",
+      "Mobile app to check hourly electricity prices in Spain."
+    ),
     tags: ["Flutter", "REST API", "Android"],
     image: precioluzImg,
     web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.precioluz",
@@ -52,7 +68,10 @@ const projects = [
   },
   {
     name: "TiempoApp",
-    info: "Aplicación web progresiva para consultar el tiempo meteorológico en municipios de España.",
+    info: localized(
+      "Aplicación web progresiva para consultar el tiempo meteorológico en municipios de España.",
+      "Progressive web app to check the weather in municipalities across Spain."
+    ),
     tags: ["Angular", "GitHub Actions", "Web"],
     image: tiempoappImg,
     web: "https://dpatrongomez.github.io/tiempoApp/",
@@ -62,7 +81,10 @@ const projects = [
   },
   {
     name: "EducamosCLM",
-    info: "Acceso móvil a módulos y avisos de la plataforma de educación de Castilla-La Mancha.",
+    info: localized(
+      "Acceso móvil a módulos y avisos de la plataforma de educación de Castilla-La Mancha.",
+      "Mobile access to modules and notices from the Castilla-La Mancha education platform."
+    ),
     tags: ["Flutter", "Dart"],
     image: educamosclmImg,
     archived: true,
@@ -71,7 +93,10 @@ const projects = [
   },
   {
     name: "Vares, con “V” de Visillo",
-    info: "Plataforma para valorar establecimientos y bares en Guadalajara fomentando el comercio local.",
+    info: localized(
+      "Plataforma para valorar establecimientos y bares en Guadalajara fomentando el comercio local.",
+      "Platform to rate shops and bars in Guadalajara, supporting local businesses."
+    ),
     tags: ["Flutter", "Firebase"],
     image: varesImg,
     archived: true,
@@ -98,9 +123,9 @@ function getTagData(tag: string) {
 <section id="portfolio">
   <div class="container">
     <div class="section-tag">
-      <Icon name="fa6-solid:folder-open" class="text-muted" /> PROYECTOS
+      <Icon name="fa6-solid:folder-open" class="text-muted" /> {t('projects.label')}
     </div>
-    <h2 class="section-title">Proyectos Destacados & Apps</h2>
+    <h2 class="section-title">{t('projects.title')}</h2>
     <div class="section-divider"></div>
 
     <div class="grid-3">
@@ -109,7 +134,7 @@ function getTagData(tag: string) {
           <div class="card-media">
             <Image src={project.image} alt={project.name} format="webp" width={256} loading="lazy" class="media-img" />
             {project.featured && (
-              <span class="badge-feat">Destacado</span>
+              <span class="badge-feat">{t('projects.featured')}</span>
             )}
           </div>
 
@@ -127,7 +152,7 @@ function getTagData(tag: string) {
               </h3>
             </div>
 
-            <p class="project-info">{project.info}</p>
+            <p class="project-info">{project.info[lang]}</p>
 
             <div class="tags-flex">
               {project.tags.map((tag) => {
@@ -150,13 +175,13 @@ function getTagData(tag: string) {
                   class="btn-project btn-primary-action"
                 >
                   <Icon name={project.googleplay ? "fa6-brands:google-play" : "fa6-solid:globe"} class="btn-ic" />
-                  <span>{project.googleplay ? "Google Play" : "Ver Web"}</span>
+                  <span>{project.googleplay ? "Google Play" : t('projects.website')}</span>
                 </a>
               )}
               {project.archived && (
                 <div class="archived-tag">
                   <Icon name="fa6-solid:box-archive" class="btn-ic" />
-                  <span>Archivada</span>
+                  <span>{t('projects.archived')}</span>
                 </div>
               )}
               <a 
@@ -166,7 +191,7 @@ function getTagData(tag: string) {
                 class="btn-project btn-secondary-action"
               >
                 <Icon name="fa6-brands:github" class="btn-ic" />
-                <span>Código</span>
+                <span>{t('projects.code')}</span>
               </a>
             </div>
           </div>
