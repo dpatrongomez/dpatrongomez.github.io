@@ -581,7 +581,16 @@ export function providerLabel(raw: string): string {
 /* Agregados                                                                   */
 /* -------------------------------------------------------------------------- */
 
-const tokensOf = (row: UsageRow): number => row.input + row.output + row.reasoning;
+/**
+ * Tokens procesados de verdad: entrada nueva, salida y razonamiento.
+ *
+ * `cacheWrite` cuenta como entrada nueva: Anthropic deja en `input` solo los
+ * tokens sin cachear (un par por petición) y factura la escritura en caché
+ * aparte, mientras que el resto de proveedores la reporta dentro de `input`.
+ * Sin sumarla, los modelos de Claude perderían casi toda su entrada. Las
+ * lecturas de caché (`cacheRead`) siguen fuera: son contexto reutilizado.
+ */
+const tokensOf = (row: UsageRow): number => row.input + row.cacheWrite + row.output + row.reasoning;
 
 /** Ventana de la línea de media móvil de la vista diaria. */
 export const MOVING_AVERAGE_DAYS = 7;
@@ -600,7 +609,7 @@ export function buildTokenUsage(
   const { t } = useTranslations(lang);
   const hasData = rows.length > 0;
 
-  /* Top 5 modelos por tokens (sin caché) sobre todo el histórico. */
+  /* Top 5 modelos por tokens (sin lecturas de caché) sobre todo el histórico. */
   const byModel = new Map<string, { tokens: number; providers: Map<string, number> }>();
   for (const row of rows) {
     const entry = byModel.get(row.model) ?? { tokens: 0, providers: new Map<string, number>() };

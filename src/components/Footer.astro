@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { useTranslations } from '../i18n';
 
 const { t } = useTranslations(Astro.currentLocale);
@@ -13,7 +14,7 @@ const currentYear = new Date().getFullYear();
 
     <div class="footer-links">
       <a href="#header" class="top-link">
-        {t('footer.top')} <i class="fa-solid fa-arrow-up"></i>
+        {t('footer.top')} <Icon name="fa6-solid:arrow-up" />
       </a>
     </div>
   </div>

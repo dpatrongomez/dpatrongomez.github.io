@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { useTranslations } from '../i18n';
 
 const { t } = useTranslations(Astro.currentLocale);
@@ -7,7 +8,7 @@ const { t } = useTranslations(Astro.currentLocale);
 <section id="about">
   <div class="container">
     <div class="section-tag">
-      <i class="fa-solid fa-user text-muted"></i> {t('about.label')}
+      <Icon name="fa6-solid:user" class="text-muted" /> {t('about.label')}
     </div>
     <h2 class="section-title">{t('about.title')}</h2>
     <div class="section-divider"></div>
