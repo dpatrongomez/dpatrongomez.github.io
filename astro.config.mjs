@@ -15,7 +15,7 @@ export default defineConfig({
           'chart-column', 'charging-station', 'circle-check', 'code', 'diagram-project', 'envelope',
           'folder-open', 'globe', 'graduation-cap', 'headset', 'house', 'list-check', 'location-dot',
           'map-location-dot', 'microchip', 'mobile-screen', 'network-wired', 'server', 'tag',
-          'tower-broadcast', 'user', 'xmark', 'bolt',
+          'tower-broadcast', 'user', 'xmark', 'bolt', 'book-open',
         ],
         'fa6-regular': ['calendar', 'clock'],
         'fa6-brands': [
