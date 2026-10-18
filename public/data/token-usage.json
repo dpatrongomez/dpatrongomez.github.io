@@ -1510,22 +1510,99 @@
     "day": "2026-10-15",
     "model": "claude-haiku-5-5",
     "provider": "anthropic",
-    "requests": 1,
-    "input": 2,
-    "output": 88,
-    "reasoning": 397,
-    "cacheRead": 1104,
-    "cacheWrite": 4120
+    "requests": 3,
+    "input": 6,
+    "output": 272,
+    "reasoning": 997,
+    "cacheRead": 3312,
+    "cacheWrite": 12343
   },
   {
     "day": "2026-10-15",
     "model": "claude-opus-5-5",
     "provider": "anthropic",
-    "requests": 82,
-    "input": 164,
-    "output": 50815,
-    "reasoning": 17650,
-    "cacheRead": 7597499,
-    "cacheWrite": 231126
+    "requests": 156,
+    "input": 312,
+    "output": 74890,
+    "reasoning": 24139,
+    "cacheRead": 15320614,
+    "cacheWrite": 352747
+  },
+  {
+    "day": "2026-10-16",
+    "model": "claude-haiku-5-5",
+    "provider": "anthropic",
+    "requests": 1,
+    "input": 2,
+    "output": 93,
+    "reasoning": 396,
+    "cacheRead": 1104,
+    "cacheWrite": 4105
+  },
+  {
+    "day": "2026-10-16",
+    "model": "claude-opus-5-5",
+    "provider": "anthropic",
+    "requests": 65,
+    "input": 130,
+    "output": 22097,
+    "reasoning": 6858,
+    "cacheRead": 6250738,
+    "cacheWrite": 167817
+  },
+  {
+    "day": "2026-10-17",
+    "model": "claude-haiku-5-5",
+    "provider": "anthropic",
+    "requests": 2,
+    "input": 4,
+    "output": 179,
+    "reasoning": 433,
+    "cacheRead": 2208,
+    "cacheWrite": 8188
+  },
+  {
+    "day": "2026-10-17",
+    "model": "claude-opus-5-5",
+    "provider": "anthropic",
+    "requests": 198,
+    "input": 400,
+    "output": 50600,
+    "reasoning": 17353,
+    "cacheRead": 19483849,
+    "cacheWrite": 599772
+  },
+  {
+    "day": "2026-10-17",
+    "model": "claude-sonnet-5-5",
+    "provider": "anthropic",
+    "requests": 44,
+    "input": 88,
+    "output": 19492,
+    "reasoning": 7378,
+    "cacheRead": 2673636,
+    "cacheWrite": 159303
+  },
+  {
+    "day": "2026-10-18",
+    "model": "claude-haiku-5-5",
+    "provider": "anthropic",
+    "requests": 1,
+    "input": 2,
+    "output": 93,
+    "reasoning": 846,
+    "cacheRead": 1104,
+    "cacheWrite": 4108
+  },
+  {
+    "day": "2026-10-18",
+    "model": "claude-opus-5-5",
+    "provider": "anthropic",
+    "requests": 68,
+    "input": 136,
+    "output": 27126,
+    "reasoning": 13916,
+    "cacheRead": 4767878,
+    "cacheWrite": 188748
   }
 ]
