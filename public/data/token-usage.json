@@ -1587,22 +1587,121 @@
     "day": "2026-10-18",
     "model": "claude-haiku-5-5",
     "provider": "anthropic",
-    "requests": 1,
-    "input": 2,
-    "output": 93,
-    "reasoning": 846,
-    "cacheRead": 1104,
-    "cacheWrite": 4108
+    "requests": 7,
+    "input": 14,
+    "output": 646,
+    "reasoning": 3250,
+    "cacheRead": 7728,
+    "cacheWrite": 28734
   },
   {
     "day": "2026-10-18",
     "model": "claude-opus-5-5",
     "provider": "anthropic",
-    "requests": 68,
-    "input": 136,
-    "output": 27126,
-    "reasoning": 13916,
-    "cacheRead": 4767878,
-    "cacheWrite": 188748
+    "requests": 223,
+    "input": 446,
+    "output": 121505,
+    "reasoning": 73728,
+    "cacheRead": 33220490,
+    "cacheWrite": 731623
+  },
+  {
+    "day": "2026-10-18",
+    "model": "claude-sonnet-5-5",
+    "provider": "anthropic",
+    "requests": 116,
+    "input": 232,
+    "output": 41511,
+    "reasoning": 11226,
+    "cacheRead": 7276877,
+    "cacheWrite": 277277
+  },
+  {
+    "day": "2026-10-18",
+    "model": "deepseek-v4.1-flash-free",
+    "provider": "opencode",
+    "requests": 52,
+    "input": 285778,
+    "output": 13666,
+    "reasoning": 19579,
+    "cacheRead": 5025920,
+    "cacheWrite": 0
+  },
+  {
+    "day": "2026-10-18",
+    "model": "glm-5.3-flash-free",
+    "provider": "opencode",
+    "requests": 145,
+    "input": 701531,
+    "output": 43478,
+    "reasoning": 35245,
+    "cacheRead": 13470464,
+    "cacheWrite": 0
+  },
+  {
+    "day": "2026-10-19",
+    "model": "claude-haiku-5-5",
+    "provider": "anthropic",
+    "requests": 2,
+    "input": 4,
+    "output": 177,
+    "reasoning": 1187,
+    "cacheRead": 2208,
+    "cacheWrite": 8237
+  },
+  {
+    "day": "2026-10-19",
+    "model": "claude-opus-5-5",
+    "provider": "anthropic",
+    "requests": 100,
+    "input": 200,
+    "output": 20250,
+    "reasoning": 8665,
+    "cacheRead": 9968030,
+    "cacheWrite": 163548
+  },
+  {
+    "day": "2026-10-19",
+    "model": "claude-sonnet-5-5",
+    "provider": "anthropic",
+    "requests": 9,
+    "input": 18,
+    "output": 2280,
+    "reasoning": 234,
+    "cacheRead": 303233,
+    "cacheWrite": 29750
+  },
+  {
+    "day": "2026-10-20",
+    "model": "claude-haiku-5-5",
+    "provider": "anthropic",
+    "requests": 3,
+    "input": 6,
+    "output": 279,
+    "reasoning": 2400,
+    "cacheRead": 3312,
+    "cacheWrite": 12414
+  },
+  {
+    "day": "2026-10-20",
+    "model": "claude-opus-5-5",
+    "provider": "anthropic",
+    "requests": 63,
+    "input": 126,
+    "output": 43166,
+    "reasoning": 27012,
+    "cacheRead": 4716803,
+    "cacheWrite": 187818
+  },
+  {
+    "day": "2026-10-20",
+    "model": "claude-sonnet-5-5",
+    "provider": "anthropic",
+    "requests": 34,
+    "input": 68,
+    "output": 27650,
+    "reasoning": 14780,
+    "cacheRead": 1924838,
+    "cacheWrite": 259084
   }
 ]
