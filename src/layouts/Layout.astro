@@ -38,6 +38,10 @@ const personJsonLd = {
     'https://github.com/dpatrongomez',
   ],
 };
+
+// Analítica GoatCounter (sin cookies). Solo se inyecta si PUBLIC_GOATCOUNTER_CODE está definida.
+const goatcounterCode = import.meta.env.PUBLIC_GOATCOUNTER_CODE ?? '';
+const hasGoatcounter = /^[a-z0-9-]+$/i.test(goatcounterCode);
 ---
 
 <!doctype html>
@@ -75,6 +79,9 @@ const personJsonLd = {
     <!-- JSON-LD: Person -->
     <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
 
+    {hasGoatcounter && (
+      <script is:inline async data-goatcounter={`https://${goatcounterCode}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>
+    )}
   </head>
   <body>
     <a href="#main-content" class="skip-link">Saltar al contenido</a>
