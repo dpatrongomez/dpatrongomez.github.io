@@ -557,15 +557,16 @@ export function providerLabel(raw: string): string {
 /* -------------------------------------------------------------------------- */
 
 /**
- * Tokens procesados de verdad: entrada nueva, salida y razonamiento.
+ * Todos los tokens que pasaron por el modelo: entrada, salida, razonamiento y
+ * caché (escritura y lectura).
  *
- * `cacheWrite` cuenta como entrada nueva: Anthropic deja en `input` solo los
- * tokens sin cachear (un par por petición) y factura la escritura en caché
- * aparte, mientras que el resto de proveedores la reporta dentro de `input`.
- * Sin sumarla, los modelos de Claude perderían casi toda su entrada. Las
- * lecturas de caché (`cacheRead`) siguen fuera: son contexto reutilizado.
+ * Anthropic deja en `input` solo los tokens sin cachear (un par por petición) y
+ * reporta la caché aparte, así que hay que sumarla para no perder casi todo el
+ * contexto de los modelos de Claude. Las lecturas de caché también cuentan: el
+ * modelo las consume en cada petición, aunque no cueste igual.
  */
-const tokensOf = (row: UsageRow): number => row.input + row.cacheWrite + row.output + row.reasoning;
+const tokensOf = (row: UsageRow): number =>
+  row.input + row.cacheWrite + row.cacheRead + row.output + row.reasoning;
 
 /** Ventana de la línea de media móvil de la vista diaria. */
 export const MOVING_AVERAGE_DAYS = 7;
@@ -579,7 +580,7 @@ export const MOVING_AVERAGE_DAYS = 7;
 export function buildTokenUsage(rows: UsageRow[], nowKey: string = todayKeyUTC()): TokenUsageModel {
   const hasData = rows.length > 0;
 
-  /* Top 5 modelos por tokens (sin lecturas de caché) sobre todo el histórico. */
+  /* Top 5 modelos por tokens (incluida la caché) sobre todo el histórico. */
   const byModel = new Map<string, { tokens: number; providers: Map<string, number> }>();
   for (const row of rows) {
     const entry = byModel.get(row.model) ?? { tokens: 0, providers: new Map<string, number>() };
