@@ -2165,5 +2165,16 @@
     "reasoning": 0,
     "cacheRead": 24823,
     "cacheWrite": 12125
+  },
+  {
+    "day": "2026-11-09",
+    "model": "glm-5.3-flash-free",
+    "provider": "opencode",
+    "requests": 11,
+    "input": 29096,
+    "output": 895,
+    "reasoning": 939,
+    "cacheRead": 292552,
+    "cacheWrite": 0
   }
 ]
