@@ -69,11 +69,11 @@
     "day": "2026-11-09",
     "model": "glm-5.3-flash-free",
     "provider": "opencode",
-    "requests": 73,
-    "input": 109875,
-    "output": 13835,
-    "reasoning": 11548,
-    "cacheRead": 2040000,
+    "requests": 77,
+    "input": 112876,
+    "output": 14612,
+    "reasoning": 11708,
+    "cacheRead": 2232576,
     "cacheWrite": 0
   }
 ]
