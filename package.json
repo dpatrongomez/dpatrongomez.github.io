@@ -20,16 +20,17 @@
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/fa6-regular": "^1.2.4",
     "@iconify-json/fa6-solid": "^1.2.4",
-    "astro": "^7.4.0",
+    "astro": "^7.4.1",
     "astro-icon": "^1.2.0",
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "typescript": "^7.0.2"
+    "@astrojs/check": "^0.9.11",
+    "@types/node": "^24.19.1",
+    "typescript": "^6.0.3"
   },
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=24.22.1"
   },
-  "packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1"
+  "packageManager": "pnpm@12.14.0+sha512.c18ba6d87993d3d164cb5e8948f32b2c06ee854487e06cd8d86781342fb3e5bb4634367034711e86802baa9c37bea906ce1929ad08d70884c97d801df13389a6"
 }

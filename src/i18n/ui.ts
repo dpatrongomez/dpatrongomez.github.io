@@ -19,7 +19,6 @@ const es = {
   'nav.skip': 'Saltar al contenido',
   'nav.about': 'Sobre mí',
   'nav.experience': 'Experiencia',
-  'nav.skills': 'Habilidades',
   'nav.tokens': 'Tokens',
   'nav.education': 'Formación',
   'nav.projects': 'Proyectos',
@@ -58,8 +57,6 @@ const es = {
   'experience.title': 'Experiencia laboral',
 
   // Habilidades
-  'skills.label': 'STACK TÉCNICO',
-  'skills.title': 'Habilidades & Tecnologías',
 
   // Proyectos
   'projects.label': 'PROYECTOS',
@@ -138,7 +135,6 @@ const en: Dictionary = {
   'nav.skip': 'Skip to content',
   'nav.about': 'About',
   'nav.experience': 'Experience',
-  'nav.skills': 'Skills',
   'nav.tokens': 'Tokens',
   'nav.education': 'Education',
   'nav.projects': 'Projects',
@@ -173,8 +169,6 @@ const en: Dictionary = {
   'experience.label': 'EXPERIENCE',
   'experience.title': 'Work experience',
 
-  'skills.label': 'TECH STACK',
-  'skills.title': 'Skills & Technologies',
 
   'projects.label': 'PROJECTS',
   'projects.title': 'Featured Projects & Apps',

@@ -1,109 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import { Icon } from 'astro-icon/components';
-import { localized, useTranslations } from '../i18n';
+import { projects } from "../lib/projects";
+import { useTranslations } from '../i18n';
 
 const { lang, t } = useTranslations(Astro.currentLocale);
-
-import { Image } from "astro:assets";
-import pluggyImg from "../assets/projects/pluggy.png";
-import urbanosImg from "../assets/projects/urbanosguadalajara.jpg";
-import mercalistImg from "../assets/projects/mercalist.png";
-import precioluzImg from "../assets/projects/precioluz.webp";
-import tiempoappImg from "../assets/projects/tiempoapp.png";
-import educamosclmImg from "../assets/projects/educamosclm.jpg";
-import varesImg from "../assets/projects/vares.png";
-
-const projects = [
-  {
-    name: "Pluggy",
-    info: localized(
-      "Aplicación móvil para localizar y consultar puntos de recarga de vehículos eléctricos (EV) en tiempo real.",
-      "Mobile app to locate and check electric vehicle (EV) charging points in real time."
-    ),
-    tags: ["Flutter", "Dart", "Android"],
-    image: pluggyImg,
-    web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.pluggy",
-    googleplay: true,
-    github: "https://github.com/dpatrongomez/pluggy",
-    featured: true
-  },
-  {
-    name: "Urbanos Guadalajara",
-    info: localized(
-      "Aplicación móvil para consultar los itinerarios y horarios de los autobuses urbanos de Guadalajara.",
-      "Mobile app to check the routes and timetables of Guadalajara's urban buses."
-    ),
-    tags: ["Flutter", "Dart", "Android"],
-    image: urbanosImg,
-    web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.urbanosguadalajara",
-    googleplay: true,
-    github: "https://github.com/dpatrongomez/urbanosguadalajara",
-    featured: true
-  },
-  {
-    name: "MercaList",
-    info: localized(
-      "Aplicación interactiva para crear listas de la compra conectada con el catálogo oficial de Mercadona.",
-      "Interactive app to create shopping lists connected to Mercadona's official catalogue."
-    ),
-    tags: ["Flutter", "REST API", "Android"],
-    image: mercalistImg,
-    web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.mercalist",
-    googleplay: true,
-    github: "https://github.com/dpatrongomez/mercalist",
-    featured: true
-  },
-  {
-    name: "Precio Luz",
-    info: localized(
-      "Aplicación móvil para consultar el precio de la electricidad por horas en España.",
-      "Mobile app to check hourly electricity prices in Spain."
-    ),
-    tags: ["Flutter", "REST API", "Android"],
-    image: precioluzImg,
-    web: "https://play.google.com/store/apps/details?id=com.dpatrongomez.precioluz",
-    googleplay: true,
-    github: "https://github.com/dpatrongomez/precioluz",
-    featured: true
-  },
-  {
-    name: "TiempoApp",
-    info: localized(
-      "Aplicación web progresiva para consultar el tiempo meteorológico en municipios de España.",
-      "Progressive web app to check the weather in municipalities across Spain."
-    ),
-    tags: ["Angular", "GitHub Actions", "Web"],
-    image: tiempoappImg,
-    web: "https://dpatrongomez.github.io/tiempoApp/",
-    googleplay: false,
-    github: "https://github.com/dpatrongomez/tiempoApp",
-    featured: false
-  },
-  {
-    name: "EducamosCLM",
-    info: localized(
-      "Acceso móvil a módulos y avisos de la plataforma de educación de Castilla-La Mancha.",
-      "Mobile access to modules and notices from the Castilla-La Mancha education platform."
-    ),
-    tags: ["Flutter", "Dart"],
-    image: educamosclmImg,
-    archived: true,
-    github: "https://github.com/dpatrongomez/EducamosCLM",
-    featured: false
-  },
-  {
-    name: "Vares, con “V” de Visillo",
-    info: localized(
-      "Plataforma para valorar establecimientos y bares en Guadalajara fomentando el comercio local.",
-      "Platform to rate shops and bars in Guadalajara, supporting local businesses."
-    ),
-    tags: ["Flutter", "Firebase"],
-    image: varesImg,
-    archived: true,
-    github: "https://github.com/dpatrongomez/vares",
-    featured: false
-  },
-];
 
 function getTagData(tag: string) {
   const lower = tag.toLowerCase();
@@ -152,7 +53,10 @@ function getTagData(tag: string) {
               </h3>
             </div>
 
-            <p class="project-info">{project.info[lang]}</p>
+            <div class="project-description">
+              <p class="project-info">{project.info[lang]}</p>
+              <p class="project-implementation">{project.implementation[lang]}</p>
+            </div>
 
             <div class="tags-flex">
               {project.tags.map((tag) => {
@@ -292,12 +196,21 @@ function getTagData(tag: string) {
     opacity: 1;
   }
 
-  .project-info {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 16px;
+  .project-description {
     flex-grow: 1;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .project-info {
+    margin: 0 0 8px;
+    color: var(--text-primary);
+  }
+
+  .project-implementation {
+    margin: 0;
+    color: var(--text-muted);
   }
 
   .tags-flex {

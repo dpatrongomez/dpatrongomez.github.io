@@ -1,106 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { localized, useTranslations } from '../i18n';
+import { formatPeriod } from "../lib/durations";
+import { experiences, formatCompanyPeriod } from "../lib/experience";
+import { useTranslations } from '../i18n';
 
 const { lang, t } = useTranslations(Astro.currentLocale);
-
-// Los textos traducibles van como `localized(es, en)`. Los iconos se eligen
-// por el nombre en español (`skill.es`), así que ese valor no se debe cambiar.
-const experiences = [
-  {
-    company: "BBVA Technology en Europa",
-    location: localized("Madrid, Comunidad de Madrid, España", "Madrid, Community of Madrid, Spain"),
-    period: localized("4 años 9 meses", "4 years 9 months"),
-    type: localized("Jornada completa", "Full-time"),
-    logo: "/assets/images/companies/bbva.webp",
-    icon: "fa6-solid:building-columns",
-    roles: [
-      {
-        title: localized("Front-end Developer"),
-        date: localized("ene. 2025 - actualidad · 1 año 8 meses", "Jan 2025 - present · 1 year 8 months"),
-        workplace: localized("Híbrido", "Hybrid"),
-        description: localized(
-          "Desarrollador front-end en la aplicación móvil de banca de BBVA Italia y Alemania.",
-          "Front-end developer on the mobile banking app of BBVA Italy and Germany."
-        ),
-        skills: [localized("Ember.js"), localized("JavaScript"), localized("Banca Móvil", "Mobile Banking")]
-      },
-      {
-        title: localized("Front-end Developer"),
-        date: localized("ene. 2024 - ene. 2025 · 1 año 1 mes", "Jan 2024 - Jan 2025 · 1 year 1 month"),
-        workplace: localized("Híbrido", "Hybrid"),
-        description: localized(
-          "Desarrollador front-end en la aplicación móvil de banca de BBVA España migrando la tecnología de la aplicación.",
-          "Front-end developer on the mobile banking app of BBVA Spain, migrating the app's technology."
-        ),
-        skills: [localized("Web Components"), localized("Lit"), localized("Migración Tecnológica", "Technology Migration")]
-      },
-      {
-        title: localized("Front-end Developer"),
-        date: localized("dic. 2021 - ene. 2024 · 2 años 2 meses", "Dec 2021 - Jan 2024 · 2 years 2 months"),
-        workplace: localized("Híbrido", "Hybrid"),
-        description: localized(
-          "Desarrollador front-end en la aplicación móvil de banca de BBVA España haciendo uso de Ember.js como framework.",
-          "Front-end developer on the mobile banking app of BBVA Spain, using Ember.js as the framework."
-        ),
-        skills: [localized("Ember.js"), localized("Metodologías Ágiles", "Agile Methodologies"), localized("Front-end")]
-      }
-    ]
-  },
-  {
-    company: "Azonix Tec",
-    location: localized("Guadalajara, España", "Guadalajara, Spain"),
-    period: localized("2018 - 2021"),
-    type: localized("Jornada parcial / Temporal", "Part-time / Temporary"),
-    logo: "/assets/images/companies/azonix.webp",
-    icon: "fa6-solid:network-wired",
-    roles: [
-      {
-        title: localized("Responsable de proyectos", "Project Manager"),
-        date: localized("nov. 2021 - dic. 2021 · 2 meses", "Nov 2021 - Dec 2021 · 2 months"),
-        workplace: localized("Jornada parcial", "Part-time"),
-        description: localized(
-          "Gestión, coordinación y supervisión de proyectos informáticos y de telecomunicaciones.",
-          "Management, coordination and supervision of IT and telecommunications projects."
-        ),
-        skills: [localized("Gestión de Proyectos", "Project Management"), localized("Coordinación", "Coordination")]
-      },
-      {
-        title: localized(
-          "Desarrollador y Técnico de Telecomunicaciones e Informática",
-          "Developer and Telecommunications & IT Technician"
-        ),
-        date: localized("jul. 2020 - dic. 2021 · 1 año 6 meses", "Jul 2020 - Dec 2021 · 1 year 6 months"),
-        workplace: localized("Jornada parcial", "Part-time"),
-        description: localized(
-          "Desarrollo de software y mantenimiento técnico de infraestructuras informáticas y de redes.",
-          "Software development and technical maintenance of IT and network infrastructure."
-        ),
-        skills: [localized("Desarrollo Software", "Software Development"), localized("Sistemas", "Systems"), localized("Redes", "Networking")]
-      },
-      {
-        title: localized("Técnico de Telecomunicaciones e Informática", "Telecommunications & IT Technician"),
-        date: localized("may. 2019 - sept. 2019 · 5 meses", "May 2019 - Sep 2019 · 5 months"),
-        workplace: localized("Contrato temporal", "Temporary contract"),
-        description: localized(
-          "Mantenimiento e instalación de infraestructura de telecomunicaciones e informática.",
-          "Maintenance and installation of telecommunications and IT infrastructure."
-        ),
-        skills: [localized("Telecomunicaciones", "Telecommunications"), localized("Sistemas", "Systems")]
-      },
-      {
-        title: localized("Técnico de Telecomunicaciones e Informática", "Telecommunications & IT Technician"),
-        date: localized("abr. 2018 - nov. 2018 · 8 meses", "Apr 2018 - Nov 2018 · 8 months"),
-        workplace: localized("Contrato temporal", "Temporary contract"),
-        description: localized(
-          "Soporte técnico, configuración de equipos informáticos y mantenimiento de red.",
-          "Technical support, IT equipment configuration and network maintenance."
-        ),
-        skills: [localized("Soporte Técnico", "Technical Support"), localized("Redes", "Networking")]
-      }
-    ]
-  }
-];
 
 function getSkillData(skillName: string) {
   const lower = skillName.toLowerCase();
@@ -149,7 +53,7 @@ function getSkillData(skillName: string) {
               <div class="company-title-row">
                 <h3 class="company-name">{companyGroup.company}</h3>
                 <span class="company-period-badge">
-                  <Icon name="fa6-regular:clock" /> {companyGroup.period[lang]}
+                  <Icon name="fa6-regular:clock" /> {formatCompanyPeriod(companyGroup, lang)}
                 </span>
               </div>
               <p class="company-meta">
@@ -176,7 +80,7 @@ function getSkillData(skillName: string) {
                       {role.workplace && <span class="workplace-badge">{role.workplace[lang]}</span>}
                     </div>
                     <div class="role-date">
-                      <Icon name="fa6-regular:calendar" /> {role.date[lang]}
+                      <Icon name="fa6-regular:calendar" /> {formatPeriod(role.start, role.end, lang)}
                     </div>
                   </div>
 

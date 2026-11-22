@@ -36,7 +36,7 @@ function interpolate(text: string, params?: Record<string, string | number>): st
  *
  *   const { lang, t } = useTranslations(Astro.currentLocale);
  *   t('nav.about');                       // "Sobre mí" / "About"
- *   t('about.ageValue', { age: 27 });     // "27 años" / "27 years old"
+ *   t('tokens.coverageDays', { count: 2 }); // "2 días con datos" / "2 days with data"
  */
 export function useTranslations(locale: string | undefined) {
   const lang = resolveLang(locale);
