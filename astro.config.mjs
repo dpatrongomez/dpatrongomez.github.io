@@ -27,4 +27,11 @@ export default defineConfig({
     }),
     sitemap(),
   ],
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

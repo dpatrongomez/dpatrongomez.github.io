@@ -2,6 +2,9 @@
 import { Image } from "astro:assets";
 import { Icon } from 'astro-icon/components';
 import { projects } from "../lib/projects";
+import { useTranslations } from '../i18n';
+
+const { lang, t } = useTranslations(Astro.currentLocale);
 
 function getTagData(tag: string) {
   const lower = tag.toLowerCase();
@@ -21,9 +24,9 @@ function getTagData(tag: string) {
 <section id="portfolio">
   <div class="container">
     <div class="section-tag">
-      <Icon name="fa6-solid:folder-open" class="text-muted" /> PROYECTOS
+      <Icon name="fa6-solid:folder-open" class="text-muted" /> {t('projects.label')}
     </div>
-    <h2 class="section-title">Proyectos Destacados & Apps</h2>
+    <h2 class="section-title">{t('projects.title')}</h2>
     <div class="section-divider"></div>
 
     <div class="grid-3">
@@ -32,7 +35,7 @@ function getTagData(tag: string) {
           <div class="card-media">
             <Image src={project.image} alt={project.name} format="webp" width={256} loading="lazy" class="media-img" />
             {project.featured && (
-              <span class="badge-feat">Destacado</span>
+              <span class="badge-feat">{t('projects.featured')}</span>
             )}
           </div>
 
@@ -51,8 +54,8 @@ function getTagData(tag: string) {
             </div>
 
             <div class="project-description">
-              <p class="project-info">{project.info}</p>
-              <p class="project-implementation">{project.implementation}</p>
+              <p class="project-info">{project.info[lang]}</p>
+              <p class="project-implementation">{project.implementation[lang]}</p>
             </div>
 
             <div class="tags-flex">
@@ -76,13 +79,13 @@ function getTagData(tag: string) {
                   class="btn-project btn-primary-action"
                 >
                   <Icon name={project.googleplay ? "fa6-brands:google-play" : "fa6-solid:globe"} class="btn-ic" />
-                  <span>{project.googleplay ? "Google Play" : "Ver Web"}</span>
+                  <span>{project.googleplay ? "Google Play" : t('projects.website')}</span>
                 </a>
               )}
               {project.archived && (
                 <div class="archived-tag">
                   <Icon name="fa6-solid:box-archive" class="btn-ic" />
-                  <span>Archivada</span>
+                  <span>{t('projects.archived')}</span>
                 </div>
               )}
               <a 
@@ -92,7 +95,7 @@ function getTagData(tag: string) {
                 class="btn-project btn-secondary-action"
               >
                 <Icon name="fa6-brands:github" class="btn-ic" />
-                <span>Código</span>
+                <span>{t('projects.code')}</span>
               </a>
             </div>
           </div>

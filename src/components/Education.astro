@@ -1,25 +1,38 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { localized, useTranslations } from '../i18n';
+
+const { lang, t } = useTranslations(Astro.currentLocale);
+
 const studies = [
   {
-    name: "Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)",
+    name: localized(
+      "Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)",
+      "Higher Technician in Multiplatform Application Development (DAM)"
+    ),
     date: "2017 - 2020",
     info: "I.E.S. Brianda de Mendoza",
-    badge: "Grado Superior",
+    badge: localized("Grado Superior", "Higher Vocational Degree"),
     highlight: true
   },
   {
-    name: "Administración y Programación en Sistemas ERP-CRM",
+    name: localized(
+      "Administración y Programación en Sistemas ERP-CRM",
+      "Administration and Programming of ERP-CRM Systems"
+    ),
     date: "2019",
     info: "Ayla Diseño y Tecnología",
-    badge: "Especialización",
+    badge: localized("Especialización", "Specialization"),
     highlight: false
   },
   {
-    name: "Técnico en Sistemas Microinformáticos y Redes (SMR)",
+    name: localized(
+      "Técnico en Sistemas Microinformáticos y Redes (SMR)",
+      "Technician in Microcomputer Systems and Networks (SMR)"
+    ),
     date: "2015 - 2017",
     info: "I.E.S. Brianda de Mendoza",
-    badge: "Grado Medio",
+    badge: localized("Grado Medio", "Intermediate Vocational Degree"),
     highlight: false
   },
 ];
@@ -28,25 +41,25 @@ const studies = [
 <section id="education">
   <div class="container">
     <div class="section-tag">
-      <Icon name="fa6-solid:graduation-cap" class="text-muted" /> FORMACIÓN
+      <Icon name="fa6-solid:graduation-cap" class="text-muted" /> {t('education.label')}
     </div>
-    <h2 class="section-title">Formación Académica</h2>
+    <h2 class="section-title">{t('education.title')}</h2>
     <div class="section-divider"></div>
 
     <div class="edu-list">
       {studies.map((item) => (
         <div class={`edu-card ${item.highlight ? 'highlight-card' : ''}`}>
           <div class="edu-top">
-            <div class="edu-title">{item.name}</div>
+            <div class="edu-title">{item.name[lang]}</div>
             <div class="edu-date">{item.date}</div>
           </div>
-          
+
           <div class="edu-bottom">
             <div class="edu-inst">
               <Icon name="fa6-solid:building-columns" class="inst-ic" />
               <span>{item.info}</span>
             </div>
-            <div class="edu-badge">{item.badge}</div>
+            <div class="edu-badge">{item.badge[lang]}</div>
           </div>
         </div>
       ))}

@@ -1,7 +1,7 @@
 /**
  * Fechas y duraciones calculadas en build time.
  *
- * Módulo puro: sin dependencias y sin `node:*`. Las fechas son meses en formato
+ * Módulo puro, sin `node:*`. Las fechas son meses en formato
  * `"YYYY-MM"` (p. ej. `"2025-01"`), y `null` como fin significa "actualidad".
  *
  * Convención de duración: meses naturales inclusivos en ambos extremos, es
@@ -9,10 +9,17 @@
  * convención con la que estaban escritos a mano los textos originales.
  */
 
-const MONTHS_ES = [
-  "ene.", "feb.", "mar.", "abr.", "may.", "jun.",
-  "jul.", "ago.", "sept.", "oct.", "nov.", "dic.",
-];
+import { defaultLang, type Lang } from "../i18n";
+
+const months: Record<Lang, string[]> = {
+  es: ["ene.", "feb.", "mar.", "abr.", "may.", "jun.", "jul.", "ago.", "sept.", "oct.", "nov.", "dic."],
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+};
+
+const durationLabels = {
+  es: { year: "año", years: "años", month: "mes", months: "meses", present: "actualidad" },
+  en: { year: "year", years: "years", month: "month", months: "months", present: "present" },
+};
 
 /** Mes actual como `"YYYY-MM"`. Se evalúa en build time. */
 export function currentYearMonth(now: Date = new Date()): string {
@@ -32,24 +39,25 @@ export function monthsBetween(start: string, end: string): number {
 }
 
 /** `84` => `"7 años"`, `14` => `"1 año 2 meses"`, `1` => `"1 mes"`. */
-export function formatDuration(totalMonths: number): string {
+export function formatDuration(totalMonths: number, lang: Lang = defaultLang): string {
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
+  const labels = durationLabels[lang];
   const parts: string[] = [];
-  if (years) parts.push(`${years} ${years === 1 ? "año" : "años"}`);
-  if (months || parts.length === 0) parts.push(`${months} ${months === 1 ? "mes" : "meses"}`);
+  if (years) parts.push(`${years} ${years === 1 ? labels.year : labels.years}`);
+  if (months || parts.length === 0) parts.push(`${months} ${months === 1 ? labels.month : labels.months}`);
   return parts.join(" ");
 }
 
 /** `"2025-01"` => `"ene. 2025"`. */
-export function formatMonthES(value: string): string {
+function formatMonth(value: string, lang: Lang): string {
   const { year, month } = parseYearMonth(value);
-  return `${MONTHS_ES[month - 1]} ${year}`;
+  return `${months[lang][month - 1]} ${year}`;
 }
 
 /** Rango con duración: `"ene. 2025 - actualidad · 1 año 10 meses"`. */
-export function formatPeriodES(start: string, end: string | null, now: string = currentYearMonth()): string {
-  const from = formatMonthES(start);
-  const to = end ? formatMonthES(end) : "actualidad";
-  return `${from} - ${to} · ${formatDuration(monthsBetween(start, end ?? now))}`;
+export function formatPeriod(start: string, end: string | null, lang: Lang = defaultLang, now: string = currentYearMonth()): string {
+  const from = formatMonth(start, lang);
+  const to = end ? formatMonth(end, lang) : durationLabels[lang].present;
+  return `${from} - ${to} · ${formatDuration(monthsBetween(start, end ?? now), lang)}`;
 }

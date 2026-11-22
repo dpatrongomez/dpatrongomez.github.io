@@ -2,21 +2,22 @@
  * Experiencia laboral. Las fechas se guardan como meses `"YYYY-MM"` (`end: null`
  * = actualidad); duraciones y rangos se calculan en build con `durations.ts`.
  */
+import { defaultLang, localized, type Lang, type Localized } from "../i18n";
 import { currentYearMonth, formatDuration, monthsBetween } from "./durations";
 
 export interface Role {
-  title: string;
+  title: Localized;
   start: string;
   end: string | null;
-  workplace: string;
-  description: string;
-  skills: string[];
+  workplace: Localized;
+  description: Localized;
+  skills: Localized[];
 }
 
 export interface Company {
   company: string;
-  location: string;
-  type: string;
+  location: Localized;
+  type: Localized;
   logo?: string;
   icon: string;
   /** `duration`: "4 años 11 meses" (desde el primer rol). `years`: "2018 - 2021". */
@@ -27,77 +28,77 @@ export interface Company {
 export const experiences: Company[] = [
   {
     company: "BBVA Technology en Europa",
-    location: "Madrid, Comunidad de Madrid, España",
-    type: "Jornada completa",
+    location: localized("Madrid, Comunidad de Madrid, España", "Madrid, Community of Madrid, Spain"),
+    type: localized("Jornada completa", "Full-time"),
     logo: "/assets/images/companies/bbva.webp",
     icon: "fa6-solid:building-columns",
     periodStyle: "duration",
     roles: [
       {
-        title: "Front-end Developer",
+        title: localized("Front-end Developer"),
         start: "2025-01",
         end: null,
-        workplace: "Híbrido",
-        description: "Desarrollador front-end en la aplicación móvil de banca de BBVA Italia y Alemania.",
-        skills: ["Ember.js", "JavaScript", "Banca Móvil"]
+        workplace: localized("Híbrido", "Hybrid"),
+        description: localized("Desarrollador front-end en la aplicación móvil de banca de BBVA Italia y Alemania.", "Front-end developer on the mobile banking app of BBVA Italy and Germany."),
+        skills: [localized("Ember.js"), localized("JavaScript"), localized("Banca Móvil", "Mobile Banking")]
       },
       {
-        title: "Front-end Developer",
+        title: localized("Front-end Developer"),
         start: "2024-01",
         end: "2025-01",
-        workplace: "Híbrido",
-        description: "Desarrollador front-end en la aplicación móvil de banca de BBVA España migrando la tecnología de la aplicación.",
-        skills: ["Web Components", "Lit", "Migración Tecnológica"]
+        workplace: localized("Híbrido", "Hybrid"),
+        description: localized("Desarrollador front-end en la aplicación móvil de banca de BBVA España migrando la tecnología de la aplicación.", "Front-end developer on the mobile banking app of BBVA Spain, migrating the app's technology."),
+        skills: [localized("Web Components"), localized("Lit"), localized("Migración Tecnológica", "Technology Migration")]
       },
       {
-        title: "Front-end Developer",
+        title: localized("Front-end Developer"),
         start: "2021-12",
         end: "2024-01",
-        workplace: "Híbrido",
-        description: "Desarrollador front-end en la aplicación móvil de banca de BBVA España haciendo uso de Ember.js como framework.",
-        skills: ["Ember.js", "Metodologías Ágiles", "Front-end"]
+        workplace: localized("Híbrido", "Hybrid"),
+        description: localized("Desarrollador front-end en la aplicación móvil de banca de BBVA España haciendo uso de Ember.js como framework.", "Front-end developer on the mobile banking app of BBVA Spain, using Ember.js as the framework."),
+        skills: [localized("Ember.js"), localized("Metodologías Ágiles", "Agile Methodologies"), localized("Front-end")]
       }
     ]
   },
   {
     company: "Azonix Tec",
-    location: "Guadalajara, España",
-    type: "Jornada parcial / Temporal",
+    location: localized("Guadalajara, España", "Guadalajara, Spain"),
+    type: localized("Jornada parcial / Temporal", "Part-time / Temporary"),
     logo: "/assets/images/companies/azonix.webp",
     icon: "fa6-solid:network-wired",
     periodStyle: "years",
     roles: [
       {
-        title: "Responsable de proyectos",
+        title: localized("Responsable de proyectos", "Project Manager"),
         start: "2021-11",
         end: "2021-12",
-        workplace: "Jornada parcial",
-        description: "Gestión, coordinación y supervisión de proyectos informáticos y de telecomunicaciones.",
-        skills: ["Gestión de Proyectos", "Coordinación"]
+        workplace: localized("Jornada parcial", "Part-time"),
+        description: localized("Gestión, coordinación y supervisión de proyectos informáticos y de telecomunicaciones.", "Management, coordination and supervision of IT and telecommunications projects."),
+        skills: [localized("Gestión de Proyectos", "Project Management"), localized("Coordinación", "Coordination")]
       },
       {
-        title: "Desarrollador y Técnico de Telecomunicaciones e Informática",
+        title: localized("Desarrollador y Técnico de Telecomunicaciones e Informática", "Developer and Telecommunications & IT Technician"),
         start: "2020-07",
         end: "2021-12",
-        workplace: "Jornada parcial",
-        description: "Desarrollo de software y mantenimiento técnico de infraestructuras informáticas y de redes.",
-        skills: ["Desarrollo Software", "Sistemas", "Redes"]
+        workplace: localized("Jornada parcial", "Part-time"),
+        description: localized("Desarrollo de software y mantenimiento técnico de infraestructuras informáticas y de redes.", "Software development and technical maintenance of IT and network infrastructure."),
+        skills: [localized("Desarrollo Software", "Software Development"), localized("Sistemas", "Systems"), localized("Redes", "Networking")]
       },
       {
-        title: "Técnico de Telecomunicaciones e Informática",
+        title: localized("Técnico de Telecomunicaciones e Informática", "Telecommunications & IT Technician"),
         start: "2019-05",
         end: "2019-09",
-        workplace: "Contrato temporal",
-        description: "Mantenimiento e instalación de infraestructura de telecomunicaciones e informática.",
-        skills: ["Telecomunicaciones", "Sistemas"]
+        workplace: localized("Contrato temporal", "Temporary contract"),
+        description: localized("Mantenimiento e instalación de infraestructura de telecomunicaciones e informática.", "Maintenance and installation of telecommunications and IT infrastructure."),
+        skills: [localized("Telecomunicaciones", "Telecommunications"), localized("Sistemas", "Systems")]
       },
       {
-        title: "Técnico de Telecomunicaciones e Informática",
+        title: localized("Técnico de Telecomunicaciones e Informática", "Telecommunications & IT Technician"),
         start: "2018-04",
         end: "2018-11",
-        workplace: "Contrato temporal",
-        description: "Soporte técnico, configuración de equipos informáticos y mantenimiento de red.",
-        skills: ["Soporte Técnico", "Redes"]
+        workplace: localized("Contrato temporal", "Temporary contract"),
+        description: localized("Soporte técnico, configuración de equipos informáticos y mantenimiento de red.", "Technical support, IT equipment configuration and network maintenance."),
+        skills: [localized("Soporte Técnico", "Technical Support"), localized("Redes", "Networking")]
       }
     ]
   }
@@ -112,12 +113,12 @@ export function companySpan(company: Company): { start: string; end: string | nu
 }
 
 /** Texto del periodo de la empresa, según su `periodStyle`. */
-export function formatCompanyPeriod(company: Company, now: string = currentYearMonth()): string {
+export function formatCompanyPeriod(company: Company, lang: Lang = defaultLang, now: string = currentYearMonth()): string {
   const { start, end } = companySpan(company);
   if (company.periodStyle === "years") {
     const startYear = start.slice(0, 4);
     const endYear = end ? end.slice(0, 4) : now.slice(0, 4);
     return `${startYear} - ${endYear}`;
   }
-  return formatDuration(monthsBetween(start, end ?? now));
+  return formatDuration(monthsBetween(start, end ?? now), lang);
 }
