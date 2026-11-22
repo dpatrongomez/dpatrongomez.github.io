@@ -50,7 +50,10 @@ function getTagData(tag: string) {
               </h3>
             </div>
 
-            <p class="project-info">{project.info}</p>
+            <div class="project-description">
+              <p class="project-info">{project.info}</p>
+              <p class="project-implementation">{project.implementation}</p>
+            </div>
 
             <div class="tags-flex">
               {project.tags.map((tag) => {
@@ -190,12 +193,21 @@ function getTagData(tag: string) {
     opacity: 1;
   }
 
-  .project-info {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 16px;
+  .project-description {
     flex-grow: 1;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .project-info {
+    margin: 0 0 8px;
+    color: var(--text-primary);
+  }
+
+  .project-implementation {
+    margin: 0;
+    color: var(--text-muted);
   }
 
   .tags-flex {
