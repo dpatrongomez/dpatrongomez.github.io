@@ -69,11 +69,44 @@
     "day": "2026-11-09",
     "model": "glm-5.3-flash-free",
     "provider": "opencode",
-    "requests": 77,
-    "input": 112876,
-    "output": 14612,
-    "reasoning": 11708,
-    "cacheRead": 2232576,
+    "requests": 78,
+    "input": 113648,
+    "output": 15145,
+    "reasoning": 12140,
+    "cacheRead": 2281536,
+    "cacheWrite": 0
+  },
+  {
+    "day": "2026-11-11",
+    "model": "glm-5.3-flash-free",
+    "provider": "opencode",
+    "requests": 424,
+    "input": 1041040,
+    "output": 71060,
+    "reasoning": 101045,
+    "cacheRead": 27241600,
+    "cacheWrite": 0
+  },
+  {
+    "day": "2026-11-12",
+    "model": "glm-5.3-flash-free",
+    "provider": "opencode",
+    "requests": 44,
+    "input": 383874,
+    "output": 11028,
+    "reasoning": 10861,
+    "cacheRead": 6236416,
+    "cacheWrite": 0
+  },
+  {
+    "day": "2026-11-16",
+    "model": "glm-5.3-flash-free",
+    "provider": "opencode",
+    "requests": 234,
+    "input": 1176652,
+    "output": 68161,
+    "reasoning": 70902,
+    "cacheRead": 17509184,
     "cacheWrite": 0
   }
 ]
