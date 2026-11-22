@@ -1,5 +1,5 @@
 import pluggyImg from "../assets/projects/pluggy.png";
-import urbanosImg from "../assets/projects/urbanosguadalajara.jpg";
+import urbanosImg from "../assets/projects/urbanosguadalajara.png";
 import mercalistImg from "../assets/projects/mercalist.png";
 import precioluzImg from "../assets/projects/precioluz.webp";
 import tiempoappImg from "../assets/projects/tiempoapp.png";
