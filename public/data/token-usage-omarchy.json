@@ -108,5 +108,16 @@
     "reasoning": 70902,
     "cacheRead": 17509184,
     "cacheWrite": 0
+  },
+  {
+    "day": "2026-11-22",
+    "model": "gpt-6.2-sol",
+    "provider": "openai",
+    "requests": 142,
+    "input": 341520,
+    "output": 31485,
+    "reasoning": 4818,
+    "cacheRead": 9111936,
+    "cacheWrite": 0
   }
 ]
