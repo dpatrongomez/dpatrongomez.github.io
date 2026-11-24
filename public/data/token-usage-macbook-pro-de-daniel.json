@@ -1,5 +1,16 @@
 [
   {
+    "day": "2025-09-28",
+    "model": "gpt-5-codex",
+    "provider": "openai",
+    "requests": 1,
+    "input": 78,
+    "output": 16,
+    "reasoning": 0,
+    "cacheRead": 2560,
+    "cacheWrite": 0
+  },
+  {
     "day": "2026-02-21",
     "model": "big-pickle",
     "provider": "opencode",
@@ -2170,11 +2181,33 @@
     "day": "2026-11-09",
     "model": "glm-5.3-flash-free",
     "provider": "opencode",
-    "requests": 11,
-    "input": 29096,
-    "output": 895,
-    "reasoning": 939,
-    "cacheRead": 292552,
+    "requests": 45,
+    "input": 173860,
+    "output": 9823,
+    "reasoning": 23020,
+    "cacheRead": 1556808,
+    "cacheWrite": 0
+  },
+  {
+    "day": "2026-11-23",
+    "model": "gpt-6.2-sol",
+    "provider": "openai",
+    "requests": 739,
+    "input": 1186001,
+    "output": 130511,
+    "reasoning": 22231,
+    "cacheRead": 67881600,
+    "cacheWrite": 0
+  },
+  {
+    "day": "2026-11-24",
+    "model": "gpt-6.2-sol",
+    "provider": "openai",
+    "requests": 99,
+    "input": 197402,
+    "output": 16452,
+    "reasoning": 223,
+    "cacheRead": 15250560,
     "cacheWrite": 0
   }
 ]
